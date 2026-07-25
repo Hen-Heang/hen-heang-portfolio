@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import { ThemeProvider } from "@/src/components/ThemeProvider"
 import { SiteContentProvider } from "@/src/providers/site-content-provider"
+import { MotionProvider } from "@/src/providers/motion-provider"
 import { RouteScrollReset } from "@/src/components/utils/RouteScrollReset"
 import { AssistantWidget } from "@/src/components/assistant"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -13,6 +14,7 @@ import "./globals.css"
 
 // Re-render at most once a minute so admin edits show up without a redeploy.
 export const revalidate = 60
+const enableVercelTelemetry = process.env.VERCEL === "1"
 
 const inter = localFont({
     src: [
@@ -93,6 +95,11 @@ const jsonLd = {
         profileData.socialLinks.linkedin,
     ],
     knowsAbout: profileData.knowsAbout,
+    subjectOf: {
+        "@type": "WebPage",
+        name: "Resume",
+        url: profileData.cvUrl,
+    },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -109,14 +116,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                <SiteContentProvider initialContent={{ profile, cv }}>
-                    <RouteScrollReset />
-                    {children}
-                    <AssistantWidget />
-                </SiteContentProvider>
+                <MotionProvider>
+                    <SiteContentProvider initialContent={{ profile, cv }}>
+                        <RouteScrollReset />
+                        {children}
+                        <AssistantWidget />
+                    </SiteContentProvider>
+                </MotionProvider>
             </ThemeProvider>
-            <Analytics />
-            <SpeedInsights />
+            {enableVercelTelemetry && <Analytics />}
+            {enableVercelTelemetry && <SpeedInsights />}
         </body>
         </html>
     )

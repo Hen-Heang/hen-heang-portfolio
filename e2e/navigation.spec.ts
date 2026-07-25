@@ -7,6 +7,7 @@ test.describe("Site navigation", () => {
         const mainNav = page.getByLabel("Main", { exact: true })
         await expect(mainNav.getByRole("link", { name: "Work" })).not.toHaveAttribute("aria-current", "page")
         await expect(mainNav.getByRole("link", { name: "About" })).toHaveAttribute("aria-current", "page")
+        await expect(mainNav.getByRole("link", { name: "Resume" })).toHaveAttribute("href", "/resume")
         await expect(mainNav.getByRole("link", { name: "Experience" })).toHaveCount(0)
     })
 
@@ -57,7 +58,7 @@ test.describe("Command menu", () => {
     test("filters commands by search and supports arrow-key navigation", async ({ page }) => {
         await page.setViewportSize({ width: 1280, height: 900 })
         await page.goto("/")
-        await page.keyboard.press("Meta+k")
+        await page.getByRole("button", { name: /Open command menu, keyboard shortcut Command or Control K/ }).click()
         const dialog = page.getByRole("dialog")
         await expect(dialog).toBeVisible()
 

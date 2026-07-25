@@ -1,15 +1,16 @@
 "use client"
 
-import { Download } from "lucide-react"
+import { Printer } from "lucide-react"
 
 /**
- * Opens the browser print dialog — choose "Save as PDF" to download.
+ * Opens the browser print dialog, where the visitor can print or save a PDF.
  * This produces a native, pixel-perfect PDF using the browser's engine.
  * The print: Tailwind variants in each component control the PDF layout.
  */
 export function CVDownloadButton() {
   return (
     <button
+      type="button"
       onClick={() => window.print()}
       title="Opens the browser print dialog"
       className="
@@ -18,8 +19,8 @@ export function CVDownloadButton() {
         hover:bg-slate-800 active:scale-[0.98] transition-all
       "
     >
-      <Download size={15} aria-hidden />
-      Download Resume
+      <Printer size={15} aria-hidden />
+      Print / Save as PDF
     </button>
   )
 }

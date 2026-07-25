@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "motion/react"
 
 import { AUDIENCES, VISIBLE_CHIP_COUNT, pagePrompts, promptsForAudience, type PromptAudience } from "./starter-questions"
 import type { PageContext } from "@/src/lib/ai/page-context"

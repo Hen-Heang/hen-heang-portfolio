@@ -1,7 +1,8 @@
 "use client"
 
 import React from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion } from "motion/react"
+import { subtleDuration, subtleEase } from "@/src/lib/utils/animations"
 
 interface RevealProps {
     delay?: number
@@ -10,23 +11,23 @@ interface RevealProps {
 }
 
 /**
- * Gently moves content into place as it enters the viewport. Content remains
- * fully visible before animation so it is never lost when observers or JS fail.
+ * Gently moves content into place as it enters the viewport. The initial
+ * opacity remains high so content stays readable before hydration or if the
+ * animation never runs.
  */
 export function Reveal({ delay = 0, className, children }: RevealProps) {
-    const reduceMotion = useReducedMotion()
-
-    if (reduceMotion) {
-        return <div className={className}>{children}</div>
-    }
-
     return (
         <motion.div
+            data-motion-enter
             className={className}
-            initial={{ y: 14 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0.85, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-32px" }}
-            transition={{ duration: 0.35, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+            transition={{
+                duration: subtleDuration,
+                delay,
+                ease: subtleEase,
+            }}
         >
             {children}
         </motion.div>

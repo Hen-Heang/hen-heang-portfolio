@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "motion/react"
 import { Check, Copy, ThumbsDown, ThumbsUp } from "lucide-react"
 import type { UIMessage } from "ai"
 

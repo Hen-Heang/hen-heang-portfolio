@@ -6,7 +6,7 @@ import { createClient } from "@/src/lib/supabase/client"
 import { SiteContentSchemas, type SiteContentKey } from "@/src/lib/schemas/content"
 
 const KEYS: { key: SiteContentKey; label: string; hint: string }[] = [
-    { key: "profile", label: "Profile & Personal Info", hint: "Name, title, bio, socials, hero roles — used across the whole site" },
+    { key: "profile", label: "Profile & Personal Info", hint: "Name, title, hero copy, bio, and socials — used across the whole site" },
     { key: "cv", label: "CV / Resume", hint: "Everything on the /cv page" },
 ]
 

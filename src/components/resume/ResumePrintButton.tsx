@@ -5,6 +5,7 @@ import { Printer } from "lucide-react"
 export function ResumePrintButton() {
   return (
     <button
+      type="button"
       onClick={() => window.print()}
       title="Opens the browser print dialog"
       className="
@@ -14,7 +15,7 @@ export function ResumePrintButton() {
       "
     >
       <Printer size={15} aria-hidden />
-      Save as PDF
+      Print / Save as PDF
     </button>
   )
 }

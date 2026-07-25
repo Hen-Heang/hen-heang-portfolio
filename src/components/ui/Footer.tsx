@@ -21,7 +21,7 @@ const navLinks = [
     { name: "Lab", href: "/lab", icon: FlaskConical },
     { name: "Journey", href: "/journey", icon: Route },
     { name: "About", href: "/about", icon: UserRound },
-    { name: "CV", href: "/cv", icon: FileText },
+    { name: "Resume", href: "/resume", icon: FileText },
     { name: "Contact", href: "/contact", icon: MessageCircle },
 ]
 
@@ -53,7 +53,7 @@ export function Footer() {
                         </p>
                     </div>
 
-                    <div className="md:col-span-3">
+                    <div className="min-w-0 md:col-span-3">
                         <h2 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-fg-muted">
                             Site
                         </h2>
@@ -72,7 +72,7 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    <div className="md:col-span-3">
+                    <div className="min-w-0 md:col-span-3">
                         <h2 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-fg-muted">
                             Connect
                         </h2>
@@ -93,10 +93,10 @@ export function Footer() {
                             <li>
                                 <a
                                     href={`mailto:${personalInfo.email}`}
-                                    className="inline-flex items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
+                                    className="inline-flex min-w-0 items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
                                 >
-                                    <Mail size={15} aria-hidden />
-                                    {personalInfo.email}
+                                    <Mail size={15} className="shrink-0" aria-hidden />
+                                    <span className="min-w-0 break-all">{personalInfo.email}</span>
                                 </a>
                             </li>
                         </ul>

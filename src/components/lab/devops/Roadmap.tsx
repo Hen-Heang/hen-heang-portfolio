@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { Check, Clock, ArrowRight } from "lucide-react"
 import type { RoadmapTopic, LabDifficulty } from "@/src/lib/types/devops-lab"
 import { toggleDevOpsProgress, useDevOpsProgress } from "@/src/components/lab/devops/DevOpsProgress"

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Github from '@/src/components/icons/github';
 import LinkIn from '@/src/components/icons/linkIn';
 import Telegram from '@/src/components/icons/telegram';

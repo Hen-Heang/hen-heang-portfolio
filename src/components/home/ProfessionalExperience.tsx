@@ -32,8 +32,9 @@ export function ProfessionalExperience({ experience }: { experience: ExperienceI
             title="Professional Experience"
             description="Backend and full-stack roles in Korean enterprise teams — REST APIs, database-backed business logic, and production web applications."
             className="bg-surface"
+            revealHeader
         >
-            <Reveal>
+            <Reveal delay={0.05}>
                 <Timeline items={items} />
             </Reveal>
             <div className="mt-12">
