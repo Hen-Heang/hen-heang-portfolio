@@ -25,11 +25,11 @@ export function ProjectFeature({ project, reverse = false }: ProjectFeatureProps
     const shortTitle = project.title.split("—")[0].trim()
     const preview = getProjectPreview(project)
     const hasPreview = preview.kind !== "none"
-    const contributions = project.solutions?.slice(0, 3) ?? []
+    const contributions = project.solutions?.slice(0, 2) ?? []
     const metadata = [project.category, project.ownership, isLive ? "Live" : "Source available"].filter(Boolean)
 
     return (
-        <article className={`group grid items-start gap-10 ${hasPreview ? "lg:grid-cols-2 lg:gap-16" : ""}`}>
+        <article className={`group grid items-start gap-8 sm:gap-10 ${hasPreview ? "lg:grid-cols-2 lg:gap-16" : ""}`}>
             <div className={cn(reverse && hasPreview ? "lg:order-2" : undefined, !hasPreview && "max-w-3xl")}>
                 {metadata.length > 0 && (
                     <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
@@ -97,7 +97,7 @@ export function ProjectFeature({ project, reverse = false }: ProjectFeatureProps
                     </p>
                 )}
 
-                <div className="mt-7 flex flex-wrap items-center gap-5">
+                <div className="mt-7 flex flex-wrap items-center gap-4 sm:gap-5">
                     <TextLink href={`/projects/${project.slug}`}>
                         View case study: {shortTitle}
                     </TextLink>
