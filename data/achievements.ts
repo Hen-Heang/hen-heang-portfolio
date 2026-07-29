@@ -144,6 +144,16 @@ export const rawAchievements: Achievement[] = [
         description: "Completed Addbook Computer Centre's practical computer course covering Microsoft Word, Excel, PowerPoint, and internet fundamentals from September to December 2021.",
         image: "/basic-computer-certificate-redacted.png",
     },
+    {
+        id: "18",
+        title: "AI Foundations",
+        issuer: "OpenAI Academy",
+        date: "2026",
+        type: "certificate",
+        description: "Completed OpenAI Academy's AI Foundations course, covering foundational concepts of working with AI models.",
+        image: "/certificate/openai-ai-foundations.png",
+        link: "/certificate/openai-ai-foundations.pdf",
+    },
 ]
 
 export const groupedAchievements = groupAchievementsByYearAndIssuer(rawAchievements)
