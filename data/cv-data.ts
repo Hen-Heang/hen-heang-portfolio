@@ -209,7 +209,7 @@ export const cvData: CVData = {
         "Delivered real-time order notifications over WebSocket.",
       ],
       technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "WebSocket"],
-      github: "https://github.com/Hen-Heang/h-phsar-api-full",
+      github: "https://github.com/Hen-Heang/h-phsar-api",
       live: null,
       caseStudy: "/projects/h-phsar",
       featured: true,
@@ -232,17 +232,14 @@ export const cvData: CVData = {
     {
       name: "Hengo",
       category: "Full-Stack App",
-      // NOTE: Hengo was originally built and shipped as "KoriAI" — the GitHub
-      // repo and Vercel deployment were never renamed, so these URLs are
-      // correct even though the product is now called Hengo.
       description:
-        "Spring Boot REST API behind an AI-assisted goal-tracking and Korean-learning app, paired with a Next.js/TypeScript client.",
+        "AI-powered workplace Korean and growth platform on Next.js, Supabase Auth/Postgres with RLS, and JWT-verified AI routes.",
       bullets: [
-        "Implemented endpoints for daily missions, spaced-repetition vocabulary scheduling, and XP progression.",
-        "Built the Next.js/TypeScript client with TanStack Query against the API contract.",
+        "Built Today’s Mission, spaced-repetition learning, interview preparation, and progress tracking in one workspace.",
+        "Kept data behind Supabase RLS and routed authenticated AI work through thin Next.js handlers.",
       ],
-      technologies: ["Next.js", "TypeScript", "TanStack Query", "Tailwind CSS", "Spring Boot"],
-      github: "https://github.com/Hen-Heang/koriai-frontend",
+      technologies: ["Next.js 16", "TypeScript", "Supabase", "Vercel AI SDK", "OpenAI"],
+      github: "https://github.com/Hen-Heang/hengo",
       live: "https://koriai-frontend.vercel.app/",
       caseStudy: "/projects/hengo",
       featured: false,
