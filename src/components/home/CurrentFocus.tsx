@@ -1,6 +1,7 @@
 import React from "react"
 import { Section } from "@/src/components/system/Section"
 import { TextLink } from "@/src/components/system/TextLink"
+import { Reveal } from "@/src/components/system/Reveal"
 import { progressItems } from "@/data/progress"
 
 /** Backend, AI-assisted development, and Korean — the three most relevant to a backend-hiring recruiter. DevOps stays on /journey with the full set. */
@@ -31,19 +32,22 @@ export function CurrentFocus() {
             title="What I’m actively improving"
             description="Backend depth first, plus the workflow and communication skills that support it."
             className="bg-surface"
+            revealHeader
         >
             <ul className="border-y border-border">
-                {items.map((item) => (
+                {items.map((item, index) => (
                     <li key={item.id} className="border-b border-border last:border-b-0">
-                        <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                            <div>
-                                <p className="font-medium text-fg">{item.title}</p>
-                                <p className="mt-1 text-sm text-fg-secondary">{item.currentFocus}</p>
+                        <Reveal delay={index * 0.06}>
+                            <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                                <div>
+                                    <p className="font-medium text-fg">{item.title}</p>
+                                    <p className="mt-1 text-sm text-fg-secondary">{item.currentFocus}</p>
+                                </div>
+                                <time dateTime={item.updatedAt} className="shrink-0 font-mono text-xs text-fg-muted">
+                                    Updated {formatUpdatedAt(item.updatedAt)}
+                                </time>
                             </div>
-                            <time dateTime={item.updatedAt} className="shrink-0 font-mono text-xs text-fg-muted">
-                                Updated {formatUpdatedAt(item.updatedAt)}
-                            </time>
-                        </div>
+                        </Reveal>
                     </li>
                 ))}
             </ul>

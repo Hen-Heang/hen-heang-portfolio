@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { ArrowDown } from "lucide-react"
+import { motion } from "motion/react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
 
 export interface ApiTabData {
@@ -120,12 +121,24 @@ function TabContent({ data }: { data: TechnicalTabData }) {
  */
 export function TechnicalPanel({ tabs }: { tabs: TechnicalTab[] }) {
     const [activeId, setActiveId] = useState(tabs[0]?.id)
+    const [direction, setDirection] = useState(1)
+    const [hasChanged, setHasChanged] = useState(false)
+    const [previous, setPrevious] = useState<TechnicalTab | null>(null)
     const active = tabs.find((t) => t.id === activeId) ?? tabs[0]
 
     if (!active) return null
 
+    const handleValueChange = (nextId: string) => {
+        const currentIndex = tabs.findIndex((tab) => tab.id === active.id)
+        const nextIndex = tabs.findIndex((tab) => tab.id === nextId)
+        setPrevious(active)
+        setDirection(nextIndex >= currentIndex ? 1 : -1)
+        setHasChanged(true)
+        setActiveId(nextId)
+    }
+
     return (
-        <Tabs value={active.id} onValueChange={setActiveId} className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
+        <Tabs value={active.id} onValueChange={handleValueChange} className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
             <div className="flex items-center gap-3 border-b border-border px-4 py-3">
                 <div className="flex gap-1.5" aria-hidden>
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
@@ -160,14 +173,49 @@ export function TechnicalPanel({ tabs }: { tabs: TechnicalTab[] }) {
                 <TabsContent
                     key={tab.id}
                     value={tab.id}
-                    className="mt-0 h-[240px] p-4 outline-none animate-in fade-in-0 sm:h-[320px] sm:p-5"
+                    className="mt-0 h-[240px] p-4 outline-none sm:h-[320px] sm:p-5"
                 >
-                    <TabContent data={tab.data} />
+                    <div className="relative h-full">
+                        {previous && previous.id !== tab.id && (
+                            <motion.div
+                                key={previous.id}
+                                data-tab-outgoing
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 z-10 h-full"
+                                initial={{ opacity: 1, x: 0 }}
+                                animate={{ opacity: 0, x: direction * -5 }}
+                                transition={{ duration: 0.18, ease: "easeOut" }}
+                                onAnimationComplete={() => {
+                                    setPrevious((current) => current?.id === previous.id ? null : current)
+                                }}
+                            >
+                                <TabContent data={previous.data} />
+                            </motion.div>
+                        )}
+                        <motion.div
+                            data-motion-enter
+                            className="relative z-20 h-full"
+                            initial={!hasChanged ? false : { opacity: 0.75, x: direction * 5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                        >
+                            <TabContent data={tab.data} />
+                        </motion.div>
+                    </div>
                 </TabsContent>
             ))}
 
-            <div className="border-t border-border px-5 py-3">
-                <p className="font-mono text-xs leading-relaxed text-fg-muted">{active.data.caption}</p>
+            <div className="h-[72px] overflow-y-auto border-t border-border px-5 py-3">
+                <motion.p
+                    key={active.id}
+                    data-motion-enter
+                    className="font-mono text-xs leading-relaxed text-fg-muted"
+                    initial={!hasChanged ? false : { opacity: 0.86 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                >
+                    {active.data.caption}
+                </motion.p>
             </div>
         </Tabs>
     )

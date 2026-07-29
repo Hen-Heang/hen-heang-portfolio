@@ -6,7 +6,7 @@
 
 Building the systems behind the screen: REST APIs, transaction flows, security boundaries, and data models with Java, Spring Boot, MyBatis, and PostgreSQL/Oracle.
 
-[**🌐 Live Site**](https://henheang.site) · [**📄 CV**](https://henheang.site/cv) · [**💼 LinkedIn**](https://www.linkedin.com/in/hen-heang) · [**💬 Telegram**](https://t.me/henheang)
+[**🌐 Live Site**](https://henheang.site) · [**📄 Resume**](https://henheang.site/resume) · [**💼 LinkedIn**](https://www.linkedin.com/in/hen-heang) · [**💬 Telegram**](https://t.me/henheang)
 
 ![Next.js](https://img.shields.io/badge/Next.js_16-black?logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React_19-20232A?logo=react&logoColor=61DAFB)

@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import {
     BriefcaseBusiness,
     Command,
@@ -26,7 +26,7 @@ export const NAV_LINKS = [
     { label: "Lab", href: "/lab", match: ["/lab", "/ai-engineering"], icon: FlaskConical },
     { label: "Journey", href: "/journey", match: ["/journey"], icon: Route },
     { label: "About", href: "/about", match: ["/about"], icon: UserRound },
-    { label: "CV", href: "/cv", match: ["/cv"], icon: FileText },
+    { label: "Resume", href: "/resume", match: ["/resume", "/cv"], icon: FileText },
 ]
 
 function isActive(pathname: string, match: string[]): boolean {
@@ -97,7 +97,7 @@ export function SiteHeader() {
 
                 <nav
                     aria-label="Main"
-                    className="hidden items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 p-1 md:flex"
+                    className="hidden items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 p-1 lg:flex"
                 >
                     {NAV_LINKS.map((link) => {
                         const active = isActive(pathname, link.match)
@@ -131,7 +131,7 @@ export function SiteHeader() {
                         onClick={openCommandMenu}
                         aria-label="Open command menu, keyboard shortcut Command or Control K"
                         aria-keyshortcuts="Meta+K Control+K"
-                        className="hidden h-9 items-center gap-1.5 rounded-lg border border-border px-2.5 font-mono text-xs text-fg-muted transition-colors hover:border-border-strong hover:text-fg md:flex"
+                        className="hidden h-9 items-center gap-1.5 rounded-lg border border-border px-2.5 font-mono text-xs text-fg-muted transition-colors hover:border-border-strong hover:text-fg lg:flex"
                     >
                         <Command size={13} aria-hidden />
                         <span aria-hidden>⌘K</span>
@@ -139,7 +139,7 @@ export function SiteHeader() {
                     <ThemeToggle />
                     <Link
                         href="/contact"
-                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover md:flex"
+                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover lg:flex"
                     >
                         <MessageCircle size={15} aria-hidden />
                         Let&apos;s talk
@@ -151,7 +151,7 @@ export function SiteHeader() {
                         aria-label="Open navigation menu"
                         aria-expanded={menuOpen}
                         aria-haspopup="dialog"
-                        className="flex h-11 w-11 items-center justify-center rounded-lg text-fg-secondary transition-colors hover:bg-surface-hover hover:text-fg md:hidden"
+                        className="flex h-11 w-11 items-center justify-center rounded-lg text-fg-secondary transition-colors hover:bg-surface-hover hover:text-fg lg:hidden"
                     >
                         <Menu size={20} aria-hidden />
                     </button>

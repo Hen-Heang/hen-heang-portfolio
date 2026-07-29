@@ -2,7 +2,7 @@
 
 import React from "react"
 import Link from "next/link"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { SectionHeading } from "@/src/components/system/SectionHeading"
@@ -11,7 +11,7 @@ import { ProjectCard } from "@/src/components/projects/ProjectCard"
 import { ProjectFeature } from "@/src/components/system/ProjectFeature"
 import type { Project } from "@/src/lib/types"
 
-const MAX_FEATURED = 2
+const MAX_FEATURED = 1
 
 function isBackend(project: Project): boolean {
     return project.technologies.some((t) => /spring|java|mybatis/i.test(t))
@@ -64,11 +64,10 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
                     size="lg"
                     className="max-w-3xl text-3xl font-semibold leading-[1.08] tracking-[-0.035em] sm:text-4xl lg:text-5xl"
                 >
-                    Everything I&apos;ve built
+                    Selected engineering work
                 </SectionHeading>
                 <p className="mt-4 max-w-2xl text-lg leading-relaxed text-fg-secondary">
-                    Personal projects and enterprise work — each one a full engineering case study,
-                    not just a screenshot.
+                    Start with the strongest backend case study, then scan the rest by stack, role, and engineering focus.
                 </p>
 
                 <div className="mt-10">
@@ -89,7 +88,7 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
                 ) : (
                     <>
                         {featured.length > 0 && (
-                            <section className="mt-10 flex flex-col gap-16 md:gap-20">
+                            <section className="mt-10">
                                 {featured.map((project, i) => (
                                     <ProjectFeature key={project.slug} project={project} reverse={i % 2 === 1} />
                                 ))}
@@ -97,7 +96,7 @@ export function ProjectsIndex({ projects, filter }: { projects: Project[]; filte
                         )}
 
                         {remaining.length > 0 && (
-                            <div className={featured.length > 0 ? "mt-20" : "mt-10"}>
+                            <div className={featured.length > 0 ? "mt-14 sm:mt-16" : "mt-10"}>
                                 {featured.length > 0 && (
                                     <h2 className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg-muted">
                                         All projects

@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Search } from "lucide-react"
 import type { Snippet } from "@/src/lib/types/ai-engineering"
 import { SnippetCard } from "@/src/components/ai-engineering/SnippetCard"

@@ -31,15 +31,16 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
             eyebrow="Selected Work"
             title="Backend systems, explained end to end"
             description="Not just screenshots: each case study opens the API contract, architecture, data model, security decisions, and trade-offs behind the product."
+            revealHeader
         >
-            <Reveal>
+            <Reveal delay={0.05}>
                 <ProjectFeature project={flagship} />
             </Reveal>
 
             {supporting.length > 0 && (
                 <div className="mt-16 grid gap-6 md:grid-cols-2">
-                    {supporting.map((project) => (
-                        <Reveal key={project.slug} className="h-full">
+                    {supporting.map((project, index) => (
+                        <Reveal key={project.slug} delay={index * 0.06} className="h-full">
                             <ProjectCard project={project} />
                         </Reveal>
                     ))}

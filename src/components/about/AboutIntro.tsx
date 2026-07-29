@@ -26,6 +26,7 @@ export function AboutIntro({ profile }: { profile: ProfileContentParsed }) {
                             src={profile.myImage}
                             alt={profile.fullName}
                             fill
+                            sizes="(min-width: 768px) 160px, 128px"
                             className="object-cover"
                             style={{ objectPosition: "center 20%" }}
                             priority

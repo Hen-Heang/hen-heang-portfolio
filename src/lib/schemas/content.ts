@@ -122,6 +122,10 @@ export const ProfileContentSchema = z.object({
     email: z.string().email(),
     available: z.boolean().optional(),
     yearsExperience: z.string(),
+    // Optional for backward compatibility with existing admin-managed rows.
+    // The homepage falls back to data/profile.ts until those rows are resaved.
+    heroValueProposition: z.string().min(1).optional(),
+    heroBio: z.string().min(1).optional(),
     bio: z.string(),
     description: z.string(),
     profileImage: z.string(),

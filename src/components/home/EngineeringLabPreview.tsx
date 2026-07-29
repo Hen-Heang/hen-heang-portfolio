@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Section } from "@/src/components/system/Section"
 import { TextLink } from "@/src/components/system/TextLink"
+import { Reveal } from "@/src/components/system/Reveal"
 import type { Article } from "@/src/lib/types/ai-engineering"
 
 interface LabEntry {
@@ -55,26 +56,29 @@ export function EngineeringLabPreview({ articles }: { articles: Article[] }) {
             eyebrow="Engineering Lab"
             title="Notes from day-to-day backend work"
             description="Guides and references kept in the open — the full directory lives on the Lab."
+            revealHeader
         >
             <ul className="border-y border-border">
-                {entries.map((entry) => (
+                {entries.map((entry, index) => (
                     <li key={entry.href} className="border-b border-border last:border-b-0">
-                        <Link
-                            href={entry.href}
-                            className="group flex items-center justify-between gap-4 py-4 transition-colors hover:text-brand"
-                        >
-                            <span>
-                                <span className="block font-medium text-fg transition-colors group-hover:text-brand">
-                                    {entry.title}
+                        <Reveal delay={index * 0.06}>
+                            <Link
+                                href={entry.href}
+                                className="group flex items-center justify-between gap-4 py-4 transition-colors hover:text-brand"
+                            >
+                                <span>
+                                    <span className="block font-medium text-fg transition-colors group-hover:text-brand">
+                                        {entry.title}
+                                    </span>
+                                    <span className="mt-1 block text-sm text-fg-muted">{entry.meta}</span>
                                 </span>
-                                <span className="mt-1 block text-sm text-fg-muted">{entry.meta}</span>
-                            </span>
-                            <ArrowRight
-                                size={16}
-                                className="shrink-0 text-fg-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand motion-reduce:transition-none"
-                                aria-hidden
-                            />
-                        </Link>
+                                <ArrowRight
+                                    size={16}
+                                    className="shrink-0 text-fg-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand motion-reduce:transition-none"
+                                    aria-hidden
+                                />
+                            </Link>
+                        </Reveal>
                     </li>
                 ))}
             </ul>

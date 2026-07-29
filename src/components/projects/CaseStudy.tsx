@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, Briefcase, Clock, Database, Github, Lightbulb, U
 import { Container } from "@/src/components/system/Container"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { ArchitecturePreview } from "@/src/components/system/ArchitecturePreview"
-import { ProcessTimeline } from "@/src/components/system/ProcessTimeline"
 import { CaseStudyTOC, type TocItem } from "@/src/components/projects/CaseStudyTOC"
 import { ScreenshotGallery } from "@/src/components/projects/ScreenshotGallery"
 import { cn } from "@/src/lib/utils/utils"
@@ -23,7 +22,7 @@ const methodColor: Record<string, string> = {
 
 function Block({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
     return (
-        <section id={id} className="scroll-mt-24 rounded-xl border border-border bg-surface p-6">
+        <section id={id} className="scroll-mt-24 rounded-xl border border-border bg-surface p-4 sm:p-6">
             <h2 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-fg-muted">{title}</h2>
             <div className="mt-4">{children}</div>
         </section>
@@ -32,19 +31,22 @@ function Block({ id, title, children }: { id: string; title: string; children: R
 
 export function CaseStudy({ project, nextProject }: { project: Project; nextProject?: AdjacentProject }) {
     const isLive = Boolean(project.demo && project.demo !== "#")
+    const decisionCount = Math.min(
+        Math.max(project.challenges?.length ?? 0, project.solutions?.length ?? 0),
+        3,
+    )
+    const decisions = Array.from({ length: decisionCount }, (_, index) => ({
+        challenge: project.challenges?.[index],
+        solution: project.solutions?.[index],
+    }))
 
     const toc: TocItem[] = [
-        project.businessProblem && { id: "problem", text: "The Problem" },
-        project.overview && { id: "overview", text: "Overview" },
+        (project.businessProblem || project.overview) && { id: "summary", text: "Project Summary" },
         project.screenshots?.length && { id: "screenshots", text: "Screenshots" },
-        project.process?.length && { id: "process", text: "How I Built It" },
-        project.features?.length && { id: "features", text: "Features" },
-        project.technicalDetails && { id: "technical-details", text: "Technical Details" },
+        project.features?.length && { id: "build", text: "What I Built" },
         project.architecture?.length && { id: "architecture", text: "Architecture" },
-        project.dataModel?.length && { id: "data-model", text: "Data Model" },
-        project.apiEndpoints?.length && { id: "api-endpoints", text: "API Endpoints" },
-        (project.challenges?.length || project.solutions?.length) && { id: "challenges", text: "Challenges & Solutions" },
-        project.lessonsLearned?.length && { id: "lessons", text: "Lessons Learned" },
+        (project.dataModel?.length || project.apiEndpoints?.length) && { id: "evidence", text: "Backend Evidence" },
+        (decisions.length || project.lessonsLearned?.length) && { id: "decisions", text: "Engineering Decisions" },
     ].filter(Boolean) as TocItem[]
 
     return (
@@ -59,7 +61,7 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
 
                 <div
                     className={cn(
-                        "relative aspect-video overflow-hidden rounded-xl border border-border",
+                        "relative aspect-[4/3] overflow-hidden rounded-xl border border-border sm:aspect-video",
                         project.imageFit === "contain" && "bg-[#000611]",
                     )}
                 >
@@ -80,7 +82,7 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                             </p>
                         )}
                         <h1 className="mt-2 text-display-sm text-fg">{project.title}</h1>
-                        <div className="mt-4 flex flex-wrap items-center gap-5 text-sm text-fg-secondary">
+                        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-fg-secondary sm:gap-5">
                             {project.role && (
                                 <span className="inline-flex items-center gap-2">
                                     <Briefcase size={15} className="text-fg-muted" aria-hidden /> {project.role}
@@ -101,13 +103,13 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                     {isLive ? <StatusBadge status="live" pulse>Live</StatusBadge> : <StatusBadge status="archived">Source available</StatusBadge>}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
                     {project.github && (
                         <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex h-10 items-center gap-2 rounded-lg border border-border px-4 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
+                            className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-border px-4 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
                         >
                             <Github size={16} aria-hidden /> GitHub
                         </a>
@@ -117,7 +119,7 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex h-10 items-center rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
+                            className="inline-flex h-10 items-center justify-center rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
                         >
                             Live Demo
                         </a>
@@ -138,17 +140,28 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                     ))}
                 </ul>
 
-                <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_220px] lg:gap-16">
+                <div className="mt-10 grid gap-8 sm:mt-12 lg:grid-cols-[1fr_220px] lg:gap-16">
                     <div className="flex flex-col gap-6">
-                        {project.businessProblem && (
-                            <Block id="problem" title="The Problem">
-                                <p className="leading-relaxed text-fg-secondary">{project.businessProblem}</p>
-                            </Block>
-                        )}
-
-                        {project.overview && (
-                            <Block id="overview" title="Overview">
-                                <p className="leading-relaxed text-fg-secondary">{project.overview}</p>
+                        {(project.businessProblem || project.overview) && (
+                            <Block id="summary" title="Project Summary">
+                                <div className="grid gap-5 sm:grid-cols-2 sm:gap-8">
+                                    {project.businessProblem && (
+                                        <div>
+                                            <h3 className="text-sm font-semibold text-fg">Problem</h3>
+                                            <p className="mt-2 text-sm leading-relaxed text-fg-secondary">
+                                                {project.businessProblem}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {project.overview && (
+                                        <div>
+                                            <h3 className="text-sm font-semibold text-fg">Approach</h3>
+                                            <p className="mt-2 text-sm leading-relaxed text-fg-secondary">
+                                                {project.overview}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </Block>
                         )}
 
@@ -158,28 +171,24 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                             </Block>
                         )}
 
-                        {project.process && project.process.length > 0 && (
-                            <Block id="process" title="How I Built It">
-                                <ProcessTimeline steps={project.process} />
-                            </Block>
-                        )}
-
                         {project.features && project.features.length > 0 && (
-                            <Block id="features" title="Features">
-                                <ul className="space-y-2.5">
-                                    {project.features.map((f, i) => (
-                                        <li key={i} className="flex gap-3 text-sm text-fg-secondary">
+                            <Block id="build" title="What I Built">
+                                <ul className="grid gap-3 sm:grid-cols-2">
+                                    {project.features.slice(0, 4).map((feature) => (
+                                        <li key={feature} className="flex gap-3 text-sm leading-relaxed text-fg-secondary">
                                             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden />
-                                            {f}
+                                            {feature}
                                         </li>
                                     ))}
                                 </ul>
-                            </Block>
-                        )}
-
-                        {project.technicalDetails && (
-                            <Block id="technical-details" title="Technical Details">
-                                <p className="text-sm leading-relaxed text-fg-secondary">{project.technicalDetails}</p>
+                                {project.technicalDetails && (
+                                    <div className="mt-5 border-t border-border pt-5">
+                                        <h3 className="text-sm font-semibold text-fg">Implementation</h3>
+                                        <p className="mt-2 text-sm leading-relaxed text-fg-secondary">
+                                            {project.technicalDetails}
+                                        </p>
+                                    </div>
+                                )}
                             </Block>
                         )}
 
@@ -189,91 +198,109 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                             </section>
                         )}
 
-                        {project.dataModel && project.dataModel.length > 0 && (
-                            <Block id="data-model" title="Data Model">
-                                <div className="flex flex-wrap gap-2">
-                                    {project.dataModel.map((table) => (
-                                        <span
-                                            key={table}
-                                            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 font-mono text-xs text-fg-secondary"
-                                        >
-                                            <Database size={12} className="text-fg-muted" aria-hidden />
-                                            {table}
-                                        </span>
-                                    ))}
+                        {(project.dataModel?.length || project.apiEndpoints?.length) ? (
+                            <Block id="evidence" title="Backend Evidence">
+                                <div className="grid gap-6 xl:grid-cols-2">
+                                    {project.dataModel && project.dataModel.length > 0 && (
+                                        <div className="min-w-0">
+                                            <h3 className="text-sm font-semibold text-fg">Core data</h3>
+                                            <div className="mt-3 flex flex-wrap gap-2">
+                                                {project.dataModel.slice(0, 8).map((table) => (
+                                                    <span
+                                                        key={table}
+                                                        className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 font-mono text-xs text-fg-secondary"
+                                                    >
+                                                        <Database size={12} className="shrink-0 text-fg-muted" aria-hidden />
+                                                        <span className="break-all">{table}</span>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {project.apiEndpoints && project.apiEndpoints.length > 0 && (
+                                        <div className="min-w-0">
+                                            <h3 className="text-sm font-semibold text-fg">Key endpoints</h3>
+                                            <ul className="mt-3 space-y-3">
+                                                {project.apiEndpoints.slice(0, 4).map((endpoint) => (
+                                                    <li
+                                                        key={[endpoint.method, endpoint.path].join(" ")}
+                                                        className="min-w-0 text-sm"
+                                                    >
+                                                        <div className="flex min-w-0 items-start gap-2">
+                                                            <span
+                                                                className={cn(
+                                                                    "shrink-0 rounded-md px-2 py-0.5 font-mono text-[11px] font-semibold",
+                                                                    methodColor[endpoint.method] ?? "bg-surface-hover text-fg",
+                                                                )}
+                                                            >
+                                                                {endpoint.method}
+                                                            </span>
+                                                            <code className="min-w-0 break-all font-mono text-xs leading-5 text-fg-secondary">
+                                                                {endpoint.path}
+                                                            </code>
+                                                        </div>
+                                                        <p className="mt-1 text-xs leading-relaxed text-fg-muted">
+                                                            {endpoint.description}
+                                                        </p>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
                             </Block>
-                        )}
-
-                        {project.apiEndpoints && project.apiEndpoints.length > 0 && (
-                            <Block id="api-endpoints" title="Key API Endpoints">
-                                <ul className="space-y-3">
-                                    {project.apiEndpoints.map((endpoint) => (
-                                        <li
-                                            key={`${endpoint.method} ${endpoint.path}`}
-                                            className="flex flex-col gap-1.5 text-sm sm:flex-row sm:items-baseline sm:gap-3"
-                                        >
-                                            <span className="flex shrink-0 items-baseline gap-2">
-                                                <span
-                                                    className={`rounded-md px-2 py-0.5 font-mono text-[11px] font-semibold ${methodColor[endpoint.method] ?? "bg-surface-hover text-fg"}`}
-                                                >
-                                                    {endpoint.method}
-                                                </span>
-                                                <code className="font-mono text-xs text-fg-secondary">{endpoint.path}</code>
-                                            </span>
-                                            <span className="text-xs text-fg-muted sm:text-sm">{endpoint.description}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Block>
-                        )}
-
-                        {(project.challenges?.length || project.solutions?.length) ? (
-                            <section id="challenges" className="scroll-mt-24 grid gap-6 md:grid-cols-2">
-                                {project.challenges && project.challenges.length > 0 && (
-                                    <Block id="challenges-inner" title="Challenges">
-                                        <ul className="space-y-2.5">
-                                            {project.challenges.map((c, i) => (
-                                                <li key={i} className="flex gap-3 text-sm text-fg-secondary">
-                                                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-red-500" aria-hidden />
-                                                    {c}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </Block>
-                                )}
-                                {project.solutions && project.solutions.length > 0 && (
-                                    <Block id="solutions-inner" title="Solutions">
-                                        <ul className="space-y-2.5">
-                                            {project.solutions.map((s, i) => (
-                                                <li key={i} className="flex gap-3 text-sm text-fg-secondary">
-                                                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-success" aria-hidden />
-                                                    {s}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </Block>
-                                )}
-                            </section>
                         ) : null}
 
-                        {project.lessonsLearned && project.lessonsLearned.length > 0 && (
-                            <Block id="lessons" title="Lessons Learned">
-                                <ul className="space-y-2.5">
-                                    {project.lessonsLearned.map((lesson, i) => (
-                                        <li key={i} className="flex gap-3 text-sm text-fg-secondary">
-                                            <Lightbulb size={15} className="mt-0.5 shrink-0 text-amber-500" aria-hidden />
-                                            {lesson}
-                                        </li>
-                                    ))}
-                                </ul>
+                        {(decisions.length > 0 || project.lessonsLearned?.length) ? (
+                            <Block id="decisions" title="Engineering Decisions">
+                                {decisions.length > 0 && (
+                                    <ol className="space-y-4">
+                                        {decisions.map((decision, index) => (
+                                            <li key={index} className="rounded-lg border border-border bg-background p-4">
+                                                {decision.challenge && (
+                                                    <>
+                                                        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-fg-muted">
+                                                            Challenge
+                                                        </p>
+                                                        <p className="mt-1 text-sm leading-relaxed text-fg-secondary">
+                                                            {decision.challenge}
+                                                        </p>
+                                                    </>
+                                                )}
+                                                {decision.solution && (
+                                                    <div className={decision.challenge ? "mt-3 border-t border-border pt-3" : undefined}>
+                                                        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-success">
+                                                            Decision
+                                                        </p>
+                                                        <p className="mt-1 text-sm leading-relaxed text-fg-secondary">
+                                                            {decision.solution}
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ol>
+                                )}
+                                {project.lessonsLearned && project.lessonsLearned.length > 0 && (
+                                    <div className={decisions.length > 0 ? "mt-5 border-t border-border pt-5" : undefined}>
+                                        <h3 className="text-sm font-semibold text-fg">Takeaways</h3>
+                                        <ul className="mt-3 space-y-2.5">
+                                            {project.lessonsLearned.slice(0, 2).map((lesson) => (
+                                                <li key={lesson} className="flex gap-3 text-sm leading-relaxed text-fg-secondary">
+                                                    <Lightbulb size={15} className="mt-0.5 shrink-0 text-amber-500" aria-hidden />
+                                                    {lesson}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
                             </Block>
-                        )}
+                        ) : null}
 
                         {nextProject && (
                             <Link
                                 href={`/projects/${nextProject.slug}`}
-                                className="group flex items-center justify-between rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-strong"
+                                className="group flex items-center justify-between rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-strong sm:p-6"
                             >
                                 <div>
                                     <span className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">Next Project</span>

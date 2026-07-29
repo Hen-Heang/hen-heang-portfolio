@@ -5,6 +5,8 @@ import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { TechnicalPanel, type TechnicalTab } from "@/src/components/system/TechnicalPanel"
+import { HeroEntrance } from "@/src/components/home/HeroEntrance"
+import { profileData } from "@/data/profile"
 import type { Project } from "@/src/lib/types"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 
@@ -89,71 +91,82 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
 
 export function Hero({ profile, projects }: { profile: ProfileContentParsed; projects: Project[] }) {
     const tabs = buildTabs(projects)
+    const valueProposition = profile.heroValueProposition ?? profileData.heroValueProposition
+    const heroBio = profile.heroBio ?? profileData.heroBio
 
     return (
         <section className="pb-section pt-16 md:pt-24">
             <Container>
                 <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="flex max-w-xl flex-col items-start">
-                        <Eyebrow className="mb-5">
-                            Backend Developer · {profile.location}
-                        </Eyebrow>
+                        <HeroEntrance className="mb-5">
+                            <Eyebrow>Backend Developer · {profile.location}</Eyebrow>
+                        </HeroEntrance>
 
-                        <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-fg sm:text-5xl">
-                            {profile.name}
-                        </h1>
+                        <HeroEntrance delay={0.06}>
+                            <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-fg sm:text-5xl">
+                                {profile.name}
+                            </h1>
+                        </HeroEntrance>
 
-                        <p className="mt-4 text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl">
-                            I build dependable backend systems with{" "}
-                            <span className="text-brand">Java and Spring Boot.</span>
-                        </p>
+                        <HeroEntrance delay={0.12} className="mt-4">
+                            <p className="text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl">
+                                {valueProposition}
+                            </p>
+                        </HeroEntrance>
 
-                        <p className="mt-6 text-base leading-relaxed text-fg-secondary">
-                            {profile.bio}
-                        </p>
+                        <HeroEntrance delay={0.18} className="mt-6">
+                            <p className="text-base leading-relaxed text-fg-secondary">{heroBio}</p>
+                        </HeroEntrance>
 
-                        <div className="mt-8 flex flex-wrap items-center gap-3">
-                            <Link
-                                href="#work"
-                                className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover"
-                            >
-                                View Selected Work
-                                <ArrowRight size={15} aria-hidden />
-                            </Link>
-                            <Link
-                                href="/resume"
-                                className="inline-flex h-11 items-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
-                            >
-                                <FileText size={15} aria-hidden />
-                                Download Resume
-                            </Link>
-                            <a
-                                href={profile.socialLinks.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
-                                aria-label="View Hen Heang on GitHub (opens in a new tab)"
-                            >
-                                <Github size={16} aria-hidden />
-                                GitHub
-                                <ArrowUpRight size={13} aria-hidden />
-                            </a>
-                        </div>
-
-                        <p className="mt-10 font-mono text-xs text-fg-muted">
-                            {profile.yearsExperience} years experience · Java / Spring · Cambodia → South Korea
-                        </p>
-
-                        {profile.available && (
-                            <div className="mt-3">
-                                <StatusBadge status="live" pulse>
-                                    Open to backend roles
-                                </StatusBadge>
+                        <HeroEntrance delay={0.24} className="mt-8">
+                            <div className="flex flex-wrap items-center gap-3">
+                                <Link
+                                    href="#work"
+                                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover"
+                                >
+                                    View Selected Work
+                                    <ArrowRight size={15} aria-hidden />
+                                </Link>
+                                <Link
+                                    href="/resume"
+                                    className="inline-flex h-11 items-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
+                                >
+                                    <FileText size={15} aria-hidden />
+                                    View Resume
+                                </Link>
+                                <a
+                                    href={profile.socialLinks.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                                    aria-label="View Hen Heang on GitHub (opens in a new tab)"
+                                >
+                                    <Github size={16} aria-hidden />
+                                    GitHub
+                                    <ArrowUpRight size={13} aria-hidden />
+                                </a>
                             </div>
-                        )}
+                        </HeroEntrance>
+
+                        <HeroEntrance delay={0.3} className="mt-10">
+                            <p className="font-mono text-xs text-fg-muted">
+                                {profile.yearsExperience} years of experience · Enterprise systems · Cambodia → South Korea
+                            </p>
+
+                            {profile.available && (
+                                <div className="mt-3">
+                                    <StatusBadge status="live" pulse>
+                                        Open to backend roles
+                                    </StatusBadge>
+                                </div>
+                            )}
+                        </HeroEntrance>
                     </div>
 
-                    <TechnicalPanel tabs={tabs} />
+                    <HeroEntrance delay={0.36} className="min-w-0">
+                        <TechnicalPanel tabs={tabs} />
+                    </HeroEntrance>
                 </div>
             </Container>
         </section>

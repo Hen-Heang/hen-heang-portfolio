@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Search } from "lucide-react"
 import type { CommandCategory } from "@/src/lib/types/devops-lab"
 import { CommandCard } from "@/src/components/lab/devops/CommandCard"
