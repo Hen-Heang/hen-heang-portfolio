@@ -1,0 +1,8 @@
+⨯ Another next dev server is already running.
+
+- Local:        http://localhost:3000
+- PID:          30772
+- Dir:          E:\Fullstack\hen-heang-porfolio
+- Log:          .next\dev\logs\next-development.log
+
+Run taskkill /PID 30772 /F to stop it.

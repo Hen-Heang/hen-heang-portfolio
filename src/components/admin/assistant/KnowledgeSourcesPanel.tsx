@@ -182,7 +182,7 @@ export function KnowledgeSourcesPanel() {
                                     <span>synced {formatTimestamp(source.lastSyncedAt)}</span>
                                 </div>
 
-                                <div className="flex items-center gap-1.5 shrink-0">
+                                <div className="flex flex-wrap items-center gap-1.5">
                                     {source.approvalStatus !== "approved" && (
                                         <button
                                             onClick={() => setApproval(source, "approved")}
