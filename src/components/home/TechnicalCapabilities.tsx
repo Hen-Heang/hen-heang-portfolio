@@ -19,9 +19,14 @@ export function TechnicalCapabilities() {
                             <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg-muted">
                                 {group.label}
                             </h3>
-                            <p className="mt-3 text-sm leading-relaxed text-fg-secondary">{group.summary}</p>
-                            <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${group.label} technologies`}>
-                                {group.technologies.map((tech) => (
+                            <p className="mt-3 text-sm leading-relaxed text-fg-secondary">
+                                {group.summary}
+                            </p>
+                            <ul
+                                className="mt-4 flex flex-wrap gap-2"
+                                aria-label={`${group.label} technologies`}
+                            >
+                                {group.technologies.slice(0, 3).map((tech) => (
                                     <li
                                         key={tech}
                                         className="rounded-md border border-border bg-surface px-2.5 py-1 font-mono text-xs text-fg-secondary"
@@ -35,5 +40,35 @@ export function TechnicalCapabilities() {
                 ))}
             </div>
         </Section>
+    )
+}
+
+export function TechnicalCapabilitiesContent() {
+    return (
+        <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2">
+            {capabilityGroups.map((group) => (
+                <div key={group.label}>
+                    <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg-muted">
+                        {group.label}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-fg-secondary">
+                        {group.summary}
+                    </p>
+                    <ul
+                        className="mt-4 flex flex-wrap gap-2"
+                        aria-label={`${group.label} technologies`}
+                    >
+                        {group.technologies.slice(0, 3).map((tech) => (
+                            <li
+                                key={tech}
+                                className="rounded-md border border-border bg-background px-2.5 py-1 font-mono text-xs text-fg-secondary"
+                            >
+                                {tech}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
     )
 }

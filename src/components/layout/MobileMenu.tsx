@@ -22,7 +22,12 @@ interface MobileMenuProps {
  * this component (in SiteHeader), so Radix has no `Dialog.Trigger` of its
  * own to restore focus to.
  */
-export function MobileMenu({ open, onOpenChange, onOpenCommandMenu, triggerRef }: MobileMenuProps) {
+export function MobileMenu({
+    open,
+    onOpenChange,
+    onOpenCommandMenu,
+    triggerRef,
+}: MobileMenuProps) {
     const pathname = usePathname()
 
     // Close when the route changes (a nav link was followed).
@@ -34,9 +39,9 @@ export function MobileMenu({ open, onOpenChange, onOpenCommandMenu, triggerRef }
     return (
         <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
             <DialogPrimitive.Portal>
-                <DialogPrimitive.Overlay className="fixed inset-0 z-[150] bg-background/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 motion-reduce:animate-none" />
+                <DialogPrimitive.Overlay className="fixed inset-0 z-[150] bg-background/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 motion-reduce:animate-none" />
                 <DialogPrimitive.Content
-                    className="fixed inset-y-0 right-0 z-[151] flex w-full max-w-sm flex-col border-l border-border bg-background p-6 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right motion-reduce:animate-none"
+                    className="fixed inset-y-0 right-0 z-[151] flex w-full max-w-sm flex-col border-l border-border bg-background p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right motion-reduce:animate-none sm:p-6"
                     aria-describedby={undefined}
                     onCloseAutoFocus={(event) => {
                         event.preventDefault()
@@ -60,7 +65,11 @@ export function MobileMenu({ open, onOpenChange, onOpenCommandMenu, triggerRef }
                             const Icon = link.icon
                             const active =
                                 link.match.length > 0 &&
-                                link.match.some((m) => pathname === m || pathname.startsWith(`${m}/`))
+                                link.match.some(
+                                    (m) =>
+                                        pathname === m ||
+                                        pathname.startsWith(`${m}/`),
+                                )
                             return (
                                 <Link
                                     key={link.label}
@@ -72,7 +81,10 @@ export function MobileMenu({ open, onOpenChange, onOpenCommandMenu, triggerRef }
                                             : "text-fg-secondary hover:bg-surface-hover hover:text-fg"
                                     }`}
                                 >
-                                    <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                                    <Icon
+                                        className="h-5 w-5 shrink-0"
+                                        aria-hidden
+                                    />
                                     {link.label}
                                 </Link>
                             )
@@ -94,7 +106,9 @@ export function MobileMenu({ open, onOpenChange, onOpenCommandMenu, triggerRef }
                             </button>
                         )}
                         <div className="flex items-center justify-between rounded-lg border border-border px-4 py-2">
-                            <span className="text-sm text-fg-secondary">Theme</span>
+                            <span className="text-sm text-fg-secondary">
+                                Theme
+                            </span>
                             <ThemeToggle />
                         </div>
                         <Link
@@ -102,7 +116,7 @@ export function MobileMenu({ open, onOpenChange, onOpenCommandMenu, triggerRef }
                             className="flex h-12 items-center justify-center gap-2 rounded-lg bg-brand text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
                         >
                             <MessageCircle size={16} aria-hidden />
-                            Let&apos;s talk
+                            Contact
                         </Link>
                     </div>
                 </DialogPrimitive.Content>

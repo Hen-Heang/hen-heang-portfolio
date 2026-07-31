@@ -28,12 +28,12 @@ function friendlyError(error: Error | undefined): string {
     return "Something went wrong. Please try again in a moment."
 }
 
-/** Privacy-safe "was this helpful?" signal — vote and page only, never the question/answer text. Best-effort; failures are silently ignored. */
-function sendFeedback(vote: "up" | "down", page: PageContext): void {
+/** Privacy-safe "was this helpful?" signal — vote, page, and the message id only, never the question/answer text. Best-effort; failures are silently ignored. */
+function sendFeedback(vote: "up" | "down", page: PageContext, requestId: string): void {
     void fetch("/api/assistant-feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ vote, page }),
+        body: JSON.stringify({ vote, page, requestId }),
         keepalive: true,
     }).catch(() => {})
 }
@@ -79,10 +79,6 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
     const isBusy = status === "submitted" || status === "streaming"
     const lastMessage = messages[messages.length - 1]
     const showTyping = status === "submitted" || (status === "streaming" && lastMessage?.role !== "assistant")
-
-    useEffect(() => {
-        inputRef.current?.focus()
-    }, [])
 
     // Grow with multiline input up to the CSS max-height, then scroll.
     useEffect(() => {
@@ -144,8 +140,10 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     <Sparkles className="h-[18px] w-[18px] text-brand-foreground" aria-hidden />
                 </div>
                 <div className="min-w-0 flex-1">
-                    <h2 className="truncate text-sm font-semibold text-fg">Heang&apos;s AI Assistant</h2>
-                    <p className="truncate text-[11px] text-fg-muted">Answers from Heang&apos;s real portfolio data</p>
+                    <h2 className="truncate text-sm font-semibold text-fg">Portfolio Assistant</h2>
+                    <p className="truncate text-[11px] text-fg-muted">
+                        Explore Hen Heang&apos;s experience, backend skills, projects, and career background.
+                    </p>
                 </div>
                 {messages.length > 0 && (
                     <button
@@ -180,8 +178,8 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     <div className="space-y-4">
                         <div className="space-y-3 rounded-2xl rounded-bl-md border border-border bg-background/60 px-4 py-3 text-sm leading-relaxed text-fg-secondary">
                             <p>
-                                Ask about Heang&apos;s experience, backend projects, enterprise work, AI-assisted
-                                development, or availability.
+                                Hi! I can help you learn about Hen&apos;s backend experience, technical skills,
+                                projects, and availability.
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 <a
@@ -209,7 +207,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         isStreaming={status === "streaming" && index === messages.length - 1 && message.role === "assistant"}
                         onFeedback={
                             message.role === "assistant" && index === messages.length - 1
-                                ? (vote) => sendFeedback(vote, page)
+                                ? (vote) => sendFeedback(vote, page, message.id)
                                 : undefined
                         }
                     />
@@ -240,7 +238,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                 className="border-t border-border px-3 pt-2"
                 style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
             >
-                <div className="flex items-end gap-2 rounded-2xl border border-border bg-background/60 px-3 py-2 transition-colors focus-within:border-brand/50">
+                <div className="flex items-end gap-2 rounded-2xl border border-border bg-background/60 px-3 py-2">
                     <label htmlFor="assistant-input" className="sr-only">
                         Ask a question about Heang
                     </label>
@@ -257,7 +255,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         }}
                         rows={1}
                         maxLength={MAX_INPUT_CHARS}
-                        placeholder="Ask about Heang…"
+                        placeholder="Ask about my projects or experience…"
                         className="max-h-28 min-h-8 flex-1 resize-none overflow-y-auto bg-transparent py-1 text-sm leading-relaxed text-fg outline-none placeholder:text-fg-muted"
                     />
                     {isBusy ? (

@@ -39,7 +39,7 @@ export const ProjectSchema = z.object({
     hidden: z.boolean().optional(),
     previewImage: z.boolean().optional(),
     category: z.enum(["Backend API", "Full-Stack Application", "Enterprise System", "Frontend Application"]).optional(),
-    ownership: z.enum(["Personal Project", "Team Project", "Professional Work"]).optional(),
+    ownership: z.enum(["Personal Project", "Team Project", "Professional Work", "Learning Lab"]).optional(),
     engineeringFocus: z.array(z.string()).optional(),
     confidential: z.boolean().optional(),
     businessProblem: z.string().optional(),

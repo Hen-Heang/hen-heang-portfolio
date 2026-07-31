@@ -1,7 +1,7 @@
 export const profileData = {
     name: "Hen Heang",
     fullName: "Hen Heang",
-    koreanName: "헹",
+    koreanName: "히엔 히엉",
     title: "Backend Developer (Java & Spring Boot)",
     company: "Bizplay",
     location: "Seoul, South Korea",
@@ -9,8 +9,10 @@ export const profileData = {
     email: "henheang15@gmail.com",
     available: true,
     yearsExperience: "2+",
-    heroValueProposition: "Java & Spring Boot backend developer building dependable APIs and business systems.",
-    heroBio: "I turn business rules into secure, testable services with Spring Boot, MyBatis, and PostgreSQL/Oracle—and connect them to Next.js products when needed.",
+    heroValueProposition:
+        "Java & Spring Boot backend developer building secure APIs and enterprise systems.",
+    heroBio:
+        "I design transaction flows, business logic, and data models with Spring Boot, MyBatis, PostgreSQL, and Oracle—then connect them to Next.js products when needed.",
     bio: "Backend developer in Seoul turning business rules into dependable Java services. I design REST APIs, transaction flows, and data models with Spring Boot, MyBatis, and PostgreSQL/Oracle — then carry the contract through to Next.js clients when a product needs it, with practical experience integrating AI features and using AI-assisted development workflows.",
     description:
         "Backend Developer (Java & Spring Boot) based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems and REST APIs with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and extend to frontends with Next.js and TypeScript when needed.",
@@ -24,16 +26,35 @@ export const profileData = {
     },
     portfolioUrl: "https://henheang.site",
     cvUrl: "https://henheang.site/resume",
-    // TODO: this number doesn't match a valid Korean phone format (mobile: 010-XXXX-XXXX).
-    // Confirm the correct number before publishing — not invented here, left as-is.
-    phone: "+82 86-7985-72",
+    // Phone intentionally omitted: no verified number on file. Add one only once confirmed.
     ides: ["IntelliJ IDEA", "WebStorm"],
     linkedinCoreSkills: [
-        "Java", "Spring Boot", "MyBatis", "Next.js", "TypeScript", "PostgreSQL",
-        "React", "Tailwind CSS", "Oracle", "Git", "Redis", "OpenAI",
-        "Spring Security", "eGovFramework", "REST APIs", "Claude Code",
+        "Java",
+        "Spring Boot",
+        "MyBatis",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "React",
+        "Tailwind CSS",
+        "Oracle",
+        "Git",
+        "Redis",
+        "OpenAI",
+        "Spring Security",
+        "eGovFramework",
+        "REST APIs",
+        "Claude Code",
     ],
-    knowsAbout: ["Java", "Spring Boot", "MyBatis", "JavaScript", "jQuery", "SQL", "Next.js"],
+    knowsAbout: [
+        "Java",
+        "Spring Boot",
+        "MyBatis",
+        "JavaScript",
+        "jQuery",
+        "SQL",
+        "Next.js",
+    ],
     rotatingRoles: [
         "Backend Developer (Java & Spring Boot)",
         "Backend · MyBatis · PostgreSQL / Oracle",
@@ -47,9 +68,9 @@ export const profileData = {
         { name: "Korean", level: "Elementary conversational" },
     ],
     heroTechStack: [
-        { name: "Java",       color: "#f89820", icon: "☕" },
-        { name: "Spring",     color: "#6db33f", icon: "🍃" },
-        { name: "Next.js",    color: "#ffffff", icon: "▲" },
+        { name: "Java", color: "#f89820", icon: "☕" },
+        { name: "Spring", color: "#6db33f", icon: "🍃" },
+        { name: "Next.js", color: "#ffffff", icon: "▲" },
         { name: "TypeScript", color: "#3178c6", icon: "🔷" },
         { name: "PostgreSQL", color: "#336791", icon: "🐘" },
     ],

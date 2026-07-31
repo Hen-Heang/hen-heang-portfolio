@@ -32,8 +32,8 @@ export interface ProcessStep {
 /** Broad shape of the system — drives the category label on cards and the flagship panel. */
 export type ProjectCategory = "Backend API" | "Full-Stack Application" | "Enterprise System" | "Frontend Application"
 
-/** Who the work was built for — distinguishes solo/team side projects from paid company work. */
-export type ProjectOwnership = "Personal Project" | "Team Project" | "Professional Work"
+/** Who the work was built for — distinguishes solo/team side projects, paid company work, and practice/learning repos that aren't standalone products. */
+export type ProjectOwnership = "Personal Project" | "Team Project" | "Professional Work" | "Learning Lab"
 
 export interface Project {
     slug: string

@@ -11,20 +11,11 @@ import type { ExperienceItem } from "@/src/lib/types"
  * Cambodia → Korea journey (school, bootcamp, certificates) lives on /about
  * via AboutTimeline, which still uses the same underlying `experience` data.
  */
-export function ProfessionalExperience({ experience }: { experience: ExperienceItem[] }) {
-    const items = experience.map((job) => ({
-        period: job.period,
-        title: job.role,
-        org: job.company,
-        location: job.location,
-        description: job.summary,
-        highlights: job.highlights?.slice(0, 3),
-        stack: job.stack?.slice(0, 5),
-        kind: "work" as const,
-    }))
-
-    if (items.length === 0) return null
-
+export function ProfessionalExperience({
+    experience,
+}: {
+    experience: ExperienceItem[]
+}) {
     return (
         <Section
             id="experience"
@@ -35,11 +26,36 @@ export function ProfessionalExperience({ experience }: { experience: ExperienceI
             revealHeader
         >
             <Reveal delay={0.05}>
-                <Timeline items={items} />
+                <ProfessionalExperienceContent experience={experience} />
             </Reveal>
-            <div className="mt-12">
+        </Section>
+    )
+}
+
+export function ProfessionalExperienceContent({
+    experience,
+}: {
+    experience: ExperienceItem[]
+}) {
+    const items = experience.map((job) => ({
+        period: job.period,
+        title: job.role,
+        org: job.company,
+        location: job.location,
+        description: job.summary,
+        highlights: job.highlights?.slice(0, 2),
+        stack: job.stack?.slice(0, 3),
+        kind: "work" as const,
+    }))
+
+    if (items.length === 0) return null
+
+    return (
+        <>
+            <Timeline items={items} />
+            <div className="mt-10">
                 <TextLink href="/about">See the full career journey</TextLink>
             </div>
-        </Section>
+        </>
     )
 }

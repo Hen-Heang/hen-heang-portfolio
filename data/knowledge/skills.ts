@@ -21,6 +21,8 @@ export function buildSkillSections(skills: SkillCategory[]): KnowledgeSection[] 
             "skills", "technologies", "stack", "experience", "level", "proficiency",
             ...group.items.map((item) => item.name.toLowerCase()),
         ],
+        sourceLabel: "About page — skills",
+        sourceUrl: "https://henheang.site/about",
         content: group.items
             .map((item) => `- ${item.name} — ${levelLabel(item.level)}${item.experience ? ` (${item.experience})` : ""}`)
             .join("\n"),
@@ -37,6 +39,8 @@ const focusSection: KnowledgeSection = {
         "focus", "learning", "currently", "now", "philosophy", "approach",
         "devops", "docker", "ci/cd", "system design",
     ],
+    sourceLabel: "Engineering Lab — experiments",
+    sourceUrl: "https://henheang.site/lab/experiments",
     content: [
         `Current technical focus: ${currentFocus.join(", ")}.`,
         "",

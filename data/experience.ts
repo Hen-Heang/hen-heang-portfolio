@@ -2,7 +2,7 @@ import type { ExperienceItem } from "@/src/lib/types"
 
 export const experiences: ExperienceItem[] = [
     {
-        role: "Full-Stack Developer",
+        role: "Backend Developer (Java & Spring Boot)",
         company: "Bizplay",
         period: "October 2025 — Present",
         location: "Seoul, South Korea",

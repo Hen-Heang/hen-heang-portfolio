@@ -15,6 +15,7 @@ const links = [
     { href: "/admin/ai_prompts", label: "AI: Prompts" },
     { href: "/admin/ai_snippets", label: "AI: Snippets" },
     { href: "/admin/content", label: "Site Content" },
+    { href: "/admin/assistant", label: "Assistant" },
 ]
 
 export function AdminNav() {

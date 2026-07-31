@@ -24,7 +24,13 @@ function capitalize(value: string): string {
  * Engineering article when one exists, falling back to a third backend
  * guide otherwise — never a placeholder title.
  */
-export function EngineeringLabPreview({ articles }: { articles: Article[] }) {
+export function EngineeringLabPreview({
+    articles,
+    embedded = false,
+}: {
+    articles: Article[]
+    embedded?: boolean
+}) {
     const latestArticle = articles[0]
 
     const entries: LabEntry[] = [
@@ -51,16 +57,14 @@ export function EngineeringLabPreview({ articles }: { articles: Article[] }) {
               },
     ]
 
-    return (
-        <Section
-            eyebrow="Engineering Lab"
-            title="Notes from day-to-day backend work"
-            description="Guides and references kept in the open — the full directory lives on the Lab."
-            revealHeader
-        >
+    const content = (
+        <>
             <ul className="border-y border-border">
                 {entries.map((entry, index) => (
-                    <li key={entry.href} className="border-b border-border last:border-b-0">
+                    <li
+                        key={entry.href}
+                        className="border-b border-border last:border-b-0"
+                    >
                         <Reveal delay={index * 0.06}>
                             <Link
                                 href={entry.href}
@@ -70,7 +74,9 @@ export function EngineeringLabPreview({ articles }: { articles: Article[] }) {
                                     <span className="block font-medium text-fg transition-colors group-hover:text-brand">
                                         {entry.title}
                                     </span>
-                                    <span className="mt-1 block text-sm text-fg-muted">{entry.meta}</span>
+                                    <span className="mt-1 block text-sm text-fg-muted">
+                                        {entry.meta}
+                                    </span>
                                 </span>
                                 <ArrowRight
                                     size={16}
@@ -86,6 +92,19 @@ export function EngineeringLabPreview({ articles }: { articles: Article[] }) {
             <div className="mt-8">
                 <TextLink href="/lab">Open the Engineering Lab</TextLink>
             </div>
+        </>
+    )
+
+    if (embedded) return content
+
+    return (
+        <Section
+            eyebrow="Engineering Lab"
+            title="Notes from day-to-day backend work"
+            description="Guides and references kept in the open — the full directory lives on the Lab."
+            revealHeader
+        >
+            {content}
         </Section>
     )
 }

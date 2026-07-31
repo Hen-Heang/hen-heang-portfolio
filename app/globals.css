@@ -47,12 +47,23 @@
     --success: 152 60% 30%;
     --warning: 32 95% 44%; /* #d97706 — amber-600, darkened for AA on white */
     --error: 0 72% 51%; /* #dc2626 — red-600, darkened for AA on white */
-    --page-ambient: radial-gradient(ellipse 70% 28rem at 50% -10rem, rgb(8 145 178 / 0.06), transparent 68%);
+    --page-ambient: radial-gradient(ellipse 65% 26rem at 20% -8rem, rgb(29 78 216 / 0.05), transparent 60%), radial-gradient(ellipse 60% 22rem at 85% -6rem, rgb(56 189 248 / 0.06), transparent 62%);
 
     /* Code/terminal chrome: deliberately dark in both themes (same convention
        as GitHub/VS Code code blocks), so these are not overridden in .dark. */
     --surface-code: 240 8% 5%; /* #0c0c0e */
     --surface-code-foreground: 240 5% 84%; /* #d4d4d8 */
+
+    /* Navy gradient family: deliberately dark in both themes (same convention
+       as --surface-code above). Used sparingly — primary CTAs and the hero
+       console chrome only, not applied per-section or per-card. */
+    --navy: 213 69% 9%; /* #071426 */
+    --navy-surface: 212 69% 14%; /* #0B1F3A */
+    --navy-elevated: 211 65% 18%; /* #102A4C */
+    --gradient-blue: 221 83% 53%; /* #1D4ED8 — indigo, gradient stop */
+    --gradient-cyan: 199 89% 60%; /* #38BDF8 — cyan highlight, ambient/chrome accent only (fails AA under white button text, so it's never a CTA gradient stop) */
+    --gradient-brand: linear-gradient(135deg, hsl(var(--navy-elevated)) 0%, hsl(var(--gradient-blue)) 100%);
+    --gradient-console: linear-gradient(90deg, hsl(var(--navy)) 0%, hsl(var(--navy-elevated)) 100%);
 
     --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -62,7 +73,7 @@
     --radius-xl: 16px;
     --radius-2xl: 20px;
 
-    /* shadcn tokens (kept for admin + ui primitives), repointed to the palette */
+    /* shading tokens (kept for admin + ui primitives), repointed to the palette */
     --foreground: var(--fg);
     --input: var(--border);
     --ring: var(--brand);
@@ -106,7 +117,7 @@
     --success: 142 69% 58%; /* #4ade80 */
     --warning: 43 96% 56%; /* #fbbf24 */
     --error: 0 91% 71%; /* #f87171 */
-    --page-ambient: radial-gradient(ellipse 70% 28rem at 50% -10rem, rgb(34 211 238 / 0.1), transparent 68%);
+    --page-ambient: radial-gradient(ellipse 65% 26rem at 20% -8rem, rgb(29 78 216 / 0.14), transparent 60%), radial-gradient(ellipse 60% 22rem at 85% -6rem, rgb(56 189 248 / 0.1), transparent 62%);
 
     --foreground: var(--fg);
     --input: var(--border);

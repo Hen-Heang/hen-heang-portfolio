@@ -81,7 +81,7 @@ export const projects: Project[] = [
             { phase: "Design & Schema", detail: "Wrote the API contract first — a standard response envelope, UUID ids, flexible goal metadata in JSONB — so frontend and backend could build in parallel." },
             { phase: "Implementation", detail: "Built the Next.js 16 / React 19 SPA with TanStack Query and an axios client, wiring Today's Mission, the AI Coach, and SRS vocabulary decks against that contract." },
             { phase: "Testing", detail: "Shipped features against a local seed fallback for endpoints not yet live on the backend, then swapped to the real endpoint with zero frontend change as each one landed." },
-            { phase: "Deployment", detail: "Deployed continuously to Vercel as koriai-frontend, iterating against the live Spring Boot API." },
+            { phase: "Deployment", detail: "Deployed continuously to Vercel as koriai-frontend, iterating against Supabase and the live Next.js AI routes." },
         ],
         features: [
             "Today’s Mission combines due vocabulary, phrases, corrections, and scenario practice",
@@ -292,7 +292,7 @@ export const projects: Project[] = [
         slug: "dev-lab",
         title: "Dev Lab — Personal Practice & Tooling Monorepo",
         featured: false,
-        ownership: "Personal Project",
+        ownership: "Learning Lab",
         description: "A personal lab of independent practice projects and learning notes — Spring Boot topics by area (web, data, security, messaging, testing, cloud, AI), core Java exercises, and small full apps, each in its own folder.",
         technologies: ["Spring Boot", "Java 21", "MyBatis", "PostgreSQL", "Maven", "Gradle"],
         image: "/image/dev-lab-preview.svg",

@@ -65,6 +65,11 @@ const config: Config = {
 				success: "hsl(var(--success) / <alpha-value>)",
 				warning: "hsl(var(--warning) / <alpha-value>)",
 				error: "hsl(var(--error) / <alpha-value>)",
+				navy: {
+					DEFAULT: "hsl(var(--navy) / <alpha-value>)",
+					surface: "hsl(var(--navy-surface) / <alpha-value>)",
+					elevated: "hsl(var(--navy-elevated) / <alpha-value>)",
+				},
 				border: {
 					DEFAULT: "hsl(var(--border))",
 					strong: "hsl(var(--border-strong) / <alpha-value>)",
@@ -104,6 +109,10 @@ const config: Config = {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",
 				sm: "calc(var(--radius) - 4px)",
+			},
+			backgroundImage: {
+				"gradient-brand": "var(--gradient-brand)",
+				"gradient-console": "var(--gradient-console)",
 			},
 			keyframes: {
 				"accordion-down": {

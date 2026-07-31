@@ -17,6 +17,8 @@ export const articlesKnowledge: KnowledgeSection[] = [
             "content", "posts", "documentation", "backend", "java", "spring boot",
             "devops", "roadmap", "system design", "diagrams", "learning", "notes",
         ],
+        sourceLabel: "Engineering Lab",
+        sourceUrl: "https://henheang.site/lab",
         content: [
             "Heang publishes engineering write-ups on his portfolio's **Engineering Lab** (https://henheang.site/lab):",
             "",
@@ -35,6 +37,8 @@ export const articlesKnowledge: KnowledgeSection[] = [
             "performance", "optimization", "caching", "cache", "optimistic",
             "background jobs", "cron", "reliability", "data access", "query", "speed",
         ],
+        sourceLabel: "Engineering Lab — performance",
+        sourceUrl: "https://henheang.site/lab/performance",
         content: performanceTechniques
             .map((t) => `- **${t.category}** (${t.project}): ${t.text}`)
             .join("\n"),
