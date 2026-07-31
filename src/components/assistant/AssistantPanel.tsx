@@ -10,7 +10,6 @@ import { StarterChips } from "./StarterChips"
 import { TypingIndicator } from "./TypingIndicator"
 import { clearAssistantHistory, loadAssistantHistory, saveAssistantHistory } from "./history"
 import type { PageContext } from "@/src/lib/ai/page-context"
-import { profileData } from "@/data/profile"
 
 const MAX_INPUT_CHARS = 1_000
 /** How close to the bottom (px) the user must be for auto-scroll to engage. */
@@ -138,14 +137,15 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
     const errorText = friendlyError(error)
 
     return (
-        <div className="flex h-full flex-col">
-            <header className="flex items-center gap-3 border-b border-border px-4 py-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand">
-                    <Sparkles className="h-[18px] w-[18px] text-brand-foreground" aria-hidden />
+        <div className="flex h-full flex-col bg-[#050816] text-[#F8FAFC]">
+            <header className="flex items-center gap-3 border-b border-slate-400/15 px-4 py-3 shrink-0">
+                <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gemini-gradient shadow-sm">
+                    <Sparkles className="h-4 w-4 text-white" aria-hidden />
+                    <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#050816] bg-green-500" aria-label="Available" />
                 </div>
                 <div className="min-w-0 flex-1">
-                    <h2 className="truncate text-sm font-semibold text-fg">Heang&apos;s AI Assistant</h2>
-                    <p className="truncate text-[11px] text-fg-muted">Answers from Heang&apos;s real portfolio data</p>
+                    <h2 className="truncate text-[13px] font-semibold text-[#F8FAFC]">Portfolio Assistant</h2>
+                    <p className="truncate text-[11px] text-[#94A3B8]">Ask about Hen&apos;s work and experience</p>
                 </div>
                 {messages.length > 0 && (
                     <button
@@ -162,7 +162,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     type="button"
                     onClick={onClose}
                     aria-label="Close assistant"
-                    className="flex h-10 w-10 items-center justify-center rounded-lg text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                    className="flex h-8 w-8 items-center justify-center rounded-md text-[#94A3B8] transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
                 >
                     <X className="h-4 w-4" aria-hidden />
                 </button>
@@ -174,29 +174,15 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                 role="log"
                 aria-live="polite"
                 aria-label="Conversation"
-                className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-4"
+                className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-5"
             >
                 {messages.length === 0 && (
                     <div className="space-y-4">
-                        <div className="space-y-3 rounded-2xl rounded-bl-md border border-border bg-background/60 px-4 py-3 text-sm leading-relaxed text-fg-secondary">
-                            <p>
-                                Ask about Heang&apos;s experience, backend projects, enterprise work, AI-assisted
-                                development, or availability.
+                        <div className="space-y-2.5 rounded-2xl rounded-bl-md border border-slate-400/15 bg-[#0B1020] px-4 py-3.5 text-sm leading-relaxed text-[#F8FAFC]">
+                            <p className="font-medium">Hi, I&apos;m Hen&apos;s Portfolio Assistant</p>
+                            <p className="text-[#94A3B8] text-[13px]">
+                                Ask me about his backend experience, projects, skills, or engineering work.
                             </p>
-                            <div className="flex flex-wrap gap-2">
-                                <a
-                                    href="/resume"
-                                    className="inline-flex items-center rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs font-medium text-fg-secondary transition-colors hover:border-brand/40 hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                                >
-                                    View resume
-                                </a>
-                                <a
-                                    href={`mailto:${profileData.email}`}
-                                    className="inline-flex items-center rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs font-medium text-fg-secondary transition-colors hover:border-brand/40 hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                                >
-                                    Contact Heang
-                                </a>
-                            </div>
                         </div>
                         <StarterChips onSelect={submit} disabled={isBusy} page={page} />
                     </div>
@@ -237,12 +223,12 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     event.preventDefault()
                     submit(input)
                 }}
-                className="border-t border-border px-3 pt-2"
+                className="shrink-0 border-t border-slate-400/15 bg-[#0B1020]/50 px-3 py-3"
                 style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
             >
-                <div className="flex items-end gap-2 rounded-2xl border border-border bg-background/60 px-3 py-2 transition-colors focus-within:border-brand/50">
+                <div className="flex items-end gap-2 rounded-2xl border border-slate-400/15 bg-[#11182B] px-3 py-2 transition-colors focus-within:border-[#4285F4]/50 shadow-sm">
                     <label htmlFor="assistant-input" className="sr-only">
-                        Ask a question about Heang
+                        Ask about Hen&apos;s experience or projects...
                     </label>
                     <textarea
                         id="assistant-input"
@@ -257,31 +243,31 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         }}
                         rows={1}
                         maxLength={MAX_INPUT_CHARS}
-                        placeholder="Ask about Heang…"
-                        className="max-h-28 min-h-8 flex-1 resize-none overflow-y-auto bg-transparent py-1 text-sm leading-relaxed text-fg outline-none placeholder:text-fg-muted"
+                        placeholder="Ask about Hen's experience or projects..."
+                        className="max-h-28 min-h-[32px] flex-1 resize-none overflow-y-auto bg-transparent py-1.5 text-sm leading-relaxed text-[#F8FAFC] outline-none placeholder:text-[#94A3B8]"
                     />
                     {isBusy ? (
                         <button
                             type="button"
                             onClick={() => stop()}
                             aria-label="Stop generating"
-                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-hover text-fg-secondary transition-colors hover:bg-border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-[#94A3B8] transition-colors hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
                         >
-                            <Square className="h-4 w-4" aria-hidden />
+                            <Square className="h-3.5 w-3.5" aria-hidden />
                         </button>
                     ) : (
                         <button
                             type="submit"
                             disabled={input.trim().length === 0}
                             aria-label="Send message"
-                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-brand-foreground transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-40"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gemini-gradient text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4] disabled:pointer-events-none disabled:opacity-40"
                         >
-                            <Send className="h-4 w-4" aria-hidden />
+                            <Send className="h-4 w-4 ml-0.5" aria-hidden />
                         </button>
                     )}
                 </div>
-                <p className="mt-1.5 flex items-center justify-between px-1 text-[10px] text-fg-muted">
-                    <span>Answers are generated from Hen Heang&apos;s public portfolio data — may be imperfect.</span>
+                <p className="mt-2 flex items-center justify-between px-2 text-[10px] text-[#94A3B8]">
+                    <span>Answers are based on verified portfolio information.</span>
                     {input.length > MAX_INPUT_CHARS * 0.8 && (
                         <span aria-live="polite">{MAX_INPUT_CHARS - input.length} left</span>
                     )}
