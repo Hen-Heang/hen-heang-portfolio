@@ -66,7 +66,11 @@ test.describe("Backend Engineering curriculum", () => {
         await page.getByRole("link", { name: "Backend Engineering" }).first().click()
         const search = page.getByRole("textbox", { name: "Search backend curriculum" })
         await search.fill("Spring Boot layered architecture")
-        await page.getByRole("link", { name: /Layered Spring Boot Architecture/ }).click()
+        await expect(page).toHaveURL((url) => url.searchParams.get("q") === "Spring Boot layered architecture")
+        await Promise.all([
+            page.waitForURL(/\/lab\/backend\/spring-boot-layered-architecture$/),
+            page.getByRole("link", { name: /Layered Spring Boot Architecture/ }).click(),
+        ])
         await expect(page.getByRole("heading", { name: "Layered Spring Boot Architecture", level: 1 })).toBeVisible()
 
         await page.getByRole("link", { name: "Backend Engineering" }).first().click()
