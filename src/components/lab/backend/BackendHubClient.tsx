@@ -95,7 +95,7 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
             <section id="catalog" className="mt-10 scroll-mt-24" aria-labelledby="backend-catalog-heading">
                 <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                     <div>
-                        <p className="font-mono text-sm uppercase tracking-wider text-brand">Reference library</p>
+                        <p className="font-mono text-sm uppercase tracking-wider text-brand-hover">Reference library</p>
                         <h2 id="backend-catalog-heading" className="mt-1 text-2xl font-bold text-fg">Published depth, planned progression</h2>
                     </div>
                     <p aria-live="polite" className="font-mono text-sm text-fg-muted">{results.length} item{results.length === 1 ? "" : "s"}</p>

@@ -104,7 +104,7 @@ test.describe("Backend Engineering layout and accessibility", () => {
         )
         expect(transitionSeconds).toBeLessThanOrEqual(0.02)
 
-        const contrastRatio = await page.getByText("Roadmap levels").evaluate((element) => {
+        const contrastRatio = await page.getByText("Reference library").evaluate((element) => {
             function rgb(value: string): number[] {
                 return value.match(/[\d.]+/g)!.slice(0, 3).map(Number)
             }
