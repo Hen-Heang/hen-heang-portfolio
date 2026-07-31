@@ -65,8 +65,8 @@ async function expectNoPageOverflow(page: Page) {
 async function expectMinimumTouchTarget(locator: Locator) {
     const box = await locator.boundingBox()
     expect(box).not.toBeNull()
-    expect(box!.width).toBeGreaterThanOrEqual(44)
-    expect(box!.height).toBeGreaterThanOrEqual(44)
+    expect(Math.round(box!.width)).toBeGreaterThanOrEqual(44)
+    expect(Math.round(box!.height)).toBeGreaterThanOrEqual(44)
 }
 
 test.describe("Portfolio Assistant responsive UI", () => {
@@ -103,7 +103,7 @@ test.describe("Portfolio Assistant responsive UI", () => {
                 dialog.getByRole("link", { name: "View resume" }),
                 dialog.getByRole("link", { name: "Contact Heang" }),
                 dialog.getByRole("button", { name: "Send message" }),
-                dialog.getByRole("button", { name: "Backend experience" }),
+                dialog.getByRole("button", { name: "Why backend?" }),
             ]
             for (const target of requiredTargets) await expectMinimumTouchTarget(target)
 

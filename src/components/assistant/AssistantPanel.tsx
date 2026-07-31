@@ -153,7 +153,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         onClick={clearConversation}
                         aria-label="Clear conversation"
                         title="Clear conversation"
-                        className="flex h-10 w-10 items-center justify-center rounded-lg text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                        className="flex h-11 w-11 items-center justify-center rounded-lg text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                     >
                         <RotateCcw className="h-4 w-4" aria-hidden />
                     </button>
@@ -162,7 +162,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     type="button"
                     onClick={onClose}
                     aria-label="Close assistant"
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-[#94A3B8] transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                    className="flex h-11 w-11 items-center justify-center rounded-md text-[#94A3B8] transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
                 >
                     <X className="h-4 w-4" aria-hidden />
                 </button>
@@ -178,11 +178,27 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
             >
                 {messages.length === 0 && (
                     <div className="space-y-4">
-                        <div className="space-y-2.5 rounded-2xl rounded-bl-md border border-slate-400/15 bg-[#0B1020] px-4 py-3.5 text-sm leading-relaxed text-[#F8FAFC]">
-                            <p className="font-medium">Hi, I&apos;m Hen&apos;s Portfolio Assistant</p>
-                            <p className="text-[#94A3B8] text-[13px]">
-                                Ask me about his backend experience, projects, skills, or engineering work.
-                            </p>
+                        <div className="space-y-3 rounded-2xl rounded-bl-md border border-slate-400/15 bg-[#0B1020] px-4 py-3.5 text-sm leading-relaxed text-[#F8FAFC]">
+                            <div className="space-y-1">
+                                <p className="font-medium">Hi, I&apos;m Hen&apos;s Portfolio Assistant</p>
+                                <p className="text-[#94A3B8] text-[13px]">
+                                    Ask me about his backend experience, projects, skills, or engineering work.
+                                </p>
+                            </div>
+                            <div className="flex flex-wrap gap-2 pt-1">
+                                <a
+                                    href="/resume"
+                                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-400/15 bg-[#11182B] px-4 py-1.5 text-xs font-medium text-[#94A3B8] transition-colors hover:border-[#4285F4]/40 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                                >
+                                    View resume
+                                </a>
+                                <a
+                                    href="/contact"
+                                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-400/15 bg-[#11182B] px-4 py-1.5 text-xs font-medium text-[#94A3B8] transition-colors hover:border-[#4285F4]/40 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                                >
+                                    Contact Heang
+                                </a>
+                            </div>
                         </div>
                         <StarterChips onSelect={submit} disabled={isBusy} page={page} />
                     </div>
@@ -209,7 +225,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         <button
                             type="button"
                             onClick={retry}
-                            className="inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-background/60 px-3 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:text-red-400"
+                            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-red-500/30 bg-background/60 px-4 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:text-red-400"
                         >
                             <RefreshCw className="h-3 w-3" aria-hidden />
                             Retry
@@ -244,23 +260,23 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         rows={1}
                         maxLength={MAX_INPUT_CHARS}
                         placeholder="Ask about Hen's experience or projects..."
-                        className="max-h-28 min-h-[32px] flex-1 resize-none overflow-y-auto bg-transparent py-1.5 text-sm leading-relaxed text-[#F8FAFC] outline-none placeholder:text-[#94A3B8]"
+                        className="max-h-28 min-h-[44px] flex-1 resize-none overflow-y-auto bg-transparent py-3 text-[16px] sm:text-sm leading-relaxed text-[#F8FAFC] outline-none placeholder:text-[#94A3B8]"
                     />
                     {isBusy ? (
                         <button
                             type="button"
                             onClick={() => stop()}
                             aria-label="Stop generating"
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-[#94A3B8] transition-colors hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-[#94A3B8] transition-colors hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
                         >
-                            <Square className="h-3.5 w-3.5" aria-hidden />
+                            <Square className="h-4 w-4" aria-hidden />
                         </button>
                     ) : (
                         <button
                             type="submit"
                             disabled={input.trim().length === 0}
                             aria-label="Send message"
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gemini-gradient text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4] disabled:pointer-events-none disabled:opacity-40"
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gemini-gradient text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4] disabled:pointer-events-none disabled:opacity-40"
                         >
                             <Send className="h-4 w-4 ml-0.5" aria-hidden />
                         </button>

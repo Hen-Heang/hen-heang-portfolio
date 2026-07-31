@@ -61,7 +61,7 @@ export function MessageBubble({ message, isStreaming, onFeedback }: MessageBubbl
                         type="button"
                         onClick={copy}
                         aria-label={copied ? "Response copied" : "Copy response"}
-                        className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
+                        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 rounded-md px-3 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
                     >
                         {copied ? <Check className="h-3.5 w-3.5 text-green-400" aria-hidden /> : <Copy className="h-3.5 w-3.5" aria-hidden />}
                         {copied ? "Copied" : "Copy"}
@@ -77,7 +77,7 @@ export function MessageBubble({ message, isStreaming, onFeedback }: MessageBubbl
                                     type="button"
                                     onClick={() => submitVote("up")}
                                     aria-label="This answer was helpful"
-                                    className="rounded-md p-1 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
+                                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
                                 >
                                     <ThumbsUp className="h-3.5 w-3.5" aria-hidden />
                                 </button>
@@ -85,7 +85,7 @@ export function MessageBubble({ message, isStreaming, onFeedback }: MessageBubbl
                                     type="button"
                                     onClick={() => submitVote("down")}
                                     aria-label="This answer was not helpful"
-                                    className="rounded-md p-1 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
+                                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
                                 >
                                     <ThumbsDown className="h-3.5 w-3.5" aria-hidden />
                                 </button>
