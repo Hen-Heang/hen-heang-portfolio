@@ -46,12 +46,11 @@ export const starterPrompts: AssistantStarterPrompt[] = [
     { id: "dev-ai", audience: "developer", label: "AI in development", prompt: "How does he use AI in development?", priority: 5 },
     { id: "dev-github", audience: "developer", label: "GitHub repositories", prompt: "Show his GitHub repositories.", priority: 6 },
 
-    // General
-    { id: "gen-who", audience: "general", label: "Who is Heang?", prompt: "Who is Hen Heang?", priority: 1 },
-    { id: "gen-journey", audience: "general", label: "Cambodia to Korea", prompt: "What is his Cambodia-to-Korea journey?", priority: 2 },
-    { id: "gen-tech", audience: "general", label: "Tech stack", prompt: "What technologies does he use?", priority: 3 },
-    { id: "gen-languages", audience: "general", label: "Languages", prompt: "What languages does he speak?", priority: 4 },
-    { id: "gen-learning", audience: "general", label: "Currently learning", prompt: "What is he currently learning?", priority: 5 },
+    // General (Now used as the default compact questions)
+    { id: "gen-backend", audience: "general", label: "Backend experience", prompt: "What is Hen's backend experience?", priority: 1 },
+    { id: "gen-projects", audience: "general", label: "Strongest projects", prompt: "Show his strongest projects.", priority: 2 },
+    { id: "gen-tech", audience: "general", label: "Technologies used", prompt: "What technologies does he use?", priority: 3 },
+    { id: "gen-contact", audience: "general", label: "Contact", prompt: "How can I contact him?", priority: 4 },
 ]
 
 /** Page-aware prompts shown instead of the audience chips when the visitor opens the assistant from a specific page. */
@@ -84,7 +83,7 @@ export const pagePrompts: Partial<Record<PageContext, AssistantStarterPrompt[]>>
 }
 
 /** How many chips to show at once before the "More questions" action. */
-export const VISIBLE_CHIP_COUNT = 5
+export const VISIBLE_CHIP_COUNT = 4
 
 export function promptsForAudience(audience: PromptAudience): AssistantStarterPrompt[] {
     return starterPrompts.filter((p) => p.audience === audience).sort((a, b) => a.priority - b.priority)

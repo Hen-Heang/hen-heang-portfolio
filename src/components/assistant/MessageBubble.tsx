@@ -48,22 +48,22 @@ export function MessageBubble({ message, isStreaming, onFeedback }: MessageBubbl
             <div
                 className={
                     isUser
-                        ? "max-w-[85%] rounded-2xl rounded-br-md bg-brand px-4 py-2.5 text-sm leading-relaxed text-brand-foreground whitespace-pre-wrap break-words"
-                        : "max-w-[92%] rounded-2xl rounded-bl-md border border-border bg-background/60 px-4 py-3"
+                        ? "max-w-[85%] rounded-2xl rounded-br-md bg-[#11182B] border border-[#4285F4]/20 px-4 py-2.5 text-[14px] leading-relaxed text-[#F8FAFC] whitespace-pre-wrap break-words shadow-sm"
+                        : "max-w-[95%] py-1 text-[#F8FAFC]"
                 }
             >
                 {isUser ? text : <MarkdownContent text={text} />}
             </div>
 
             {!isUser && !isStreaming && text.length > 0 && (
-                <div className="mt-1 flex items-center gap-2 text-[11px] text-fg-muted opacity-0 transition-all focus-within:opacity-100 group-hover:opacity-100">
+                <div className="mt-2 flex items-center gap-2 text-[11px] text-[#94A3B8] opacity-0 transition-all focus-within:opacity-100 group-hover:opacity-100">
                     <button
                         type="button"
                         onClick={copy}
                         aria-label={copied ? "Response copied" : "Copy response"}
-                        className="inline-flex items-center gap-1 rounded-md px-1.5 py-1 transition-colors hover:bg-surface-hover hover:text-fg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand"
+                        className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
                     >
-                        {copied ? <Check className="h-3 w-3 text-success" aria-hidden /> : <Copy className="h-3 w-3" aria-hidden />}
+                        {copied ? <Check className="h-3.5 w-3.5 text-green-400" aria-hidden /> : <Copy className="h-3.5 w-3.5" aria-hidden />}
                         {copied ? "Copied" : "Copy"}
                     </button>
 
@@ -77,17 +77,17 @@ export function MessageBubble({ message, isStreaming, onFeedback }: MessageBubbl
                                     type="button"
                                     onClick={() => submitVote("up")}
                                     aria-label="This answer was helpful"
-                                    className="rounded-md p-1 transition-colors hover:bg-surface-hover hover:text-fg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand"
+                                    className="rounded-md p-1 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
                                 >
-                                    <ThumbsUp className="h-3 w-3" aria-hidden />
+                                    <ThumbsUp className="h-3.5 w-3.5" aria-hidden />
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => submitVote("down")}
                                     aria-label="This answer was not helpful"
-                                    className="rounded-md p-1 transition-colors hover:bg-surface-hover hover:text-fg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand"
+                                    className="rounded-md p-1 transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4285F4]"
                                 >
-                                    <ThumbsDown className="h-3 w-3" aria-hidden />
+                                    <ThumbsDown className="h-3.5 w-3.5" aria-hidden />
                                 </button>
                             </span>
                         )
