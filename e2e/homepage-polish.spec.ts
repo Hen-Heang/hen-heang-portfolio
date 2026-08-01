@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test"
+import { positioning } from "../src/lib/content/positioning"
 
 const viewports = [
     { name: "small mobile", width: 375, height: 812 },
@@ -23,21 +24,14 @@ test.describe("Homepage polish", () => {
         const response = await request.get("/")
         const html = await response.text()
 
-        expect(html).toContain(
-            "Java &amp; Spring Boot backend developer building secure APIs and enterprise systems.",
-        )
-        expect(html).toContain(
-            "I design transaction flows, business logic, and data models",
-        )
+        expect(html).toContain(positioning.title)
+        expect(html).toContain(positioning.description)
+        expect(html).toContain(positioning.supporting)
         expect(html).toContain("years experience")
 
         await page.goto("/")
         const main = page.locator("main")
-        await expect(
-            main.getByText(
-                "Java & Spring Boot backend developer building secure APIs and enterprise systems.",
-            ),
-        ).toBeVisible()
+        await expect(main.getByText(positioning.description)).toBeVisible()
         await expect(
             main.getByRole("link", { name: "View Backend Work" }),
         ).toHaveAttribute("href", "#work")
@@ -52,17 +46,20 @@ test.describe("Homepage polish", () => {
         expect(pageErrors).toEqual([])
     })
 
-    test("keeps a concise five-part hierarchy and a readable H-Phsar architecture preview", async ({
+    test("keeps a concise section hierarchy and a readable H-Phsar architecture preview", async ({
         page,
     }) => {
         await page.setViewportSize({ width: 390, height: 844 })
         await page.goto("/")
 
+        // Recruiter-scan order: who he is, what he works with, the work, where
+        // he did it, the background, then a direct contact path.
         const landmarks = [
             page.getByRole("heading", { name: "Hen Heang", level: 1 }),
+            page.locator("#capabilities"),
             page.locator("#work"),
-            page.locator("#profile"),
-            page.locator("#growth"),
+            page.locator("#experience"),
+            page.locator("#about"),
             page.getByRole("heading", { name: "Have a system to build?" }),
         ]
         const positions = await Promise.all(
@@ -74,7 +71,11 @@ test.describe("Homepage polish", () => {
             ),
         )
         expect([...positions].sort((a, b) => a - b)).toEqual(positions)
-        await expect(page.getByText("In enterprise teams")).toBeVisible()
+
+        // Each purpose appears once: the old proof-strip, profile, and growth
+        // sections restated Selected Work, Experience, and Capabilities.
+        await expect(page.locator("#profile")).toHaveCount(0)
+        await expect(page.locator("#growth")).toHaveCount(0)
 
         const hPhsar = page
             .locator("article", {
