@@ -60,7 +60,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.1.7",
+    "eslint-config-next": "^16.2.12",
     "jsdom": "^30.0.1",
     "postcss": "^8.5.3",
     "prettier": "^3.6.2",
