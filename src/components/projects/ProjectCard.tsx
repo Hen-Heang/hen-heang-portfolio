@@ -1,7 +1,8 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, ExternalLink, Github } from "lucide-react"
+import { ArrowRight, ExternalLink } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { cn, interactiveCard } from "@/src/lib/utils/utils"
 import type { Project } from "@/src/lib/types"
 
@@ -121,7 +122,7 @@ export function ProjectCard({ project }: { project: Project }) {
                             className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
                             aria-label={`View ${project.title} on GitHub (opens in a new tab)`}
                         >
-                            <Github size={14} aria-hidden />
+                            <GithubIcon size={14} brand={false} />
                             GitHub
                         </a>
                         {isLive && (

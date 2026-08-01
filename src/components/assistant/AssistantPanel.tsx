@@ -145,7 +145,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                 </div>
                 <div className="min-w-0 flex-1">
                     <h2 className="truncate text-[13px] font-semibold text-[#F8FAFC]">Portfolio Assistant</h2>
-                    <p className="truncate text-[11px] text-[#94A3B8]">Ask about Hen&apos;s work and experience</p>
+                    <p className="truncate text-[11px] text-[#94A3B8]">Ask about Heang&apos;s work and experience</p>
                 </div>
                 {messages.length > 0 && (
                     <button
@@ -180,7 +180,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     <div className="space-y-4">
                         <div className="space-y-3 rounded-2xl rounded-bl-md border border-slate-400/15 bg-[#0B1020] px-4 py-3.5 text-sm leading-relaxed text-[#F8FAFC]">
                             <div className="space-y-1">
-                                <p className="font-medium">Hi, I&apos;m Hen&apos;s Portfolio Assistant</p>
+                                <p className="font-medium">Hi, I&apos;m Heang&apos;s Portfolio Assistant</p>
                                 <p className="text-[#94A3B8] text-[13px]">
                                     Ask me about his backend experience, projects, skills, or engineering work.
                                 </p>
@@ -244,7 +244,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
             >
                 <div className="flex items-end gap-2 rounded-2xl border border-slate-400/15 bg-[#11182B] px-3 py-2 transition-colors focus-within:border-[#4285F4]/50 shadow-sm">
                     <label htmlFor="assistant-input" className="sr-only">
-                        Ask about Hen&apos;s experience or projects...
+                        Ask about Heang&apos;s experience or projects...
                     </label>
                     <textarea
                         id="assistant-input"
@@ -259,8 +259,8 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                         }}
                         rows={1}
                         maxLength={MAX_INPUT_CHARS}
-                        placeholder="Ask about Hen's experience or projects..."
-                        className="max-h-28 min-h-[44px] flex-1 resize-none overflow-y-auto bg-transparent py-3 text-[16px] sm:text-sm leading-relaxed text-[#F8FAFC] outline-none placeholder:text-[#94A3B8]"
+                        placeholder="Ask about Heang's experience or projects..."
+                        className="max-h-28 min-h-[44px] flex-1 resize-none overflow-y-auto bg-transparent py-3 text-[16px] sm:text-sm leading-relaxed text-[#F8FAFC] outline-none focus-visible:outline-none placeholder:text-[#94A3B8]"
                     />
                     {isBusy ? (
                         <button

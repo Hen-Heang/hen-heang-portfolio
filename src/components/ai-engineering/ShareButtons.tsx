@@ -1,6 +1,7 @@
 "use client"
 
-import { Link2, Linkedin, Twitter } from "lucide-react"
+import { Link2 } from "lucide-react"
+import { LinkedinIcon, XIcon } from "@/src/components/icons/social"
 import { useState } from "react"
 
 export function ShareButtons({ url, title }: { url: string; title: string }) {
@@ -19,12 +20,12 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
     const shareLinks = [
         {
             label: "Share on X",
-            icon: Twitter,
-            href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+            icon: XIcon,
+            href: `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
         },
         {
             label: "Share on LinkedIn",
-            icon: Linkedin,
+            icon: LinkedinIcon,
             href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
         },
     ]

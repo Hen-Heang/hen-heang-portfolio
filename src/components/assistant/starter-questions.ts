@@ -1,7 +1,5 @@
 import type { PageContext } from "@/src/lib/ai/page-context"
 
-import type { PageContext } from "@/src/lib/ai/page-context"
-
 export interface AssistantStarterPrompt {
     id: string
     /** Short label shown on the chip */
@@ -11,7 +9,7 @@ export interface AssistantStarterPrompt {
 }
 
 export const primaryQuestions: AssistantStarterPrompt[] = [
-    { id: "pri-who", label: "Tell me about Hen", prompt: "Tell me about Hen." },
+    { id: "pri-who", label: "Tell me about Heang", prompt: "Tell me about Heang." },
     { id: "pri-backend", label: "Backend experience", prompt: "What is his backend experience?" },
     { id: "pri-strongest", label: "Strongest project", prompt: "Show his strongest project." },
     { id: "pri-compare", label: "Compare projects", prompt: "Compare his backend projects." },
@@ -30,7 +28,7 @@ export const secondaryQuestions: AssistantStarterPrompt[] = [
 /** Page-aware prompts shown instead of the default mix when the visitor opens the assistant from a specific page. */
 export const pagePrompts: Partial<Record<PageContext, AssistantStarterPrompt[]>> = {
     home: [
-        { id: "page-home-who", label: "Who is Hen?", prompt: "Who is Hen Heang?" },
+        { id: "page-home-who", label: "Who is Heang?", prompt: "Who is Hen Heang?" },
         { id: "page-home-strongest-work", label: "Strongest work", prompt: "Show his strongest work." },
         { id: "page-home-why-backend", label: "Why backend?", prompt: "Why is he backend-focused?" },
         { id: "page-home-contact", label: "Contact him", prompt: "How can I contact him?" },

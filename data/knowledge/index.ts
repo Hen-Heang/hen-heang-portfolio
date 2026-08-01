@@ -3,12 +3,13 @@ import { buildPositioningKnowledge, positioningKnowledge } from "./positioning"
 import { buildExperienceKnowledge, experienceKnowledge } from "./experience"
 import { buildCareerKnowledge, careerKnowledge } from "./career"
 import { buildProjectsKnowledge, projectsKnowledge } from "./projects"
-import { buildSkillsKnowledge, skillsKnowledge } from "./skills"
+import { buildSkillsKnowledge } from "./skills"
 import { buildAIEngineeringKnowledge, aiEngineeringKnowledge } from "./ai-engineering"
 import { articlesKnowledge } from "./articles"
 import { buildContactKnowledge, contactKnowledge } from "./contact"
 import { faqKnowledge } from "./faq"
 import { buildCorrectionsKnowledge } from "./corrections"
+import { skills as staticSkills } from "@/data/skills"
 import type { EducationItem, ExperienceItem, Project, SkillCategory } from "@/src/lib/types"
 import type { AICategory, Article, Prompt, Snippet } from "@/src/lib/types/ai-engineering"
 import type { AIProfileFact } from "@/src/lib/types/ai-knowledge"
@@ -88,7 +89,7 @@ export const knowledgeBase: KnowledgeSection[] = dedupeKnowledgeSections([
     ...experienceKnowledge,
     ...careerKnowledge,
     ...projectsKnowledge,
-    ...skillsKnowledge,
+    ...buildSkillsKnowledge(staticSkills),
     ...aiEngineeringKnowledge,
     ...articlesKnowledge,
     ...contactKnowledge,

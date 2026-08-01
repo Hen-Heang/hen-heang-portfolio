@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { Mail, Phone, MapPin, Linkedin, Github, Globe } from "lucide-react"
+import { Mail, Phone, MapPin, Globe } from "lucide-react"
+import { GithubIcon, LinkedinIcon } from "@/src/components/icons/social"
 import type { CVData } from "@/data/cv-data"
 
 export function CVHeader({ cv }: { cv: CVData }) {
@@ -69,7 +70,7 @@ export function CVHeader({ cv }: { cv: CVData }) {
                 aria-label={`${personal.name}'s LinkedIn profile`}
                 className="flex items-center gap-1.5 text-slate-600 hover:text-blue-600 transition-colors underline decoration-slate-300 underline-offset-2 hover:decoration-blue-600"
               >
-                <Linkedin size={14} className="text-slate-400 print:hidden" aria-hidden />
+                <LinkedinIcon size={14} brand={false} className="text-slate-400 print:hidden" />
                 LinkedIn
               </a>
             )}
@@ -82,7 +83,7 @@ export function CVHeader({ cv }: { cv: CVData }) {
                 aria-label={`${personal.name}'s GitHub profile`}
                 className="flex items-center gap-1.5 text-slate-600 hover:text-blue-600 transition-colors underline decoration-slate-300 underline-offset-2 hover:decoration-blue-600"
               >
-                <Github size={14} className="text-slate-400 print:hidden" aria-hidden />
+                <GithubIcon size={14} brand={false} className="text-slate-400 print:hidden" />
                 GitHub
               </a>
             )}

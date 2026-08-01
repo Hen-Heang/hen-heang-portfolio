@@ -23,6 +23,8 @@ export const profileData = {
         linkedin: "https://www.linkedin.com/in/hen-heang",
         telegram: "https://t.me/henheang",
         x: "https://x.com/hen_heang54960",
+        facebook: "https://www.facebook.com/HenHeang15/",
+        instagram: "https://www.instagram.com/hen_heang/",
     },
     portfolioUrl: "https://henheang.site",
     cvUrl: "https://henheang.site/resume",

@@ -1,6 +1,13 @@
 "use client"
 
-import { Mail, Github, Linkedin, Send, MapPin, MessageSquare, ExternalLink } from "lucide-react"
+import { Mail, MapPin, MessageSquare, ExternalLink } from "lucide-react"
+import {
+    FacebookIcon,
+    GithubIcon,
+    InstagramIcon,
+    LinkedinIcon,
+    TelegramIcon,
+} from "@/src/components/icons/social"
 import { ContactForm } from "@/src/components/sections/contact/ContactForm"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import { SiteHeader } from "@/src/components/layout/SiteHeader"
@@ -13,10 +20,12 @@ export function ContactPageClient() {
     const personalInfo = usePersonalInfo()
     const contactCards = [
         { title: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}`, newTab: false, icon: Mail },
-        { title: "LinkedIn", value: "Hen Heang", href: personalInfo.socialLinks.linkedin, newTab: true, icon: Linkedin },
-        { title: "Telegram", value: "@henheang", href: personalInfo.socialLinks.telegram, newTab: true, icon: Send },
-        { title: "GitHub", value: "Hen-Heang", href: personalInfo.socialLinks.github, newTab: true, icon: Github },
-    ]
+        { title: "LinkedIn", value: "Hen Heang", href: personalInfo.socialLinks.linkedin, newTab: true, icon: LinkedinIcon },
+        { title: "Telegram", value: "@henheang", href: personalInfo.socialLinks.telegram, newTab: true, icon: TelegramIcon },
+        { title: "GitHub", value: "Hen-Heang", href: personalInfo.socialLinks.github, newTab: true, icon: GithubIcon },
+        { title: "Facebook", value: "HenHeang15", href: personalInfo.socialLinks.facebook, newTab: true, icon: FacebookIcon },
+        { title: "Instagram", value: "@hen_heang", href: personalInfo.socialLinks.instagram, newTab: true, icon: InstagramIcon },
+    ].filter((card) => Boolean(card.href))
 
     return (
         <div className="min-h-screen bg-background text-fg">
@@ -51,7 +60,7 @@ export function ContactPageClient() {
                                         rel={card.newTab ? "noopener noreferrer" : undefined}
                                         className="group relative block rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-strong"
                                     >
-                                        <card.icon size={18} className="text-brand" aria-hidden />
+                                        <card.icon size={18} className="text-brand" />
                                         <p className="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
                                             {card.title}
                                         </p>

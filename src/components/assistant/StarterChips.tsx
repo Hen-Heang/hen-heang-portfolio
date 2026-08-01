@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useCallback, useState } from "react"
 import { motion, useReducedMotion } from "motion/react"
 import { RefreshCw } from "lucide-react"
 
@@ -32,23 +32,26 @@ function shuffle<T>(array: T[]): T[] {
 export function StarterChips({ onSelect, disabled, page }: StarterChipsProps) {
     const reduceMotion = useReducedMotion()
     const [rotationKey, setRotationKey] = useState(0)
+    // The shuffle is computed in the click handler, not during render: picking
+    // it in a `useMemo` made rendering impure, so React could resample the
+    // chips on any incidental re-render (and produce different markup on the
+    // server than on the client).
+    const [rotated, setRotated] = useState<AssistantStarterPrompt[] | null>(null)
 
-    const visible: AssistantStarterPrompt[] = useMemo(() => {
-        if (page && pagePrompts[page]) {
-            return pagePrompts[page]!
-        }
-
-        if (rotationKey === 0) {
-            return primaryQuestions.slice(0, VISIBLE_CHIP_COUNT)
-        }
-
+    const rotate = useCallback(() => {
         const shuffledSecondary = shuffle(secondaryQuestions)
         const nextQuestions = [
             primaryQuestions[Math.floor(Math.random() * primaryQuestions.length)],
             ...shuffledSecondary.slice(0, VISIBLE_CHIP_COUNT - 1)
         ]
-        return shuffle(nextQuestions)
-    }, [page, rotationKey])
+        setRotated(shuffle(nextQuestions))
+        setRotationKey(k => k + 1)
+    }, [])
+
+    const visible: AssistantStarterPrompt[] =
+        (page && pagePrompts[page]) ||
+        rotated ||
+        primaryQuestions.slice(0, VISIBLE_CHIP_COUNT)
 
     return (
         <div className="space-y-2.5">
@@ -71,7 +74,7 @@ export function StarterChips({ onSelect, disabled, page }: StarterChipsProps) {
                 {!page && (
                     <button
                         type="button"
-                        onClick={() => setRotationKey(k => k + 1)}
+                        onClick={rotate}
                         disabled={disabled}
                         aria-label="More questions"
                         className="flex min-h-[44px] w-[44px] items-center justify-center rounded-full text-[#94A3B8] transition-colors hover:bg-[#11182B] hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4] disabled:pointer-events-none disabled:opacity-50"

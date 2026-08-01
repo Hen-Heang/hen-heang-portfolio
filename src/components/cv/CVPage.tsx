@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { User, FileText, Github } from "lucide-react"
+import { User, FileText } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { CVHeader } from "./CVHeader"
 import { CVSection } from "./CVSection"
 import { CVExperience } from "./CVExperience"
@@ -30,7 +31,7 @@ export function CVPage({ cv }: { cv: CVData }) {
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:border-slate-300 hover:text-slate-900 transition-colors"
           >
-            <Github size={15} aria-hidden />
+            <GithubIcon size={15} brand={false} />
             View GitHub
           </a>
         )}
