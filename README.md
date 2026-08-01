@@ -36,7 +36,7 @@ Backend-focused portfolio for [Hen Heang](https://henheang.site), a Java and Spr
 
 ## Technology
 
-**Portfolio application:** Next.js 16 App Router, React 19, TypeScript, Tailwind CSS, Motion, Supabase, Vercel Analytics, and Vercel Speed Insights.
+**Portfolio application:** Next.js 16 App Router, React 19, TypeScript, Tailwind CSS, Motion, Supabase, Vercel Analytics, and Vercel Speed Insights. The icon-only technology carousel uses Motion's `animate()` API for its accessible, pausable auto-scroll.
 
 **Professional focus:** Java, Spring Boot, Spring Security, MyBatis, PostgreSQL, Oracle, Redis, eGovFramework, REST APIs, testing, and Docker.
 

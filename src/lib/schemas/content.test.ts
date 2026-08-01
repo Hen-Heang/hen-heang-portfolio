@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest"
 import {
     ProfileContentSchema,
-    DashboardContentSchema,
     CvContentSchema,
     ProjectSchema,
     SkillCategorySchema,
@@ -10,7 +9,6 @@ import {
     AchievementSchema,
 } from "./content"
 import { profileData } from "@/data/profile"
-import { deployedProjects, workProjects, journey } from "@/data/dashboard"
 import { cvData } from "@/data/cv-data"
 import { projects } from "@/data/projects"
 import { skills } from "@/data/skills"
@@ -19,9 +17,8 @@ import { education } from "@/data/education"
 import { rawAchievements } from "@/data/achievements"
 
 describe("content schemas", () => {
-    it("accepts the real static profile/dashboard/cv content", () => {
+    it("accepts the real static profile/cv content", () => {
         expect(ProfileContentSchema.safeParse(profileData).success).toBe(true)
-        expect(DashboardContentSchema.safeParse({ deployedProjects, workProjects, journey }).success).toBe(true)
         expect(CvContentSchema.safeParse(cvData).success).toBe(true)
     })
 

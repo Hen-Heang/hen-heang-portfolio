@@ -1,4 +1,3 @@
-
 import type { SkillCategory } from "@/src/lib/types"
 export const skills: SkillCategory[] = [
     {
@@ -13,7 +12,8 @@ export const skills: SkillCategory[] = [
             { name: "React", level: 3, experience: "1.5 years" },
             { name: "Next.js", level: 3, experience: "1.5 years" },
             { name: "Tailwind CSS", level: 3, experience: "1.5 years" },
-        ]
+            { name: "TanStack Query", level: 3, experience: "1 year" },
+        ],
     },
     {
         category: "Backend",
@@ -25,7 +25,7 @@ export const skills: SkillCategory[] = [
             { name: "Spring Security", level: 3, experience: "1.5 years" },
             { name: "Spring Data JPA", level: 3, experience: "1.5 years" },
             { name: "Maven", level: 4, experience: "2+ years" },
-        ]
+        ],
     },
     {
         category: "Database",
@@ -34,7 +34,7 @@ export const skills: SkillCategory[] = [
             { name: "Oracle", level: 4, experience: "1+ year" },
             { name: "PostgreSQL", level: 4, experience: "1.5 years" },
             { name: "MySQL", level: 3, experience: "1 year" },
-        ]
+        ],
     },
     {
         category: "Tools",
@@ -43,6 +43,8 @@ export const skills: SkillCategory[] = [
             { name: "GitHub", level: 4, experience: "2+ years" },
             { name: "IntelliJ IDEA", level: 4, experience: "2+ years" },
             { name: "WebStorm", level: 4, experience: "1.5 years" },
-        ]
-    }
+            { name: "Postman", level: 4, experience: "2+ years" },
+            { name: "Swagger", level: 4, experience: "2+ years" },
+        ],
+    },
 ]

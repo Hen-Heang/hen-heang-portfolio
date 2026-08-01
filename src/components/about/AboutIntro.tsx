@@ -4,6 +4,7 @@ import { BriefcaseBusiness, Mail, MapPin } from "lucide-react"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { getLanguageFlag } from "@/src/lib/utils/language-flags"
+import { positioning } from "@/src/lib/content/positioning"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 
 export function AboutIntro({ profile }: { profile: ProfileContentParsed }) {
@@ -16,7 +17,7 @@ export function AboutIntro({ profile }: { profile: ProfileContentParsed }) {
                         {profile.fullName}
                     </span>{" "}
                     <span className="inline-block text-xl font-medium tracking-[-0.025em] text-fg-secondary sm:text-2xl lg:text-3xl">
-                        — {profile.title}
+                        — {positioning.title}
                     </span>
                 </h1>
 
@@ -34,15 +35,20 @@ export function AboutIntro({ profile }: { profile: ProfileContentParsed }) {
                     </div>
 
                     <div className="max-w-2xl">
-                        <p className="text-lg leading-relaxed text-fg-secondary">
-                            {profile.bio}
-                        </p>
-                        <p className="mt-4 leading-relaxed text-fg-secondary">
-                            I&apos;ve worked in both Cambodia and South Korea — trained at the Korea
-                            Software HRD Center, then hired into Korean-language enterprise teams
-                            at KOSIGN and now Bizplay. Most of my day is spent on the systems side:
-                            APIs, schemas, and the transactions in between.
-                        </p>
+                        {/* Canonical About narrative — the same three
+                            paragraphs the homepage and the assistant use. */}
+                        {positioning.about.map((paragraph, index) => (
+                            <p
+                                key={paragraph}
+                                className={
+                                    index === 0
+                                        ? "text-lg leading-relaxed text-fg-secondary"
+                                        : "mt-4 leading-relaxed text-fg-secondary"
+                                }
+                            >
+                                {paragraph}
+                            </p>
+                        ))}
 
                         <dl className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
                             <div>

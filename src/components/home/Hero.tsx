@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, FileText, Github } from "lucide-react"
+import { ArrowRight, ArrowUpRight, FileText } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import {
@@ -8,7 +9,7 @@ import {
     type TechnicalTab,
 } from "@/src/components/system/TechnicalPanel"
 import { HeroEntrance } from "@/src/components/home/HeroEntrance"
-import { profileData } from "@/data/profile"
+import { positioning } from "@/src/lib/content/positioning"
 import type { Project } from "@/src/lib/types"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 
@@ -102,9 +103,6 @@ export function Hero({
     projects: Project[]
 }) {
     const tabs = buildTabs(projects)
-    const valueProposition =
-        profile.heroValueProposition ?? profileData.heroValueProposition
-    const heroBio = profile.heroBio ?? profileData.heroBio
 
     return (
         <section className="pb-12 pt-12 sm:pt-16 md:pb-16 md:pt-24">
@@ -123,13 +121,19 @@ export function Hero({
 
                         <HeroEntrance delay={0.12} className="mt-4">
                             <p className="text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl lg:text-[1.7rem]">
-                                {valueProposition}
+                                {positioning.title}
                             </p>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.18} className="mt-6">
+                        <HeroEntrance delay={0.18} className="mt-5">
+                            <p className="text-balance text-lg leading-snug text-fg-secondary">
+                                {positioning.description}
+                            </p>
+                        </HeroEntrance>
+
+                        <HeroEntrance delay={0.22} className="mt-5">
                             <p className="text-base leading-relaxed text-fg-secondary">
-                                {heroBio}
+                                {positioning.supporting}
                             </p>
                         </HeroEntrance>
 
@@ -156,7 +160,7 @@ export function Hero({
                                     className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                                     aria-label="View Hen Heang on GitHub (opens in a new tab)"
                                 >
-                                    <Github size={16} aria-hidden />
+                                    <GithubIcon size={16} />
                                     GitHub
                                     <ArrowUpRight size={13} aria-hidden />
                                 </a>

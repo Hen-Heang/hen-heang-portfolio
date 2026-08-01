@@ -10,7 +10,7 @@ export const projects: Project[] = [
         engineeringFocus: ["Authentication", "Order workflow", "Data modeling", "Real-time notifications"],
         description: "A B2B online marketplace API connecting distributors and retailers — stores, product catalogs, carts, an order state machine, and real-time notifications. Spring Boot 3 on PostgreSQL.",
         technologies: ["Spring Boot 3", "Java 17", "MyBatis", "PostgreSQL", "Spring Security", "WebSocket"],
-        image: "/h-phsar-poster-image.png",
+        image: "/h-phsar-poster-image-small.jpg",
         imageFit: "contain",
         previewImage: true,
         github: "https://github.com/Hen-Heang/h-phsar-api",
@@ -81,7 +81,7 @@ export const projects: Project[] = [
             { phase: "Design & Schema", detail: "Wrote the API contract first — a standard response envelope, UUID ids, flexible goal metadata in JSONB — so frontend and backend could build in parallel." },
             { phase: "Implementation", detail: "Built the Next.js 16 / React 19 SPA with TanStack Query and an axios client, wiring Today's Mission, the AI Coach, and SRS vocabulary decks against that contract." },
             { phase: "Testing", detail: "Shipped features against a local seed fallback for endpoints not yet live on the backend, then swapped to the real endpoint with zero frontend change as each one landed." },
-            { phase: "Deployment", detail: "Deployed continuously to Vercel as koriai-frontend, iterating against Supabase and the live Next.js AI routes." },
+            { phase: "Deployment", detail: "Deployed continuously to Vercel, iterating against Supabase and the live Next.js AI routes. The deployment still carries its original koriai-frontend hostname from before the project was renamed to Hengo." },
         ],
         features: [
             "Today’s Mission combines due vocabulary, phrases, corrections, and scenario practice",

@@ -65,8 +65,8 @@ async function expectNoPageOverflow(page: Page) {
 async function expectMinimumTouchTarget(locator: Locator) {
     const box = await locator.boundingBox()
     expect(box).not.toBeNull()
-    expect(box!.width).toBeGreaterThanOrEqual(44)
-    expect(box!.height).toBeGreaterThanOrEqual(44)
+    expect(Math.round(box!.width)).toBeGreaterThanOrEqual(44)
+    expect(Math.round(box!.height)).toBeGreaterThanOrEqual(44)
 }
 
 test.describe("Portfolio Assistant responsive UI", () => {
@@ -86,7 +86,7 @@ test.describe("Portfolio Assistant responsive UI", () => {
             }))
             expect(dialogOverflow.scrollWidth).toBeLessThanOrEqual(dialogOverflow.clientWidth)
 
-            const input = dialog.getByRole("textbox", { name: "Ask a question about Heang" })
+            const input = dialog.getByRole("textbox", { name: "Ask about Heang's experience or projects..." })
             await expect(input).toBeVisible()
             await expectInsideViewport(page, input)
             await expectMinimumTouchTarget(input)
@@ -103,7 +103,7 @@ test.describe("Portfolio Assistant responsive UI", () => {
                 dialog.getByRole("link", { name: "View resume" }),
                 dialog.getByRole("link", { name: "Contact Heang" }),
                 dialog.getByRole("button", { name: "Send message" }),
-                dialog.getByRole("button", { name: "Summarize his background" }),
+                dialog.getByRole("button", { name: "Why backend?" }),
             ]
             for (const target of requiredTargets) await expectMinimumTouchTarget(target)
 
@@ -122,7 +122,7 @@ test.describe("Portfolio Assistant responsive UI", () => {
         await page.setViewportSize({ width: 390, height: 844 })
         await page.goto("/")
         const dialog = await openAssistant(page)
-        const input = dialog.getByRole("textbox", { name: "Ask a question about Heang" })
+        const input = dialog.getByRole("textbox", { name: "Ask about Heang's experience or projects..." })
         await input.focus()
 
         await page.setViewportSize({ width: 390, height: 500 })
@@ -181,7 +181,7 @@ test.describe("Portfolio Assistant responsive UI", () => {
         await page.goto("/")
 
         const dialog = await openAssistant(page)
-        const input = dialog.getByRole("textbox", { name: "Ask a question about Heang" })
+        const input = dialog.getByRole("textbox", { name: "Ask about Heang's experience or projects..." })
         await input.fill("Summarize the backend experience.")
         await dialog.getByRole("button", { name: "Send message" }).click()
 

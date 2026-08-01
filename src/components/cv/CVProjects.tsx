@@ -1,4 +1,5 @@
-import { Github, ExternalLink, FileText, Rocket } from "lucide-react"
+import { ExternalLink, FileText, Rocket } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { CVSection } from "./CVSection"
 import type { CVData } from "@/data/cv-data"
 
@@ -32,7 +33,7 @@ export function CVProjects({ cv }: { cv: CVData }) {
                     aria-label={`${project.name} source code on GitHub`}
                     className="flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-slate-900 transition-colors"
                   >
-                    <Github size={12} aria-hidden /> Code
+                    <GithubIcon size={12} brand={false} /> Code
                   </a>
                 )}
                 {project.live && (

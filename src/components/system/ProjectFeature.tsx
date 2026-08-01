@@ -1,5 +1,6 @@
 import React from "react"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { TextLink } from "@/src/components/system/TextLink"
 import { ProjectPreviewPanel } from "@/src/components/system/ProjectPreviewPanel"
 import {
@@ -148,7 +149,7 @@ export function ProjectFeature({
                                 className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                                 aria-label={`View ${shortTitle} on GitHub (opens in a new tab)`}
                             >
-                                <Github size={15} aria-hidden />
+                                <GithubIcon size={15} brand={false} />
                                 GitHub
                                 <ExternalLink size={12} aria-hidden />
                             </a>
@@ -276,7 +277,7 @@ export function ProjectFeature({
                             className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                             aria-label={`View ${shortTitle} on GitHub (opens in a new tab)`}
                         >
-                            <Github size={15} aria-hidden />
+                            <GithubIcon size={15} brand={false} />
                             GitHub
                             <ExternalLink size={12} aria-hidden />
                         </a>

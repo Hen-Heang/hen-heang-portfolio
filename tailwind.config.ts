@@ -113,6 +113,7 @@ const config: Config = {
 			backgroundImage: {
 				"gradient-brand": "var(--gradient-brand)",
 				"gradient-console": "var(--gradient-console)",
+				"gemini-gradient": "linear-gradient(135deg, #4285F4 0%, #38BDF8 35%, #8B5CF6 70%, #EC4899 100%)",
 			},
 			keyframes: {
 				"accordion-down": {

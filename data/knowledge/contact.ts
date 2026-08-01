@@ -11,7 +11,7 @@ export function buildContactKnowledge(profile: ProfileContentParsed): KnowledgeS
             title: "How to contact Heang",
             keywords: [
                 "contact", "email", "reach", "hire", "hiring", "message", "connect",
-                "github", "linkedin", "telegram", "twitter", "x", "social", "cv",
+                "github", "linkedin", "telegram", "twitter", "x", "facebook", "instagram", "social", "cv",
                 "resume", "download", "recruit", "opportunity", "available", "interview",
             ],
             core: true,
@@ -23,6 +23,8 @@ export function buildContactKnowledge(profile: ProfileContentParsed): KnowledgeS
                 `- LinkedIn: ${profile.socialLinks.linkedin}`,
                 profile.socialLinks.telegram ? `- Telegram: ${profile.socialLinks.telegram}` : "",
                 profile.socialLinks.x ? `- X (Twitter): ${profile.socialLinks.x}` : "",
+                profile.socialLinks.facebook ? `- Facebook: ${profile.socialLinks.facebook}` : "",
+                profile.socialLinks.instagram ? `- Instagram: ${profile.socialLinks.instagram}` : "",
                 profile.cvUrl ? `- Resume (ATS-friendly HTML, view and print): ${profile.cvUrl}` : "",
                 "- CV (modern HTML layout, view and print): https://henheang.site/cv",
                 "- Contact page: https://henheang.site/contact",

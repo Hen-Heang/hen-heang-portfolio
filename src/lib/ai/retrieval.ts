@@ -81,7 +81,7 @@ export const keywordRetriever: Retriever = {
         // overview sections so the model can still introduce Heang.
         const selected = relevant.length > 0
             ? relevant
-            : sections.filter((s) => s.id === "projects-catalog" || s.id === "skills-current-focus")
+            : sections.filter((s) => s.id === "projects-catalog" || s.id === "skills-primary-stack")
 
         // Core sections (identity + contact) are always present.
         const result = [...sections.filter((s) => s.core), ...selected]
@@ -100,7 +100,9 @@ const PAGE_CONTEXT_HINTS: Record<PageContext, string> = {
     home: "profile positioning overview",
     "projects-index": "projects catalog",
     "project-detail": "projects",
-    resume: "resume cv experience skills",
+    experience: "resume cv experience career",
+    skills: "skills capabilities stack about",
+    contact: "contact email availability",
     articles: "articles engineering lab",
     other: "",
 }

@@ -20,12 +20,10 @@ import { education as staticEducation } from '@/data/education'
 import { rawAchievements as staticAchievements } from '@/data/achievements'
 import { profileData as staticProfile } from '@/data/profile'
 import { cvData as staticCv } from '@/data/cv-data'
-import { deployedProjects as staticDeployedProjects, workProjects as staticWorkProjects, journey as staticJourney } from '@/data/dashboard'
 import { filterPublishedEducation } from '@/src/lib/utils/education'
 
 const staticSiteContent = {
   profile: staticProfile,
-  dashboard: { deployedProjects: staticDeployedProjects, workProjects: staticWorkProjects, journey: staticJourney },
   cv: staticCv,
 }
 
@@ -160,7 +158,7 @@ export const getSiteContent = cache(async function getSiteContent<K extends Site
   const schema = SiteContentSchemas[key] as z.ZodType<Content>
   const fallback = staticSiteContent[key] as Content
 
-  return withFallback(
+  const content = await withFallback(
     async () => {
       const sb = getSupabaseClient()
       if (!sb) return null
@@ -172,6 +170,20 @@ export const getSiteContent = cache(async function getSiteContent<K extends Site
     fallback,
     `site_content:${key}`,
   )
+
+  // Social links added in code (a new platform in data/profile.ts) should go
+  // live on commit rather than waiting for the profile row to be resaved in
+  // /admin — same reasoning as the static merge in mapProject. The stored row
+  // still wins for any handle it does define.
+  if (key === 'profile') {
+    const profile = content as z.infer<typeof SiteContentSchemas.profile>
+    return {
+      ...profile,
+      socialLinks: { ...staticProfile.socialLinks, ...profile.socialLinks },
+    } as Content
+  }
+
+  return content
 })
 
 const SkillCategoryListSchema = z.array(SkillCategorySchema)

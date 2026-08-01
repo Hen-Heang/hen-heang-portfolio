@@ -32,8 +32,10 @@ const tokenize = (text: string): string[] =>
 function expandWithAliases(tokens: string[]): string[] {
     const expanded = new Set(tokens)
     for (const token of tokens) {
-        const mapped = LAB_SEARCH_ALIASES[token]
-        if (mapped) for (const term of mapped) expanded.add(term)
+        if (Object.prototype.hasOwnProperty.call(LAB_SEARCH_ALIASES, token)) {
+            const mapped = LAB_SEARCH_ALIASES[token]
+            for (const term of mapped) expanded.add(term)
+        }
     }
     return [...expanded]
 }
