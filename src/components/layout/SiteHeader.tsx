@@ -19,15 +19,35 @@ import {
 import { ThemeToggle } from "@/src/components/system/ThemeToggle"
 import { MobileMenu } from "@/src/components/layout/MobileMenu"
 
-const CommandMenu = dynamic(() => import("@/src/components/system/CommandMenu"), { ssr: false })
+const CommandMenu = dynamic(
+    () => import("@/src/components/system/CommandMenu"),
+    { ssr: false },
+)
 
 export const NAV_LINKS = [
-    { label: "Work", href: "/projects", match: ["/projects"], icon: BriefcaseBusiness },
-    { label: "Lab", href: "/lab", match: ["/lab", "/ai-engineering"], icon: FlaskConical },
+    {
+        label: "Work",
+        href: "/projects",
+        match: ["/projects"],
+        icon: BriefcaseBusiness,
+    },
+    {
+        label: "Lab",
+        href: "/lab",
+        match: ["/lab", "/ai-engineering"],
+        icon: FlaskConical,
+    },
     { label: "Journey", href: "/journey", match: ["/journey"], icon: Route },
     { label: "About", href: "/about", match: ["/about"], icon: UserRound },
-    { label: "Resume", href: "/resume", match: ["/resume", "/cv"], icon: FileText },
+    {
+        label: "Resume",
+        href: "/resume",
+        match: ["/resume", "/cv"],
+        icon: FileText,
+    },
 ]
+
+const DESKTOP_NAV_LINKS = NAV_LINKS.filter((link) => link.label !== "Journey")
 
 function isActive(pathname: string, match: string[]): boolean {
     return match.some((m) => pathname === m || pathname.startsWith(`${m}/`))
@@ -55,7 +75,10 @@ export function SiteHeader() {
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
-            if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+            if (
+                (event.metaKey || event.ctrlKey) &&
+                event.key.toLowerCase() === "k"
+            ) {
                 event.preventDefault()
                 setCommandRequested(true)
                 setCommandOpen((v) => !v)
@@ -78,7 +101,7 @@ export function SiteHeader() {
                     : "border-b border-transparent bg-transparent"
             }`}
         >
-            <div className="mx-auto flex h-16 max-w-content items-center justify-between px-6">
+            <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6">
                 <Link
                     href="/"
                     className="flex items-center gap-2 transition-opacity hover:opacity-80"
@@ -92,14 +115,16 @@ export function SiteHeader() {
                         priority
                         className="h-12 w-12 rounded-full object-cover ring-1 ring-border"
                     />
-                    <span className="hidden text-sm font-semibold tracking-tight text-fg sm:inline">Hen Heang</span>
+                    <span className="hidden text-sm font-semibold tracking-tight text-fg sm:inline">
+                        Hen Heang
+                    </span>
                 </Link>
 
                 <nav
                     aria-label="Main"
                     className="hidden items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 p-1 lg:flex"
                 >
-                    {NAV_LINKS.map((link) => {
+                    {DESKTOP_NAV_LINKS.map((link) => {
                         const active = isActive(pathname, link.match)
                         const Icon = link.icon
                         return (
@@ -108,18 +133,28 @@ export function SiteHeader() {
                                 href={link.href}
                                 aria-current={active ? "page" : undefined}
                                 className={`relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                                    active ? "text-fg" : "text-fg-secondary hover:text-fg"
+                                    active
+                                        ? "text-fg"
+                                        : "text-fg-secondary hover:text-fg"
                                 }`}
                             >
                                 {active && (
                                     <motion.span
                                         layoutId="nav-active-pill"
                                         className="absolute inset-0 rounded-full bg-surface-hover shadow-sm ring-1 ring-border"
-                                        transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                                        transition={{
+                                            duration: 0.24,
+                                            ease: "easeOut",
+                                        }}
                                     />
                                 )}
-                                <Icon className="relative z-10 h-3.5 w-3.5" aria-hidden />
-                                <span className="relative z-10">{link.label}</span>
+                                <Icon
+                                    className="relative z-10 h-3.5 w-3.5"
+                                    aria-hidden
+                                />
+                                <span className="relative z-10">
+                                    {link.label}
+                                </span>
                             </Link>
                         )
                     })}
@@ -139,10 +174,10 @@ export function SiteHeader() {
                     <ThemeToggle />
                     <Link
                         href="/contact"
-                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-brand px-4 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover lg:flex"
+                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-gradient-brand px-4 text-sm font-medium text-white transition-[filter] hover:brightness-110 lg:flex"
                     >
                         <MessageCircle size={15} aria-hidden />
-                        Let&apos;s talk
+                        Contact
                     </Link>
                     <button
                         ref={menuButtonRef}
@@ -158,8 +193,15 @@ export function SiteHeader() {
                 </div>
             </div>
 
-            <MobileMenu open={menuOpen} onOpenChange={setMenuOpen} onOpenCommandMenu={openCommandMenu} triggerRef={menuButtonRef} />
-            {commandRequested && <CommandMenu open={commandOpen} onOpenChange={setCommandOpen} />}
+            <MobileMenu
+                open={menuOpen}
+                onOpenChange={setMenuOpen}
+                onOpenCommandMenu={openCommandMenu}
+                triggerRef={menuButtonRef}
+            />
+            {commandRequested && (
+                <CommandMenu open={commandOpen} onOpenChange={setCommandOpen} />
+            )}
         </header>
     )
 }

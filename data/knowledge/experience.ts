@@ -40,6 +40,8 @@ export function buildExperienceKnowledge(
                 "employer", "history", "role", "professional", "professionally", "enterprise", "korea",
                 "cambodia", "billing", "financial", "b2b", "years", "backend", "systems", "built",
             ],
+            sourceLabel: "About page — experience timeline",
+            sourceUrl: "https://henheang.site/about",
             content: experienceContent,
         },
         {
@@ -50,6 +52,8 @@ export function buildExperienceKnowledge(
                 "education", "educational", "background", "study", "university", "degree", "bootcamp", "training",
                 "school", "hrd", "computer science", "learn", "certificate",
             ],
+            sourceLabel: "About page — experience timeline",
+            sourceUrl: "https://henheang.site/about",
             content: educationContent,
         },
     ]

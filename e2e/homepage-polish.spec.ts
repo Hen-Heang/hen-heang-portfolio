@@ -1,13 +1,18 @@
 import { expect, test } from "@playwright/test"
 
 const viewports = [
+    { name: "small mobile", width: 375, height: 812 },
     { name: "mobile", width: 390, height: 844 },
+    { name: "large mobile", width: 430, height: 932 },
     { name: "tablet", width: 768, height: 1024 },
     { name: "desktop", width: 1440, height: 900 },
 ] as const
 
 test.describe("Homepage polish", () => {
-    test("server-renders the recruiter-focused hero and consistent resume CTAs", async ({ page, request }) => {
+    test("server-renders the recruiter-focused hero and consistent resume CTAs", async ({
+        page,
+        request,
+    }) => {
         const consoleErrors: string[] = []
         const pageErrors: string[] = []
         page.on("console", (message) => {
@@ -18,15 +23,24 @@ test.describe("Homepage polish", () => {
         const response = await request.get("/")
         const html = await response.text()
 
-        expect(html).toContain("Java &amp; Spring Boot backend developer building dependable APIs and business systems.")
-        expect(html).toContain("I turn business rules into secure, testable services")
-        expect(html).toContain("2+ years of experience")
+        expect(html).toContain(
+            "Java &amp; Spring Boot backend developer building secure APIs and enterprise systems.",
+        )
+        expect(html).toContain(
+            "I design transaction flows, business logic, and data models",
+        )
+        expect(html).toContain("years experience")
 
         await page.goto("/")
         const main = page.locator("main")
         await expect(
-            main.getByText("Java & Spring Boot backend developer building dependable APIs and business systems."),
+            main.getByText(
+                "Java & Spring Boot backend developer building secure APIs and enterprise systems.",
+            ),
         ).toBeVisible()
+        await expect(
+            main.getByRole("link", { name: "View Backend Work" }),
+        ).toHaveAttribute("href", "#work")
 
         const resumeLinks = main.getByRole("link", { name: "View Resume" })
         await expect(resumeLinks).toHaveCount(2)
@@ -38,11 +52,59 @@ test.describe("Homepage polish", () => {
         expect(pageErrors).toEqual([])
     })
 
+    test("keeps a concise five-part hierarchy and a readable H-Phsar architecture preview", async ({
+        page,
+    }) => {
+        await page.setViewportSize({ width: 390, height: 844 })
+        await page.goto("/")
+
+        const landmarks = [
+            page.getByRole("heading", { name: "Hen Heang", level: 1 }),
+            page.locator("#work"),
+            page.locator("#profile"),
+            page.locator("#growth"),
+            page.getByRole("heading", { name: "Have a system to build?" }),
+        ]
+        const positions = await Promise.all(
+            landmarks.map((landmark) =>
+                landmark.evaluate(
+                    (element) =>
+                        element.getBoundingClientRect().top + window.scrollY,
+                ),
+            ),
+        )
+        expect([...positions].sort((a, b) => a - b)).toEqual(positions)
+        await expect(page.getByText("In enterprise teams")).toBeVisible()
+
+        const hPhsar = page
+            .locator("article", {
+                has: page.getByRole("heading", { name: /H-Phsar/, level: 3 }),
+            })
+            .first()
+        await expect(
+            hPhsar.getByLabel(/Architecture flow: Client to Spring Security/),
+        ).toBeVisible()
+        await expect(hPhsar.getByText("Engineering focus")).toHaveCount(0)
+        await expect(hPhsar.getByText(/^Role:/)).toHaveCount(0)
+        await expect(
+            hPhsar
+                .getByRole("list", { name: /H-Phsar technologies/ })
+                .getByRole("listitem"),
+        ).toHaveCount(3)
+        await expect(
+            page.locator('img[src*="h-phsar-poster-image"]'),
+        ).toHaveCount(0)
+    })
+
     for (const viewport of viewports) {
-        test(`keeps the homepage within the ${viewport.name} viewport`, async ({ page }) => {
+        test(`keeps the homepage within the ${viewport.name} viewport`, async ({
+            page,
+        }) => {
             await page.setViewportSize(viewport)
             await page.goto("/")
-            await expect(page.getByRole("heading", { name: "Hen Heang", level: 1 })).toBeVisible()
+            await expect(
+                page.getByRole("heading", { name: "Hen Heang", level: 1 }),
+            ).toBeVisible()
 
             const dimensions = await page.evaluate(() => ({
                 clientWidth: document.documentElement.clientWidth,
@@ -50,7 +112,11 @@ test.describe("Homepage polish", () => {
                 offenders: [...document.querySelectorAll<HTMLElement>("body *")]
                     .filter((element) => {
                         const rect = element.getBoundingClientRect()
-                        return rect.left < -1 || rect.right > document.documentElement.clientWidth + 1
+                        return (
+                            rect.left < -1 ||
+                            rect.right >
+                                document.documentElement.clientWidth + 1
+                        )
                     })
                     .slice(0, 8)
                     .map((element) => ({
@@ -60,13 +126,16 @@ test.describe("Homepage polish", () => {
                         right: element.getBoundingClientRect().right,
                     })),
             }))
-            expect(dimensions.scrollWidth, JSON.stringify(dimensions.offenders)).toBeLessThanOrEqual(
-                dimensions.clientWidth,
-            )
+            expect(
+                dimensions.scrollWidth,
+                JSON.stringify(dimensions.offenders),
+            ).toBeLessThanOrEqual(dimensions.clientWidth)
         })
     }
 
-    test("keeps Radix tab keyboard semantics and panel height stable", async ({ page }) => {
+    test("keeps Radix tab keyboard semantics and panel height stable", async ({
+        page,
+    }) => {
         await page.setViewportSize({ width: 1440, height: 900 })
         await page.goto("/")
 
@@ -81,13 +150,19 @@ test.describe("Homepage polish", () => {
         await page.keyboard.press("ArrowRight")
         await expect(api).toBeFocused()
         await expect(api).toHaveAttribute("aria-selected", "true")
-        await expect(page.getByRole("tabpanel")).toContainText("HTTP/1.1 200 OK")
+        await expect(page.getByRole("tabpanel")).toContainText(
+            "HTTP/1.1 200 OK",
+        )
         const after = await panel.boundingBox()
 
-        expect(Math.abs((after?.height ?? 0) - (before?.height ?? 0))).toBeLessThanOrEqual(1)
+        expect(
+            Math.abs((after?.height ?? 0) - (before?.height ?? 0)),
+        ).toBeLessThanOrEqual(1)
     })
 
-    test("renders static hero content and preserves focus treatment with reduced motion", async ({ page }) => {
+    test("renders static hero content and preserves focus treatment with reduced motion", async ({
+        page,
+    }) => {
         const consoleErrors: string[] = []
         page.on("console", (message) => {
             if (message.type() === "error") consoleErrors.push(message.text())
@@ -96,25 +171,39 @@ test.describe("Homepage polish", () => {
         await page.emulateMedia({ reducedMotion: "reduce" })
         await page.goto("/")
 
-        const heading = page.getByRole("heading", { name: "Hen Heang", level: 1 })
-        await expect(heading).toBeVisible()
-        const heroMotionStyle = await heading.locator("xpath=..").evaluate((element) => {
-            const style = getComputedStyle(element)
-            return { opacity: style.opacity, transform: style.transform }
+        const heading = page.getByRole("heading", {
+            name: "Hen Heang",
+            level: 1,
         })
+        await expect(heading).toBeVisible()
+        const heroMotionStyle = await heading
+            .locator("xpath=..")
+            .evaluate((element) => {
+                const style = getComputedStyle(element)
+                return { opacity: style.opacity, transform: style.transform }
+            })
         expect(heroMotionStyle.opacity).toBe("1")
         expect(heroMotionStyle.transform).toBe("none")
 
         const resume = page.getByRole("link", { name: "View Resume" }).first()
         await resume.focus()
-        expect(await resume.evaluate((element) => getComputedStyle(element).outlineStyle)).not.toBe("none")
+        expect(
+            await resume.evaluate(
+                (element) => getComputedStyle(element).outlineStyle,
+            ),
+        ).not.toBe("none")
         expect(consoleErrors).toEqual([])
     })
 
-    test("supports dark mode and keeps both resume views public", async ({ page, request }) => {
+    test("supports dark mode and keeps both resume views public", async ({
+        page,
+        request,
+    }) => {
         await page.emulateMedia({ colorScheme: "light" })
         await page.goto("/")
-        const darkToggle = page.getByRole("button", { name: "Switch to dark theme" }).first()
+        const darkToggle = page
+            .getByRole("button", { name: "Switch to dark theme" })
+            .first()
         await darkToggle.click()
         await expect(page.locator("html")).toHaveClass(/dark/)
 

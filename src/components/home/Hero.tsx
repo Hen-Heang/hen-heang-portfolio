@@ -1,12 +1,15 @@
 import React from "react"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, FileText, Github } from "lucide-react"
+import { ArrowRight, ArrowUpRight, FileText } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
-import { StatusBadge } from "@/src/components/system/StatusBadge"
-import { TechnicalPanel, type TechnicalTab } from "@/src/components/system/TechnicalPanel"
+import {
+    TechnicalPanel,
+    type TechnicalTab,
+} from "@/src/components/system/TechnicalPanel"
 import { HeroEntrance } from "@/src/components/home/HeroEntrance"
-import { profileData } from "@/data/profile"
+import { positioning } from "@/src/lib/content/positioning"
 import type { Project } from "@/src/lib/types"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 
@@ -28,8 +31,9 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
             label: "architecture",
             data: {
                 kind: "architecture",
-                layers: hphsar.architecture,
-                caption: "H-Phsar marketplace API — request flow through the real production layers.",
+                layers: ["Client", ...hphsar.architecture.slice(0, 4)],
+                caption:
+                    "H-Phsar request flow, from the client boundary to persistence.",
             },
         })
     }
@@ -66,7 +70,8 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
             data: {
                 kind: "database",
                 tables: moneyFlow.dataModel.slice(0, 10),
-                caption: "Money Flow schema — per-user access enforced with Postgres Row Level Security.",
+                caption:
+                    "Money Flow schema — per-user access enforced with Postgres Row Level Security.",
             },
         })
     }
@@ -82,55 +87,68 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
                 { label: "build + test", detail: "Flyway validates schema" },
                 { label: "deploy", detail: "on green" },
             ],
-            caption: "CI pipeline as run on AuthHub (GitHub Actions + postgres:16). Stages illustrative.",
+            caption:
+                "CI pipeline as run on AuthHub (GitHub Actions + postgres:16). Stages illustrative.",
         },
     })
 
     return tabs
 }
 
-export function Hero({ profile, projects }: { profile: ProfileContentParsed; projects: Project[] }) {
+export function Hero({
+    profile,
+    projects,
+}: {
+    profile: ProfileContentParsed
+    projects: Project[]
+}) {
     const tabs = buildTabs(projects)
-    const valueProposition = profile.heroValueProposition ?? profileData.heroValueProposition
-    const heroBio = profile.heroBio ?? profileData.heroBio
 
     return (
-        <section className="pb-section pt-16 md:pt-24">
+        <section className="pb-12 pt-12 sm:pt-16 md:pb-16 md:pt-24">
             <Container>
                 <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="flex max-w-xl flex-col items-start">
                         <HeroEntrance className="mb-5">
-                            <Eyebrow>Backend Developer · {profile.location}</Eyebrow>
+                            <Eyebrow>Engineering portfolio</Eyebrow>
                         </HeroEntrance>
 
                         <HeroEntrance delay={0.06}>
-                            <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-fg sm:text-5xl">
+                            <h1 className="whitespace-nowrap text-[clamp(2.75rem,12vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-fg">
                                 {profile.name}
                             </h1>
                         </HeroEntrance>
 
                         <HeroEntrance delay={0.12} className="mt-4">
-                            <p className="text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl">
-                                {valueProposition}
+                            <p className="text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl lg:text-[1.7rem]">
+                                {positioning.title}
                             </p>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.18} className="mt-6">
-                            <p className="text-base leading-relaxed text-fg-secondary">{heroBio}</p>
+                        <HeroEntrance delay={0.18} className="mt-5">
+                            <p className="text-balance text-lg leading-snug text-fg-secondary">
+                                {positioning.description}
+                            </p>
+                        </HeroEntrance>
+
+                        <HeroEntrance delay={0.22} className="mt-5">
+                            <p className="text-base leading-relaxed text-fg-secondary">
+                                {positioning.supporting}
+                            </p>
                         </HeroEntrance>
 
                         <HeroEntrance delay={0.24} className="mt-8">
-                            <div className="flex flex-wrap items-center gap-3">
+                            <div className="flex w-full flex-wrap items-center gap-3">
                                 <Link
                                     href="#work"
-                                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand-hover"
+                                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-gradient-brand px-5 text-sm font-medium text-white transition-[filter] hover:brightness-110 xs:w-auto"
                                 >
-                                    View Selected Work
+                                    View Backend Work
                                     <ArrowRight size={15} aria-hidden />
                                 </Link>
                                 <Link
                                     href="/resume"
-                                    className="inline-flex h-11 items-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
+                                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover xs:w-auto"
                                 >
                                     <FileText size={15} aria-hidden />
                                     View Resume
@@ -142,25 +160,32 @@ export function Hero({ profile, projects }: { profile: ProfileContentParsed; pro
                                     className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                                     aria-label="View Hen Heang on GitHub (opens in a new tab)"
                                 >
-                                    <Github size={16} aria-hidden />
+                                    <GithubIcon size={16} />
                                     GitHub
                                     <ArrowUpRight size={13} aria-hidden />
                                 </a>
                             </div>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.3} className="mt-10">
-                            <p className="font-mono text-xs text-fg-muted">
-                                {profile.yearsExperience} years of experience · Enterprise systems · Cambodia → South Korea
-                            </p>
-
-                            {profile.available && (
-                                <div className="mt-3">
-                                    <StatusBadge status="live" pulse>
-                                        Open to backend roles
-                                    </StatusBadge>
-                                </div>
-                            )}
+                        <HeroEntrance delay={0.3} className="mt-9 w-full">
+                            <div
+                                className="flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-border py-3 font-mono text-xs text-fg-muted"
+                                aria-label="Professional metadata"
+                            >
+                                <span>
+                                    {profile.yearsExperience} years experience
+                                </span>
+                                <span>{profile.location}</span>
+                                {profile.available && (
+                                    <span className="inline-flex items-center gap-2 text-success">
+                                        <span
+                                            className="h-1.5 w-1.5 rounded-full bg-success"
+                                            aria-hidden
+                                        />
+                                        Open to roles
+                                    </span>
+                                )}
+                            </div>
                         </HeroEntrance>
                     </div>
 

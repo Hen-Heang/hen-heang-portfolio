@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { BookOpenCheck, Filter, Map, Search, X } from "lucide-react"
 import { BACKEND_CATEGORIES, BACKEND_CONTENT_TYPES, type BackendItemSummary } from "@/src/lib/types/backend-engineering"
@@ -26,6 +26,7 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
     const searchParams = useSearchParams()
 
     const [query, setQuery] = useState(() => paramOrDefault(searchParams, "q", ""))
+    const pendingQuerySync = useRef<ReturnType<typeof setTimeout> | null>(null)
     const level = paramOrDefault(searchParams, "level", "all")
     const category = paramOrDefault(searchParams, "category", "all")
     const difficulty = paramOrDefault(searchParams, "difficulty", "all")
@@ -50,9 +51,20 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
         const handle = setTimeout(() => {
             if (query !== paramOrDefault(searchParams, "q", "")) updateParams({ q: query || undefined })
         }, 250)
-        return () => clearTimeout(handle)
+        pendingQuerySync.current = handle
+        return () => {
+            clearTimeout(handle)
+            if (pendingQuerySync.current === handle) pendingQuerySync.current = null
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-sync when the debounced query itself changes
     }, [query])
+
+    function cancelPendingQuerySync() {
+        if (pendingQuerySync.current) {
+            clearTimeout(pendingQuerySync.current)
+            pendingQuerySync.current = null
+        }
+    }
 
     const results = useMemo(() => sortBackendItems(filterBackendItems(items, {
         query,
@@ -95,7 +107,7 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
             <section id="catalog" className="mt-10 scroll-mt-24" aria-labelledby="backend-catalog-heading">
                 <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                     <div>
-                        <p className="font-mono text-sm uppercase tracking-wider text-brand">Reference library</p>
+                        <p className="font-mono text-sm uppercase tracking-wider text-brand-hover">Reference library</p>
                         <h2 id="backend-catalog-heading" className="mt-1 text-2xl font-bold text-fg">Published depth, planned progression</h2>
                     </div>
                     <p aria-live="polite" className="font-mono text-sm text-fg-muted">{results.length} item{results.length === 1 ? "" : "s"}</p>
@@ -121,7 +133,7 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
                 </div>
 
                 {results.length > 0 ? (
-                    <div className="mt-5 grid gap-4 md:grid-cols-2">
+                    <div className="mt-5 grid gap-4 md:grid-cols-2" onClickCapture={cancelPendingQuerySync}>
                         {results.map((item) => <BackendCard key={item.id} item={item} complete={progress.has(item.id)} />)}
                     </div>
                 ) : (

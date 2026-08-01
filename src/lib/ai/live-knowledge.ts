@@ -1,6 +1,8 @@
 import "server-only"
 
-import { getProjects, getExperience, getEducation, getSkills } from "@/src/lib/db/portfolio"
+import { getProjects, getExperience, getEducation, getSkills, getSiteContent } from "@/src/lib/db/portfolio"
+import { getAICategories, getAIArticles, getAIPrompts, getAISnippets } from "@/src/lib/db/ai-engineering"
+import { getApprovedProfileFacts } from "@/src/lib/db/ai-knowledge"
 import { projects as staticProjects } from "@/data/projects"
 import { experiences as staticExperiences } from "@/data/experience"
 import { education as staticEducation } from "@/data/education"
@@ -19,11 +21,23 @@ import type { Project } from "@/src/lib/types"
  * the result briefly.
  *
  * Merge rules per category:
+ * - Profile: `getSiteContent("profile")` already falls back to data/profile.ts
+ *   internally (see src/lib/db/portfolio.ts), so it's passed straight through
+ *   — this is the same source the /about page renders from.
  * - Projects: DB rows win field-by-field, but static-only case-study fields
  *   (businessProblem, architecture, apiEndpoints, lessonsLearned, …) are kept
  *   for projects that exist in both — the DB only stores a subset. DB-only
  *   projects appear with whatever fields they have.
  * - Experience / education / skills: DB replaces static when non-empty.
+ * - AI Engineering categories / articles / prompts / snippets: admin-authored
+ *   directly in Supabase with no static source at all — passed straight
+ *   through so the assistant matches the live /ai-engineering pages exactly
+ *   instead of a fixed narrative summary. Each getter already resolves to
+ *   `[]` on any Supabase error, so an AI-content outage just omits those
+ *   sections rather than breaking the rest of the knowledge base.
+ * - Owner-approved correction facts: getApprovedProfileFacts() queries with
+ *   the public anon client, so RLS already restricts it to approved+public
+ *   rows before this module ever sees them — see src/lib/db/ai-knowledge.ts.
  * - Any empty result or thrown error falls back to the static knowledge base,
  *   so the assistant keeps working if Supabase is down.
  */
@@ -52,19 +66,34 @@ export async function getLiveKnowledgeBase(): Promise<KnowledgeSection[]> {
     if (cached && Date.now() < cached.expiresAt) return cached.sections
 
     try {
-        // Each getter already returns [] on any Supabase error.
-        const [projects, experiences, education, skills] = await Promise.all([
-            getProjects(),
-            getExperience(),
-            getEducation(),
-            getSkills(),
-        ])
+        // Each getter already returns [] (or the static fallback) on any Supabase error.
+        const [profile, projects, experiences, education, skills, aiCategories, aiArticles, aiPrompts, aiSnippets, correctionFacts] =
+            await Promise.all([
+                getSiteContent("profile"),
+                getProjects(),
+                getExperience(),
+                getEducation(),
+                getSkills(),
+                getAICategories(),
+                getAIArticles(),
+                getAIPrompts(),
+                getAISnippets(),
+                getApprovedProfileFacts(),
+            ])
 
         const sections = buildKnowledgeBase({
+            profile,
             projects: mergeProjects(projects),
             experiences: experiences.length > 0 ? experiences : staticExperiences,
             education: education.length > 0 ? education : staticEducation,
             skills: skills.length > 0 ? skills : staticSkills,
+            aiContent: {
+                categories: aiCategories,
+                articles: aiArticles,
+                prompts: aiPrompts,
+                snippets: aiSnippets,
+            },
+            correctionFacts,
         })
 
         cached = { sections, expiresAt: Date.now() + CACHE_TTL_MS }

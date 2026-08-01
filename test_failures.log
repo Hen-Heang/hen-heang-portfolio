@@ -1,0 +1,428 @@
+
+> hen-heang@0.1.0 test:e2e /Users/mac/Documents/Front-end/hen-heang-porfolio
+> playwright test
+
+
+Running 38 tests using 1 worker
+
+  ✘   1 [chromium] › e2e/backend-engineering.spec.ts:4:9 › Backend Engineering curriculum › loads every requested backend route with its expected primary heading (6.1s)
+[WebServer] [browser] Uncaught TypeError: mapped is not iterable
+[WebServer]     at expandWithAliases (src/lib/lab/search.ts:36:40)
+[WebServer]     at tokenize (src/lib/lab/search.ts:23:5)
+[WebServer]     at scoreItem (src/lib/lab/search.ts:53:25)
+[WebServer]     at <unknown> (src/lib/lab/search.ts:112:40)
+[WebServer]     at Array.map (<anonymous>)
+[WebServer]     at rankLabSearch (src/lib/lab/search.ts:112:10)
+[WebServer]     at LabSearchClient.useMemo[results] (src/components/lab/home/LabSearchClient.tsx:29:29)
+[WebServer]     at LabSearchClient (src/components/lab/home/LabSearchClient.tsx:27:28)
+[WebServer]     at EngineeringLabPage (app/lab/page.tsx:54:13)
+[WebServer]   34 |     for (const token of tokens) {
+[WebServer]   35 |         const mapped = LAB_SEARCH_ALIASES[token]
+[WebServer] > 36 |         if (mapped) for (const term of mapped) expanded.add(term)
+[WebServer]      |                                        ^
+[WebServer]   37 |     }
+[WebServer]   38 |     return [...expanded]
+[WebServer]   39 | }
+  ✘   2 [chromium] › e2e/backend-engineering.spec.ts:35:9 › Backend Engineering curriculum › integrates published and planned backend content into global Lab search (5.8s)
+[WebServer] [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+  ✓   3 [chromium] › e2e/backend-engineering.spec.ts:55:9 › Backend Engineering curriculum › opens the hub, roadmap, Java fundamentals, Spring content, search, filters, lab, and related content (3.8s)
+  ✘   4 [chromium] › e2e/backend-engineering.spec.ts:93:9 › Backend Engineering curriculum › does not expose empty planned routes and supports no-results plus clearing filters (5.7s)
+[WebServer] [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+  ✓   5 [chromium] › e2e/backend-engineering.spec.ts:108:9 › Backend Engineering curriculum › persists local progress and supports previous/next navigation (9.1s)
+  ✘   6 [chromium] › e2e/backend-engineering.spec.ts:122:9 › Backend Engineering curriculum › renders safely on mobile and exposes keyboard-operable navigation (5.7s)
+  ✓   7 [chromium] › e2e/backend-engineering.spec.ts:161:9 › Backend Engineering curriculum › opens external references with safe browser isolation (720ms)
+  ✓   8 [chromium] › e2e/backend-layout-accessibility.spec.ts:11:13 › Backend Engineering layout and accessibility › keeps the long detail route within the desktop viewport (745ms)
+  ✓   9 [chromium] › e2e/backend-layout-accessibility.spec.ts:11:13 › Backend Engineering layout and accessibility › keeps the long detail route within the tablet viewport (692ms)
+  ✘  10 [chromium] › e2e/backend-layout-accessibility.spec.ts:11:13 › Backend Engineering layout and accessibility › keeps the long detail route within the mobile viewport (658ms)
+  ✓  11 [chromium] › e2e/backend-layout-accessibility.spec.ts:36:9 › Backend Engineering layout and accessibility › uses one main landmark, ordered headings, unique IDs, labelled diagrams, and table headers (729ms)
+  ✓  12 [chromium] › e2e/backend-layout-accessibility.spec.ts:55:9 › Backend Engineering layout and accessibility › supports roadmap scrolling and native details keyboard operation (806ms)
+  ✓  13 [chromium] › e2e/backend-layout-accessibility.spec.ts:71:9 › Backend Engineering layout and accessibility › keeps the desktop table of contents sticky and mobile breadcrumbs truncated (1.2s)
+  ✘  14 [chromium] › e2e/backend-layout-accessibility.spec.ts:84:9 › Backend Engineering layout and accessibility › exposes visible focus, 44px primary touch targets, safe external labels, and reduced motion (1.0m)
+  ✓  15 [chromium] › e2e/current-focus.spec.ts:4:9 › Homepage current focus › shows a compact three-item list and links to the journey, without the old four-card layout (1.0s)
+  ✓  16 [chromium] › e2e/homepage-polish.spec.ts:10:9 › Homepage polish › server-renders the recruiter-focused hero and consistent resume CTAs (895ms)
+  ✓  17 [chromium] › e2e/homepage-polish.spec.ts:42:13 › Homepage polish › keeps the homepage within the mobile viewport (826ms)
+  ✓  18 [chromium] › e2e/homepage-polish.spec.ts:42:13 › Homepage polish › keeps the homepage within the tablet viewport (819ms)
+  ✓  19 [chromium] › e2e/homepage-polish.spec.ts:42:13 › Homepage polish › keeps the homepage within the desktop viewport (533ms)
+  ✓  20 [chromium] › e2e/homepage-polish.spec.ts:69:9 › Homepage polish › keeps Radix tab keyboard semantics and panel height stable (697ms)
+[WebServer] [browser] You have Reduced Motion enabled on your device. Animations may not appear as expected.. For more information and steps for solving, visit https://motion.dev/troubleshooting/reduced-motion-disabled
+  ✓  21 [chromium] › e2e/homepage-polish.spec.ts:90:9 › Homepage polish › renders static hero content and preserves focus treatment with reduced motion (561ms)
+  ✓  22 [chromium] › e2e/homepage-polish.spec.ts:114:9 › Homepage polish › supports dark mode and keeps both resume views public (994ms)
+  ✘  23 [chromium] › e2e/lab-homepage.spec.ts:4:9 › Engineering Lab homepage › renders the compact hero, Continue Learning, learning paths, and library sections in order (220ms)
+  ✓  24 [chromium] › e2e/lab-homepage.spec.ts:24:9 › Engineering Lab homepage › shows the Backend path as recommended and links to the roadmap (481ms)
+[WebServer] [browser] Uncaught TypeError: mapped is not iterable
+[WebServer]     at expandWithAliases (src/lib/lab/search.ts:36:40)
+[WebServer]     at tokenize (src/lib/lab/search.ts:23:5)
+[WebServer]     at scoreItem (src/lib/lab/search.ts:53:25)
+[WebServer]     at <unknown> (src/lib/lab/search.ts:112:40)
+[WebServer]     at Array.map (<anonymous>)
+[WebServer]     at rankLabSearch (src/lib/lab/search.ts:112:10)
+[WebServer]     at LabSearchClient.useMemo[results] (src/components/lab/home/LabSearchClient.tsx:29:29)
+[WebServer]     at LabSearchClient (src/components/lab/home/LabSearchClient.tsx:27:28)
+[WebServer]     at EngineeringLabPage (app/lab/page.tsx:54:13)
+[WebServer]   34 |     for (const token of tokens) {
+[WebServer]   35 |         const mapped = LAB_SEARCH_ALIASES[token]
+[WebServer] > 36 |         if (mapped) for (const term of mapped) expanded.add(term)
+[WebServer]      |                                        ^
+[WebServer]   37 |     }
+[WebServer]   38 |     return [...expanded]
+[WebServer]   39 | }
+  ✘  25 [chromium] › e2e/lab-homepage.spec.ts:30:9 › Engineering Lab homepage › search stays interactive and swaps only the library preview section (5.7s)
+  ✘  26 [chromium] › e2e/lab-homepage.spec.ts:44:9 › Engineering Lab homepage › the Lab nav marks the current section with aria-current (584ms)
+[WebServer] [browser] Uncaught TypeError: mapped is not iterable
+[WebServer]     at expandWithAliases (src/lib/lab/search.ts:36:40)
+[WebServer]     at tokenize (src/lib/lab/search.ts:23:5)
+[WebServer]     at scoreItem (src/lib/lab/search.ts:53:25)
+[WebServer]     at <unknown> (src/lib/lab/search.ts:112:40)
+[WebServer]     at Array.map (<anonymous>)
+[WebServer]     at rankLabSearch (src/lib/lab/search.ts:112:10)
+[WebServer]     at LabLibraryClient.useMemo[results] (src/components/lab/library/LabLibraryClient.tsx:76:28)
+[WebServer]     at LabLibraryClient (src/components/lab/library/LabLibraryClient.tsx:75:28)
+[WebServer]     at LabLibraryPage (app/lab/library/page.tsx:37:17)
+[WebServer]   34 |     for (const token of tokens) {
+[WebServer]   35 |         const mapped = LAB_SEARCH_ALIASES[token]
+[WebServer] > 36 |         if (mapped) for (const term of mapped) expanded.add(term)
+[WebServer]      |                                        ^
+[WebServer]   37 |     }
+[WebServer]   38 |     return [...expanded]
+[WebServer]   39 | }
+  ✘  27 [chromium] › e2e/lab-homepage.spec.ts:54:9 › Engineering Lab library › persists the query in the URL and survives a refresh (5.9s)
+  ✓  28 [chromium] › e2e/lab-homepage.spec.ts:64:9 › Engineering Lab library › filters by content type via the tab buttons (918ms)
+  ✓  29 [chromium] › e2e/lab-homepage.spec.ts:72:9 › Engineering Lab progress › shows the factual empty state with no local progress (1.5s)
+[WebServer] [content:achievements] Supabase data failed schema validation, using static fallback
+  ✓  30 [chromium] › e2e/navigation.spec.ts:4:9 › Site navigation › main nav has no ambiguous active route and Experience is not a separate tab (1.1s)
+  ✓  31 [chromium] › e2e/navigation.spec.ts:14:9 › Site navigation › mobile navigation drawer opens, escape closes it, and focus returns to the trigger (740ms)
+  ✓  32 [chromium] › e2e/navigation.spec.ts:29:9 › Command menu › desktop trigger communicates the Cmd/Ctrl+K shortcut and is keyboard accessible (1.5s)
+  ✓  33 [chromium] › e2e/navigation.spec.ts:58:9 › Command menu › filters commands by search and supports arrow-key navigation (1.3s)
+  ✓  34 [chromium] › e2e/projects.spec.ts:4:9 › Projects index › shows featured projects as large panels and the rest in a compact grid (492ms)
+  ✓  35 [chromium] › e2e/projects.spec.ts:12:9 › Projects index › filters remain correct and featured projects respect the active filter (446ms)
+  ✓  36 [chromium] › e2e/projects.spec.ts:21:9 › Projects index › filter bar is reachable and scrollable at 320px with comfortable touch targets (568ms)
+  ✓  37 [chromium] › e2e/projects.spec.ts:43:9 › Projects index › shows an editorial no-results message and clears back to all (408ms)
+  ✓  38 [chromium] › e2e/projects.spec.ts:48:9 › Projects index › grid card CTA is visible without hover and github/live links are separate from the card link (414ms)
+
+
+  1) [chromium] › e2e/backend-engineering.spec.ts:4:9 › Backend Engineering curriculum › loads every requested backend route with its expected primary heading 
+
+    Error: /lab
+
+    expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Engineering Lab', level: 1 })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - /lab with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Engineering Lab', level: 1 })
+
+
+      26 |             const response = await page.goto(route)
+      27 |             expect(response?.status(), route).toBe(200)
+    > 28 |             await expect(page.getByRole("heading", { name: heading, level: 1 }), route).toBeVisible()
+         |                                                                                         ^
+      29 |         }
+      30 |
+      31 |         const planned = await page.goto("/lab/backend/java-concurrency-virtual-threads")
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/backend-engineering.spec.ts:28:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-f0079-ts-expected-primary-heading-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-f0079-ts-expected-primary-heading-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/backend-engineering-Backen-f0079-ts-expected-primary-heading-chromium/error-context.md
+
+  2) [chromium] › e2e/backend-engineering.spec.ts:35:9 › Backend Engineering curriculum › integrates published and planned backend content into global Lab search 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: getByRole('link', { name: /Backend Engineering.*Java Backend Fundamentals/ })
+    Expected: "/lab/backend/java-backend-fundamentals"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Backend Engineering.*Java Backend Fundamentals/ })
+
+
+      39 |         await search.fill("Java Backend Fundamentals")
+      40 |         const published = page.getByRole("link", { name: /Backend Engineering.*Java Backend Fundamentals/ })
+    > 41 |         await expect(published).toHaveAttribute("href", "/lab/backend/java-backend-fundamentals")
+         |                                 ^
+      42 |         await expect(published.getByText(/Backend Engineering/)).toHaveClass(/text-success/)
+      43 |
+      44 |         await search.fill("Java Concurrency and Virtual Threads")
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/backend-engineering.spec.ts:41:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-5c56a-tent-into-global-Lab-search-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-5c56a-tent-into-global-Lab-search-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/backend-engineering-Backen-5c56a-tent-into-global-Lab-search-chromium/error-context.md
+
+  3) [chromium] › e2e/backend-engineering.spec.ts:93:9 › Backend Engineering curriculum › does not expose empty planned routes and supports no-results plus clearing filters 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('40 items')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText('40 items')
+
+
+      103 |         await page.getByRole("button", { name: "Clear filters" }).click()
+      104 |         await expect(search).toHaveValue("")
+    > 105 |         await expect(page.getByText("40 items")).toBeVisible()
+          |                                                  ^
+      106 |     })
+      107 |
+      108 |     test("persists local progress and supports previous/next navigation", async ({ page }) => {
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/backend-engineering.spec.ts:105:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-2fc22-sults-plus-clearing-filters-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-2fc22-sults-plus-clearing-filters-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/backend-engineering-Backen-2fc22-sults-plus-clearing-filters-chromium/error-context.md
+
+  4) [chromium] › e2e/backend-engineering.spec.ts:122:9 › Backend Engineering curriculum › renders safely on mobile and exposes keyboard-operable navigation 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: getByRole('dialog', { name: 'Engineering Lab navigation' }).getByRole('link', { name: 'Roadmap & Library' })
+    Expected: "page"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Engineering Lab navigation' }).getByRole('link', { name: 'Roadmap & Library' })
+
+
+      133 |         await expect(drawer).toBeVisible()
+      134 |         await expect(drawer.getByRole("navigation", { name: "Lab sections" })).toBeVisible()
+    > 135 |         await expect(drawer.getByRole("link", { name: "Roadmap & Library" })).toHaveAttribute("aria-current", "page")
+          |                                                                               ^
+      136 |
+      137 |         // Background content (including the header trigger) is aria-hidden and
+      138 |         // cannot be interacted with while the modal drawer is open.
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/backend-engineering.spec.ts:135:79
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-eabfb-eyboard-operable-navigation-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/backend-engineering-Backen-eabfb-eyboard-operable-navigation-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/backend-engineering-Backen-eabfb-eyboard-operable-navigation-chromium/error-context.md
+
+  5) [chromium] › e2e/backend-layout-accessibility.spec.ts:11:13 › Backend Engineering layout and accessibility › keeps the long detail route within the mobile viewport 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 390
+    Received:    712
+
+      18 |                 scrollWidth: document.documentElement.scrollWidth,
+      19 |             }))
+    > 20 |             expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth)
+         |                                            ^
+      21 |             await expect(page.getByRole("button", { name: "Copy to clipboard" }).first()).toBeVisible()
+      22 |             await expect(page.getByRole("table").first()).toBeVisible()
+      23 |             if (viewport.name === "mobile") {
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/backend-layout-accessibility.spec.ts:20:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/backend-layout-accessibili-40619--within-the-mobile-viewport-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/backend-layout-accessibili-40619--within-the-mobile-viewport-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/backend-layout-accessibili-40619--within-the-mobile-viewport-chromium/error-context.md
+
+  6) [chromium] › e2e/backend-layout-accessibility.spec.ts:84:9 › Backend Engineering layout and accessibility › exposes visible focus, 44px primary touch targets, safe external labels, and reduced motion 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByText('Roadmap levels')
+
+
+      105 |         expect(transitionSeconds).toBeLessThanOrEqual(0.02)
+      106 |
+    > 107 |         const contrastRatio = await page.getByText("Roadmap levels").evaluate((element) => {
+          |                                                                      ^
+      108 |             function rgb(value: string): number[] {
+      109 |                 return value.match(/[\d.]+/g)!.slice(0, 3).map(Number)
+      110 |             }
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/backend-layout-accessibility.spec.ts:107:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/backend-layout-accessibili-11c57-l-labels-and-reduced-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/backend-layout-accessibili-11c57-l-labels-and-reduced-motion-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/backend-layout-accessibili-11c57-l-labels-and-reduced-motion-chromium/error-context.md
+
+  7) [chromium] › e2e/lab-homepage.spec.ts:4:9 › Engineering Lab homepage › renders the compact hero, Continue Learning, learning paths, and library sections in order 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > -1
+    Received:   -1
+
+      16 |         ].map((marker) => html.indexOf(marker))
+      17 |
+    > 18 |         for (const pos of positions) expect(pos).toBeGreaterThan(-1)
+         |                                                  ^
+      19 |         for (let i = 1; i < positions.length; i++) {
+      20 |             expect(positions[i]).toBeGreaterThan(positions[i - 1])
+      21 |         }
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/lab-homepage.spec.ts:18:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-0c58d-d-library-sections-in-order-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-0c58d-d-library-sections-in-order-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/lab-homepage-Engineering-L-0c58d-d-library-sections-in-order-chromium/error-context.md
+
+  8) [chromium] › e2e/lab-homepage.spec.ts:30:9 › Engineering Lab homepage › search stays interactive and swaps only the library preview section 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/\d+ results?$/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/\d+ results?$/)
+
+
+      35 |         await search.fill("docker")
+      36 |         await expect(page.getByRole("link", { name: "Backend curriculum" })).toHaveCount(0)
+    > 37 |         await expect(page.getByText(/\d+ results?$/)).toBeVisible()
+         |                                                       ^
+      38 |         await expect(page.getByRole("link", { name: /Open in full library/ })).toBeVisible()
+      39 |
+      40 |         await search.fill("")
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/lab-homepage.spec.ts:37:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-0b18f-the-library-preview-section-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-0b18f-the-library-preview-section-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/lab-homepage-Engineering-L-0b18f-the-library-preview-section-chromium/error-context.md
+
+  9) [chromium] › e2e/lab-homepage.spec.ts:44:9 › Engineering Lab homepage › the Lab nav marks the current section with aria-current 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: getByRole('link', { name: 'Overview', exact: true })
+    Expected: "page"
+    Error: strict mode violation: getByRole('link', { name: 'Overview', exact: true }) resolved to 2 elements:
+        1) <a href="/lab" aria-current="page" class="flex min-h-11 items-center gap-2.5 rounded-lg border-l-2 px-2 py-1.5 text-base transition-colors lg:min-h-0 lg:text-sm border-brand bg-surface font-medium text-fg">…</a> aka getByLabel('Lab sections', { exact: true }).getByRole('link', { name: 'Overview' })
+        2) <a href="/lab" aria-current="page" class="shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors bg-brand text-brand-foreground">Overview</a> aka getByLabel('Engineering Lab sections').getByRole('link', { name: 'Overview' })
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('link', { name: 'Overview', exact: true })
+
+
+      44 |     test("the Lab nav marks the current section with aria-current", async ({ page }) => {
+      45 |         await page.goto("/lab")
+    > 46 |         await expect(page.getByRole("link", { name: "Overview", exact: true })).toHaveAttribute("aria-current", "page")
+         |                                                                                 ^
+      47 |
+      48 |         await page.goto("/lab/backend")
+      49 |         await expect(page.getByRole("link", { name: "Backend", exact: true })).toHaveAttribute("aria-current", "page")
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/lab-homepage.spec.ts:46:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-d21e1-t-section-with-aria-current-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-d21e1-t-section-with-aria-current-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/lab-homepage-Engineering-L-d21e1-t-section-with-aria-current-chromium/error-context.md
+
+  10) [chromium] › e2e/lab-homepage.spec.ts:54:9 › Engineering Lab library › persists the query in the URL and survives a refresh 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /[?&]q=spring/
+    Received string:  "http://127.0.0.1:3000/lab/library"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        14 × unexpected value "http://127.0.0.1:3000/lab/library"
+
+
+      56 |         const search = page.getByRole("textbox", { name: "Search the Engineering Lab library" })
+      57 |         await search.fill("spring")
+    > 58 |         await expect(page).toHaveURL(/[?&]q=spring/)
+         |                            ^
+      59 |
+      60 |         await page.reload()
+      61 |         await expect(page.getByRole("textbox", { name: "Search the Engineering Lab library" })).toHaveValue("spring")
+        at /Users/mac/Documents/Front-end/hen-heang-porfolio/e2e/lab-homepage.spec.ts:58:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-94ee6--URL-and-survives-a-refresh-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/lab-homepage-Engineering-L-94ee6--URL-and-survives-a-refresh-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/lab-homepage-Engineering-L-94ee6--URL-and-survives-a-refresh-chromium/error-context.md
+
+  10 failed
+    [chromium] › e2e/backend-engineering.spec.ts:4:9 › Backend Engineering curriculum › loads every requested backend route with its expected primary heading 
+    [chromium] › e2e/backend-engineering.spec.ts:35:9 › Backend Engineering curriculum › integrates published and planned backend content into global Lab search 
+    [chromium] › e2e/backend-engineering.spec.ts:93:9 › Backend Engineering curriculum › does not expose empty planned routes and supports no-results plus clearing filters 
+    [chromium] › e2e/backend-engineering.spec.ts:122:9 › Backend Engineering curriculum › renders safely on mobile and exposes keyboard-operable navigation 
+    [chromium] › e2e/backend-layout-accessibility.spec.ts:11:13 › Backend Engineering layout and accessibility › keeps the long detail route within the mobile viewport 
+    [chromium] › e2e/backend-layout-accessibility.spec.ts:84:9 › Backend Engineering layout and accessibility › exposes visible focus, 44px primary touch targets, safe external labels, and reduced motion 
+    [chromium] › e2e/lab-homepage.spec.ts:4:9 › Engineering Lab homepage › renders the compact hero, Continue Learning, learning paths, and library sections in order 
+    [chromium] › e2e/lab-homepage.spec.ts:30:9 › Engineering Lab homepage › search stays interactive and swaps only the library preview section 
+    [chromium] › e2e/lab-homepage.spec.ts:44:9 › Engineering Lab homepage › the Lab nav marks the current section with aria-current 
+    [chromium] › e2e/lab-homepage.spec.ts:54:9 › Engineering Lab library › persists the query in the URL and survives a refresh 
+  28 passed (2.3m)
+ ELIFECYCLE  Command failed with exit code 1.

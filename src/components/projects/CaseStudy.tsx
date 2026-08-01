@@ -1,7 +1,8 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, ArrowRight, Briefcase, Clock, Database, Github, Lightbulb, Users } from "lucide-react"
+import { ArrowLeft, ArrowRight, Briefcase, Clock, Database, Lightbulb, Users } from "lucide-react"
+import { GithubIcon } from "@/src/components/icons/social"
 import { Container } from "@/src/components/system/Container"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 import { ArchitecturePreview } from "@/src/components/system/ArchitecturePreview"
@@ -111,7 +112,7 @@ export function CaseStudy({ project, nextProject }: { project: Project; nextProj
                             rel="noopener noreferrer"
                             className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-border px-4 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
                         >
-                            <Github size={16} aria-hidden /> GitHub
+                            <GithubIcon size={16} brand={false} /> GitHub
                         </a>
                     )}
                     {isLive && (

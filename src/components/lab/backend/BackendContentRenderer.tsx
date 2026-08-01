@@ -25,7 +25,7 @@ export function BackendBlockRenderer({ block }: { block: BackendBlock }) {
         case "list": {
             const Tag = block.ordered ? "ol" : "ul"
             return (
-                <Tag className={`mb-5 space-y-2 pl-5 text-[17px] leading-7 text-fg-secondary ${block.ordered ? "list-decimal" : "list-disc"}`}>
+                <Tag className={`mb-5 space-y-2 break-words pl-5 text-[17px] leading-7 text-fg-secondary ${block.ordered ? "list-decimal" : "list-disc"}`}>
                     {block.items.map((item) => <li key={item}>{item}</li>)}
                 </Tag>
             )
@@ -49,7 +49,7 @@ export function BackendBlockRenderer({ block }: { block: BackendBlock }) {
         }
         case "table":
             return (
-                <div className="my-6 overflow-x-auto rounded-xl border border-border">
+                <div className="my-6 w-full max-w-full overflow-x-auto rounded-xl border border-border">
                     <table className="w-full min-w-[560px] text-left text-base">
                         <thead className="border-b border-border bg-surface">
                             <tr>{block.headers.map((header) => <th key={header} scope="col" className="px-4 py-3 text-sm font-semibold uppercase tracking-wide text-fg-muted">{header}</th>)}</tr>

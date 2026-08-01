@@ -14,7 +14,7 @@ const SAFE_HREF = /^(https?:|mailto:)/i
  */
 export function MarkdownContent({ text }: { text: string }) {
     return (
-        <div className="text-sm leading-relaxed text-fg-secondary space-y-2 break-words">
+        <div className="text-sm leading-relaxed text-[#D1D5DB] space-y-3 break-words">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -26,7 +26,7 @@ export function MarkdownContent({ text }: { text: string }) {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-brand underline underline-offset-2 decoration-brand/40 hover:decoration-brand"
+                                className="text-[#38BDF8] underline underline-offset-2 decoration-[#38BDF8]/40 hover:decoration-[#38BDF8]"
                             >
                                 {children}
                             </a>
@@ -35,12 +35,12 @@ export function MarkdownContent({ text }: { text: string }) {
                     ul: ({ children }) => <ul className="list-disc pl-5 space-y-1">{children}</ul>,
                     ol: ({ children }) => <ol className="list-decimal pl-5 space-y-1">{children}</ol>,
                     li: ({ children }) => <li>{children}</li>,
-                    strong: ({ children }) => <strong className="font-semibold text-fg">{children}</strong>,
-                    h1: ({ children }) => <h3 className="text-sm font-semibold text-fg mt-1">{children}</h3>,
-                    h2: ({ children }) => <h3 className="text-sm font-semibold text-fg mt-1">{children}</h3>,
-                    h3: ({ children }) => <h4 className="text-sm font-semibold text-fg mt-1">{children}</h4>,
+                    strong: ({ children }) => <strong className="font-semibold text-[#F8FAFC]">{children}</strong>,
+                    h1: ({ children }) => <h3 className="text-sm font-semibold text-[#F8FAFC] mt-2 mb-1">{children}</h3>,
+                    h2: ({ children }) => <h3 className="text-sm font-semibold text-[#F8FAFC] mt-2 mb-1">{children}</h3>,
+                    h3: ({ children }) => <h4 className="text-sm font-semibold text-[#F8FAFC] mt-2 mb-1">{children}</h4>,
                     blockquote: ({ children }) => (
-                        <blockquote className="border-l-2 border-brand/40 pl-3 text-fg-secondary">{children}</blockquote>
+                        <blockquote className="border-l-2 border-[#4285F4]/40 pl-3 text-[#94A3B8] italic">{children}</blockquote>
                     ),
                     code: ({ className, children }) => {
                         const isBlock = /language-/.test(className ?? "") || String(children).includes("\n")
@@ -50,19 +50,19 @@ export function MarkdownContent({ text }: { text: string }) {
                             )
                         }
                         return (
-                            <code className="font-mono text-xs px-1 py-0.5 rounded bg-surface-hover text-brand">
+                            <code className="font-mono text-[13px] px-1.5 py-0.5 rounded bg-[#11182B] text-[#38BDF8] border border-slate-400/15">
                                 {children}
                             </code>
                         )
                     },
                     pre: ({ children }) => (
-                        <pre className="p-3 rounded-lg bg-background/60 border border-border overflow-x-auto">
+                        <pre className="p-3 my-2 rounded-lg bg-[#0B1020] border border-slate-400/15 overflow-x-auto text-[13px] text-[#F8FAFC]">
                             {children}
                         </pre>
                     ),
                     table: ({ children }) => (
-                        <div className="overflow-x-auto">
-                            <table className="text-xs border-collapse [&_th]:border [&_th]:border-border [&_th]:px-2 [&_th]:py-1 [&_td]:border [&_td]:border-border [&_td]:px-2 [&_td]:py-1">
+                        <div className="overflow-x-auto my-2">
+                            <table className="text-[13px] border-collapse [&_th]:border [&_th]:border-slate-400/15 [&_th]:bg-[#11182B] [&_th]:px-2.5 [&_th]:py-1.5 [&_td]:border [&_td]:border-slate-400/15 [&_td]:px-2.5 [&_td]:py-1.5">
                                 {children}
                             </table>
                         </div>

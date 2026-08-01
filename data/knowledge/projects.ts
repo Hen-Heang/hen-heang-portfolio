@@ -28,11 +28,13 @@ export function buildProjectsKnowledge(projects: Project[]): KnowledgeSection[] 
             ...project.technologies.map((t) => t.toLowerCase()),
             "project", "portfolio", "built", "side project",
             ...(project.featured ? ["featured", "latest", "recent", "best"] : []),
+            ...(project.ownership ? [project.ownership.toLowerCase()] : []),
         ],
         content: [
             `### ${project.title}`,
             project.featured ? "(Featured project)" : "",
             [
+                project.ownership ? `Type: ${project.ownership}` : "",
                 project.role ? `Role: ${project.role}` : "",
                 project.duration ?? "",
                 project.teamSize ? `Team: ${project.teamSize}` : "",
@@ -87,10 +89,12 @@ export function buildProjectsKnowledge(projects: Project[]): KnowledgeSection[] 
             "projects", "project", "portfolio", "built", "list", "all", "latest",
             "recent", "showcase", "work", "github", "side",
         ],
+        sourceLabel: "Projects page",
+        sourceUrl: "https://henheang.site/projects",
         content: projects
             .map(
                 (p) =>
-                    `- **${p.title}**${p.featured ? " (featured)" : ""} — ${p.description} [${p.technologies.join(", ")}] → https://henheang.site/projects/${p.slug}`,
+                    `- **${p.title}**${p.featured ? " (featured)" : ""}${p.ownership ? ` (${p.ownership})` : ""} — ${p.description} [${p.technologies.join(", ")}] → https://henheang.site/projects/${p.slug}`,
             )
             .join("\n"),
     }

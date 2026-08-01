@@ -5,7 +5,17 @@ import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import {
-    Briefcase, FileText, FlaskConical, Github, Mail, MessageCircle, Moon, Route, Search, Sun,
+    Briefcase,
+    FileText,
+    FlaskConical,
+    Github,
+    Mail,
+    MessageCircle,
+    Moon,
+    Route,
+    Search,
+    Sun,
+    UserRound,
 } from "lucide-react"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import { NAV_LINKS } from "@/src/components/layout/SiteHeader"
@@ -19,7 +29,11 @@ interface CommandAction {
     id: string
     label: string
     keywords: string
-    icon: React.ComponentType<{ size?: number; className?: string; "aria-hidden"?: boolean }>
+    icon: React.ComponentType<{
+        size?: number
+        className?: string
+        "aria-hidden"?: boolean
+    }>
     run: () => void
 }
 
@@ -28,11 +42,36 @@ interface CommandAction {
  * SiteHeader's NAV_LINKS — reused here so the route itself has one source
  * of truth; only the command-menu-specific presentation is duplicated.
  */
-const NAV_COMMAND_META: Record<string, { icon: CommandAction["icon"]; keywords: string; label: string }> = {
-    Work: { icon: Briefcase, keywords: "projects portfolio case study", label: "Go to Work" },
-    Lab: { icon: FlaskConical, keywords: "lab backend java spring boot roadmap devops systems database", label: "Open Engineering Lab" },
-    Journey: { icon: Route, keywords: "now progress learning milestones active projects", label: "View Current Journey" },
-    CV: { icon: FileText, keywords: "resume curriculum vitae download pdf", label: "Open CV" },
+const NAV_COMMAND_META: Record<
+    string,
+    { icon: CommandAction["icon"]; keywords: string; label: string }
+> = {
+    Work: {
+        icon: Briefcase,
+        keywords: "projects portfolio case study",
+        label: "Go to Work",
+    },
+    Lab: {
+        icon: FlaskConical,
+        keywords:
+            "lab backend java spring boot roadmap devops systems database",
+        label: "Open Engineering Lab",
+    },
+    Journey: {
+        icon: Route,
+        keywords: "now progress learning milestones active projects",
+        label: "View Current Journey",
+    },
+    About: {
+        icon: UserRound,
+        keywords: "about experience profile background",
+        label: "Open About",
+    },
+    Resume: {
+        icon: FileText,
+        keywords: "resume curriculum vitae print pdf recruiter",
+        label: "Open Resume",
+    },
 }
 
 /**
@@ -71,9 +110,17 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
             onOpenChange(false)
             router.push(href)
         }
-        const navActions = NAV_LINKS.filter((link) => NAV_COMMAND_META[link.label]).map((link) => {
+        const navActions = NAV_LINKS.filter(
+            (link) => NAV_COMMAND_META[link.label],
+        ).map((link) => {
             const meta = NAV_COMMAND_META[link.label]
-            return { id: link.label.toLowerCase(), label: meta.label, keywords: meta.keywords, icon: meta.icon, run: go(link.href) }
+            return {
+                id: link.label.toLowerCase(),
+                label: meta.label,
+                keywords: meta.keywords,
+                icon: meta.icon,
+                run: go(link.href),
+            }
         })
         return [
             ...navActions,
@@ -84,13 +131,26 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 icon: Github,
                 run: () => {
                     onOpenChange(false)
-                    window.open(personalInfo.socialLinks.github, "_blank", "noopener,noreferrer")
+                    window.open(
+                        personalInfo.socialLinks.github,
+                        "_blank",
+                        "noopener,noreferrer",
+                    )
                 },
             },
-            { id: "contact", label: "Contact Hen", keywords: "email message talk hire", icon: Mail, run: go("/contact") },
+            {
+                id: "contact",
+                label: "Contact Hen",
+                keywords: "email message talk hire",
+                icon: Mail,
+                run: go("/contact"),
+            },
             {
                 id: "theme",
-                label: resolvedTheme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+                label:
+                    resolvedTheme === "dark"
+                        ? "Switch to light theme"
+                        : "Switch to dark theme",
                 keywords: "theme dark light mode toggle appearance",
                 icon: resolvedTheme === "dark" ? Sun : Moon,
                 run: () => {
@@ -109,7 +169,13 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 },
             },
         ]
-    }, [onOpenChange, router, personalInfo.socialLinks.github, resolvedTheme, setTheme])
+    }, [
+        onOpenChange,
+        router,
+        personalInfo.socialLinks.github,
+        resolvedTheme,
+        setTheme,
+    ])
 
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase()
@@ -120,7 +186,9 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
     }, [actions, query])
 
     const clampedIndex = Math.min(activeIndex, Math.max(filtered.length - 1, 0))
-    const activeId = filtered[clampedIndex] ? `cmd-option-${filtered[clampedIndex].id}` : undefined
+    const activeId = filtered[clampedIndex]
+        ? `cmd-option-${filtered[clampedIndex].id}`
+        : undefined
 
     const onKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === "ArrowDown") {
@@ -147,9 +215,9 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
             }}
         >
             <DialogPrimitive.Portal>
-                <DialogPrimitive.Overlay className="fixed inset-0 z-[150] bg-background/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 motion-reduce:animate-none" />
+                <DialogPrimitive.Overlay className="fixed inset-0 z-[150] bg-background/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 motion-reduce:animate-none" />
                 <DialogPrimitive.Content
-                    className="fixed left-1/2 top-24 z-[151] w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-surface shadow-2xl data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 motion-reduce:animate-none"
+                    className="fixed left-1/2 top-24 z-[151] w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-surface shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 motion-reduce:animate-none"
                     aria-describedby={undefined}
                     aria-keyshortcuts="Meta+K Control+K"
                     onCloseAutoFocus={(event) => {
@@ -157,9 +225,15 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                         previousFocus?.focus()
                     }}
                 >
-                    <DialogPrimitive.Title className="sr-only">Command menu</DialogPrimitive.Title>
+                    <DialogPrimitive.Title className="sr-only">
+                        Command menu
+                    </DialogPrimitive.Title>
                     <div className="flex items-center gap-3 border-b border-border px-4">
-                        <Search size={16} className="shrink-0 text-fg-muted" aria-hidden />
+                        <Search
+                            size={16}
+                            className="shrink-0 text-fg-muted"
+                            aria-hidden
+                        />
                         <input
                             autoFocus
                             value={query}
@@ -180,9 +254,18 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                             ESC
                         </kbd>
                     </div>
-                    <ul id="cmd-listbox" role="listbox" aria-label="Commands" ref={listRef} className="max-h-80 overflow-y-auto p-2">
+                    <ul
+                        id="cmd-listbox"
+                        role="listbox"
+                        aria-label="Commands"
+                        ref={listRef}
+                        className="max-h-80 overflow-y-auto p-2"
+                    >
                         {filtered.length === 0 && (
-                            <li className="px-3 py-6 text-center text-sm text-fg-muted" role="presentation">
+                            <li
+                                className="px-3 py-6 text-center text-sm text-fg-muted"
+                                role="presentation"
+                            >
                                 No matching commands.
                             </li>
                         )}
@@ -204,7 +287,11 @@ export default function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                                             : "text-fg-secondary"
                                     }`}
                                 >
-                                    <action.icon size={15} className="shrink-0 text-fg-muted" aria-hidden />
+                                    <action.icon
+                                        size={15}
+                                        className="shrink-0 text-fg-muted"
+                                        aria-hidden
+                                    />
                                     {action.label}
                                 </button>
                             </li>

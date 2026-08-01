@@ -70,7 +70,7 @@ export function ContinueLearning({ backendItems, devopsTopics }: { backendItems:
                 <p className="mt-2 max-w-xl text-base leading-6 text-fg-secondary">
                     A structured path through Java, Spring Boot, databases, APIs, testing, and production systems.
                 </p>
-                <Link href="/lab/backend/roadmap" className="group mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                <Link href="/lab/backend/roadmap" className="group mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-brand px-4 py-2.5 text-base font-semibold text-white transition-[filter] hover:brightness-110">
                     Start Backend Path <ArrowRight size={14} aria-hidden="true" className="transition-transform group-hover:translate-x-1" />
                 </Link>
             </section>
@@ -84,7 +84,7 @@ export function ContinueLearning({ backendItems, devopsTopics }: { backendItems:
                 <h2 id="continue-learning-heading" className="mt-2 text-2xl font-bold text-fg">You&apos;ve completed everything available right now</h2>
                 <p className="mt-2 max-w-xl text-base leading-6 text-fg-secondary">Review a roadmap to reinforce what you&apos;ve learned, or explore the full library for something new.</p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                    <Link href="/lab/backend/roadmap" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                    <Link href="/lab/backend/roadmap" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-brand px-4 py-2.5 text-base font-semibold text-white transition-[filter] hover:brightness-110">
                         <Map size={15} aria-hidden="true" /> View roadmap
                     </Link>
                     <Link href="/lab/library" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">
@@ -117,7 +117,7 @@ export function ContinueLearning({ backendItems, devopsTopics }: { backendItems:
             )}
 
             <div className="mt-5 flex flex-wrap gap-3">
-                <Link href={item.href} className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                <Link href={item.href} className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-brand px-4 py-2.5 text-base font-semibold text-white transition-[filter] hover:brightness-110">
                     <PlayCircle size={16} aria-hidden="true" /> Continue lesson <ArrowRight size={14} aria-hidden="true" className="transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link href={roadmapHref} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">

@@ -17,7 +17,7 @@ export function LabHero() {
                 <Link href="/lab/library" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-colors hover:border-border-strong hover:text-fg">
                     <Search size={14} aria-hidden="true" /> Search the Lab
                 </Link>
-                <Link href="#learning-paths" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-base font-semibold text-brand-foreground transition-colors hover:bg-brand-hover">
+                <Link href="#learning-paths" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-brand px-4 py-2.5 text-base font-semibold text-white transition-[filter] hover:brightness-110">
                     Browse learning paths <ArrowRight size={14} aria-hidden="true" />
                 </Link>
             </div>

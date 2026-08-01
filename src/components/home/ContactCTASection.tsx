@@ -5,26 +5,30 @@ import { Reveal } from "@/src/components/system/Reveal"
 
 export function ContactCTASection() {
     return (
-        <section className="border-t border-border py-section">
+        <section className="border-t border-border pb-32 pt-section sm:py-section">
             <Container>
                 <Reveal>
                     <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
                         <div className="max-w-2xl">
-                            <h2 className="text-display-sm text-fg">Have a system to build?</h2>
+                            <h2 className="text-display-sm text-fg">
+                                Have a system to build?
+                            </h2>
                             <p className="mt-4 max-w-lg text-lg leading-relaxed text-fg-secondary">
-                                I&apos;m available for Java and Spring Boot backend roles, API work, and product teams that value dependable systems.
+                                I&apos;m available for Java and Spring Boot
+                                backend roles, API work, and product teams that
+                                value dependable systems.
                             </p>
                         </div>
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex w-full flex-wrap gap-3 sm:w-auto">
                             <Link
                                 href="/contact"
-                                className="inline-flex h-11 items-center rounded-lg bg-brand px-5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
+                                className="inline-flex h-12 w-full items-center justify-center rounded-lg bg-gradient-brand px-5 text-sm font-medium text-white transition-[filter] hover:brightness-110 sm:w-auto"
                             >
                                 Start a conversation
                             </Link>
                             <Link
                                 href="/resume"
-                                className="inline-flex h-11 items-center rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover"
+                                className="inline-flex h-12 w-full items-center justify-center rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover sm:w-auto"
                             >
                                 View Resume
                             </Link>

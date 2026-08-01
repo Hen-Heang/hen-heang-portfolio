@@ -93,7 +93,9 @@ const jsonLd = {
     sameAs: [
         profileData.socialLinks.github,
         profileData.socialLinks.linkedin,
-    ],
+        profileData.socialLinks.facebook,
+        profileData.socialLinks.instagram,
+    ].filter(Boolean),
     knowsAbout: profileData.knowsAbout,
     subjectOf: {
         "@type": "WebPage",
@@ -109,7 +111,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     ])
 
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
         <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
             <script
                 type="application/ld+json"

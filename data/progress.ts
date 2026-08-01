@@ -107,15 +107,20 @@ export const progressItems: ProgressItem[] = [
     },
 ]
 
+// Every entry must point at a real project slug in data/projects.ts (or "/").
+// The previous list carried a separate "KoriAI" entry that pointed at
+// /projects/hengo — KoriAI is the former name of Hengo, not a second project,
+// so the two rows described the same thing and one of them linked to a title
+// it didn't match.
 export const activeProjects: ActiveProject[] = [
     {
-        id: "koriai",
-        name: "KoriAI",
+        id: "hengo",
+        name: "Hengo",
         description:
-            "A Korean-learning platform designed for foreign software developers working in Korea.",
+            "An AI-powered Korean learning and growth platform for engineers working in Korea. Originally built as KoriAI.",
         status: "Building",
         href: "/projects/hengo",
-        technologies: ["Spring Boot", "Next.js", "AI Coach"],
+        technologies: ["Next.js", "Supabase", "OpenAI"],
     },
     {
         id: "authhub",
@@ -136,12 +141,12 @@ export const activeProjects: ActiveProject[] = [
         technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
     },
     {
-        id: "hengo",
-        name: "Hengo",
+        id: "money-flow",
+        name: "Money Flow",
         description:
-            "A personal growth application for goals, habits, learning progress, and self-improvement.",
-        status: "Building",
-        href: "/projects/hengo",
-        technologies: ["Spring Boot", "Next.js", "TanStack Query"],
+            "An installable personal finance PWA with budgets, savings goals, and AI chat over your own spending.",
+        status: "Iterating",
+        href: "/projects/money-flow",
+        technologies: ["Next.js", "Supabase", "Google Gemini"],
     },
 ]

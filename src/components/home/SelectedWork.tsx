@@ -13,13 +13,25 @@ import type { Project } from "@/src/lib/types"
  */
 export function SelectedWork({ projects }: { projects: Project[] }) {
     const backend = projects.filter((project) =>
-        project.technologies.some((technology) => /java|spring boot/i.test(technology))
+        project.technologies.some((technology) =>
+            /java|spring boot/i.test(technology),
+        ),
     )
     const featured = projects.filter((p) => p.featured)
-    const ordered = [...backend.filter((p) => p.featured), ...backend, ...featured, ...projects]
-    const selected = ordered.filter((project, index) =>
-        ordered.findIndex((candidate) => candidate.slug === project.slug) === index
-    ).slice(0, 3)
+    const ordered = [
+        ...backend.filter((p) => p.featured),
+        ...backend,
+        ...featured,
+        ...projects,
+    ]
+    const selected = ordered
+        .filter(
+            (project, index) =>
+                ordered.findIndex(
+                    (candidate) => candidate.slug === project.slug,
+                ) === index,
+        )
+        .slice(0, 3)
 
     if (selected.length === 0) return null
 
@@ -30,17 +42,21 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
             id="work"
             eyebrow="Selected Work"
             title="Backend systems, explained end to end"
-            description="Not just screenshots: each case study opens the API contract, architecture, data model, security decisions, and trade-offs behind the product."
+            description="A quick view of the problem, solution, and implementation—full architecture and trade-offs stay in each case study."
             revealHeader
         >
             <Reveal delay={0.05}>
-                <ProjectFeature project={flagship} />
+                <ProjectFeature project={flagship} homepage />
             </Reveal>
 
             {supporting.length > 0 && (
                 <div className="mt-16 grid gap-6 md:grid-cols-2">
                     {supporting.map((project, index) => (
-                        <Reveal key={project.slug} delay={index * 0.06} className="h-full">
+                        <Reveal
+                            key={project.slug}
+                            delay={index * 0.06}
+                            className="h-full"
+                        >
                             <ProjectCard project={project} />
                         </Reveal>
                     ))}

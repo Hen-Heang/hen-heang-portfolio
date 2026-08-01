@@ -20,6 +20,8 @@ export const SocialLinksSchema = z.object({
     linkedin: z.string().url(),
     telegram: z.string().url().optional(),
     x: z.string().url().optional(),
+    facebook: z.string().url().optional(),
+    instagram: z.string().url().optional(),
 })
 
 // ---------------------------------------------------------------------------
@@ -39,7 +41,7 @@ export const ProjectSchema = z.object({
     hidden: z.boolean().optional(),
     previewImage: z.boolean().optional(),
     category: z.enum(["Backend API", "Full-Stack Application", "Enterprise System", "Frontend Application"]).optional(),
-    ownership: z.enum(["Personal Project", "Team Project", "Professional Work"]).optional(),
+    ownership: z.enum(["Personal Project", "Team Project", "Professional Work", "Learning Lab"]).optional(),
     engineeringFocus: z.array(z.string()).optional(),
     confidential: z.boolean().optional(),
     businessProblem: z.string().optional(),
@@ -107,8 +109,8 @@ export const AchievementSchema = z.object({
 })
 
 // ---------------------------------------------------------------------------
-// Site content: profile / dashboard / cv
-// (match data/profile.ts, data/dashboard.ts, data/cv-data.ts)
+// Site content: profile / cv
+// (match data/profile.ts, data/cv-data.ts)
 // ---------------------------------------------------------------------------
 
 export const ProfileContentSchema = z.object({
@@ -143,38 +145,6 @@ export const ProfileContentSchema = z.object({
 })
 export type ProfileContentParsed = z.infer<typeof ProfileContentSchema>
 
-const BentoProjectSchema = z.object({
-    id: z.string().min(1),
-    title: z.string().min(1),
-    subtitle: z.string(),
-    description: z.string(),
-    emoji: z.string(),
-    url: z.string(),
-    github: z.string().optional(),
-    tech: z.array(z.union([z.string(), z.object({ name: z.string(), color: z.string().optional() })])),
-    gradientFrom: z.string().optional(),
-    gradientTo: z.string().optional(),
-    borderColor: z.string().optional(),
-    accentColor: z.string().optional(),
-    screenshot: z.string().optional(),
-    status: z.enum(["live", "archived"]).optional(),
-})
-
-export const DashboardContentSchema = z.object({
-    deployedProjects: z.array(BentoProjectSchema),
-    workProjects: z.array(
-        z.object({ id: z.string(), title: z.string(), subtitle: z.string().optional(), emoji: z.string().optional() })
-    ),
-    journey: z.array(
-        z.object({
-            year: z.string(),
-            company: z.string(),
-            location: z.string(),
-            current: z.boolean(),
-        })
-    ),
-})
-export type DashboardContentParsed = z.infer<typeof DashboardContentSchema>
 
 const CvExperienceSchema = z.object({
     company: z.string().min(1),
@@ -237,7 +207,6 @@ export type CvContentParsed = z.infer<typeof CvContentSchema>
 
 export const SiteContentSchemas = {
     profile: ProfileContentSchema,
-    dashboard: DashboardContentSchema,
     cv: CvContentSchema,
 } as const
 

@@ -81,7 +81,6 @@ export const cvData: CVData = {
     subtitle: "Java · Spring Boot · MyBatis · REST APIs · PostgreSQL · Oracle · Next.js",
     photo: profileData.myImage,
     location: profileData.location,
-    phone: profileData.phone,
     email: profileData.email,
     linkedin: profileData.socialLinks.linkedin,
     github: profileData.socialLinks.github,
@@ -94,7 +93,7 @@ export const cvData: CVData = {
   experience: [
     {
       company: "Bizplay",
-      title: "Full-Stack Developer",
+      title: "Backend Developer (Java & Spring Boot)",
       location: "Seoul, South Korea",
       startDate: "October 2025",
       endDate: "Present",

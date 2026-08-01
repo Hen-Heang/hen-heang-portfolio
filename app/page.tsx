@@ -1,38 +1,42 @@
 import { PageLayout } from "@/src/components/layout/PageLayout"
 import { Hero } from "@/src/components/home/Hero"
-import { EngineeringProofStrip } from "@/src/components/home/EngineeringProofStrip"
 import { SelectedWork } from "@/src/components/home/SelectedWork"
 import { ProfessionalExperience } from "@/src/components/home/ProfessionalExperience"
-import { TechnicalCapabilities } from "@/src/components/home/TechnicalCapabilities"
-import { EngineeringLabPreview } from "@/src/components/home/EngineeringLabPreview"
-import { CurrentFocus } from "@/src/components/home/CurrentFocus"
+import { TechnicalCapabilities } from "@/src/components/capabilities/TechnicalCapabilities"
+import { AboutSummary } from "@/src/components/home/AboutSummary"
 import { ContactCTASection } from "@/src/components/home/ContactCTASection"
-import { getExperience, getProjects, getSiteContent } from "@/src/lib/db/portfolio"
-import { getAIArticles } from "@/src/lib/db/ai-engineering"
+import {
+    getExperience,
+    getProjects,
+    getSiteContent,
+} from "@/src/lib/db/portfolio"
 
 // Re-render at most once a minute so admin edits show up without a redeploy.
 export const revalidate = 60
 
-// Recruiter-focused order: identity, credibility, and verified professional
-// work first; active learning (CurrentFocus) stays near the bottom, after
-// the engineering proof — never before it.
+// Recruiter-scan order: who he is, what he works with, the work, where he did
+// it, the background, then a direct contact path. Each purpose appears once —
+// the previous "Engineering Proof Strip", "Professional Profile", and
+// "Engineering Growth" sections restated Selected Work, Experience, and
+// Technical Capabilities respectively.
 export default async function HomePage() {
-    const [profile, projects, experience, articles] = await Promise.all([
+    const [profile, projects, experience] = await Promise.all([
         getSiteContent("profile"),
         getProjects(),
         getExperience(),
-        getAIArticles(),
     ])
 
     return (
         <PageLayout>
             <Hero profile={profile} projects={projects} />
-            <EngineeringProofStrip projects={projects} profile={profile} />
+            <TechnicalCapabilities
+                projects={projects}
+                experience={experience}
+                variant="surface"
+            />
             <SelectedWork projects={projects} />
             <ProfessionalExperience experience={experience} />
-            <TechnicalCapabilities />
-            <EngineeringLabPreview articles={articles} />
-            <CurrentFocus />
+            <AboutSummary />
             <ContactCTASection />
         </PageLayout>
     )

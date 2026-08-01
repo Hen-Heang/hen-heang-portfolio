@@ -7,12 +7,12 @@ test.describe("Engineering Lab homepage", () => {
 
         const positions = [
             "Learn backend engineering by building real systems.",
-            "Start here",
-            "Learning paths",
-            "Search the Engineering Lab",
-            "Hands-on practice",
-            "Apply what you learn",
-            "Your progress",
+            'id="continue-learning-heading"',
+            'id="learning-paths-heading"',
+            'id="lab-library-heading"',
+            'id="hands-on-practice-heading"',
+            'id="apply-projects-heading"',
+            'id="progress-summary-heading"',
         ].map((marker) => html.indexOf(marker))
 
         for (const pos of positions) expect(pos).toBeGreaterThan(-1)
@@ -43,10 +43,11 @@ test.describe("Engineering Lab homepage", () => {
 
     test("the Lab nav marks the current section with aria-current", async ({ page }) => {
         await page.goto("/lab")
-        await expect(page.getByRole("link", { name: "Overview", exact: true })).toHaveAttribute("aria-current", "page")
+        const labNav = page.getByRole("navigation", { name: "Engineering Lab sections" })
+        await expect(labNav.getByRole("link", { name: "Overview", exact: true })).toHaveAttribute("aria-current", "page")
 
         await page.goto("/lab/backend")
-        await expect(page.getByRole("link", { name: "Backend", exact: true })).toHaveAttribute("aria-current", "page")
+        await expect(labNav.getByRole("link", { name: "Backend", exact: true })).toHaveAttribute("aria-current", "page")
     })
 })
 

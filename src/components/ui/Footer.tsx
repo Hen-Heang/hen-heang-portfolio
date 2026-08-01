@@ -4,17 +4,21 @@ import {
     BriefcaseBusiness,
     FileText,
     FlaskConical,
-    Github,
-    Linkedin,
     Mail,
     MessageCircle,
     Route,
-    Send,
     UserRound,
 } from "lucide-react"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import Link from "next/link"
-import X from "@/src/components/icons/x"
+import {
+    FacebookIcon,
+    GithubIcon,
+    InstagramIcon,
+    LinkedinIcon,
+    TelegramIcon,
+    XIcon,
+} from "@/src/components/icons/social"
 
 const navLinks = [
     { name: "Work", href: "/projects", icon: BriefcaseBusiness },
@@ -30,15 +34,37 @@ export function Footer() {
     const currentYear = new Date().getFullYear()
 
     const socialLinks = [
-        { href: personalInfo.socialLinks.github, icon: Github, label: "GitHub" },
-        { href: personalInfo.socialLinks.linkedin, icon: Linkedin, label: "LinkedIn" },
-        { href: personalInfo.socialLinks.telegram, icon: Send, label: "Telegram" },
-        { href: personalInfo.socialLinks.x, icon: X, label: "X" },
-    ]
+        {
+            href: personalInfo.socialLinks.github,
+            icon: GithubIcon,
+            label: "GitHub",
+        },
+        {
+            href: personalInfo.socialLinks.linkedin,
+            icon: LinkedinIcon,
+            label: "LinkedIn",
+        },
+        {
+            href: personalInfo.socialLinks.telegram,
+            icon: TelegramIcon,
+            label: "Telegram",
+        },
+        { href: personalInfo.socialLinks.x, icon: XIcon, label: "X" },
+        {
+            href: personalInfo.socialLinks.facebook,
+            icon: FacebookIcon,
+            label: "Facebook",
+        },
+        {
+            href: personalInfo.socialLinks.instagram,
+            icon: InstagramIcon,
+            label: "Instagram",
+        },
+    ].filter((social) => Boolean(social.href))
 
     return (
         <footer className="border-t border-border bg-surface">
-            <div className="mx-auto max-w-content px-6 py-16">
+            <div className="mx-auto max-w-content px-4 py-16 sm:px-6">
                 <div className="grid gap-12 md:grid-cols-12">
                     <div className="md:col-span-6">
                         <Link
@@ -48,12 +74,13 @@ export function Footer() {
                             HH<span className="text-brand">.</span>
                         </Link>
                         <p className="mt-4 max-w-sm text-sm leading-relaxed text-fg-secondary">
-                            {personalInfo.fullName} — backend engineer building enterprise systems
-                            with Java and Spring Boot in {personalInfo.location}.
+                            {personalInfo.fullName} — backend engineer building
+                            enterprise systems with Java and Spring Boot in{" "}
+                            {personalInfo.location}.
                         </p>
                     </div>
 
-                    <div className="min-w-0 md:col-span-3">
+                    <div className="min-w-0 md:col-span-6">
                         <h2 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-fg-muted">
                             Site
                         </h2>
@@ -72,47 +99,50 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    <div className="min-w-0 md:col-span-3">
-                        <h2 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-fg-muted">
-                            Connect
-                        </h2>
-                        <ul className="mt-4 space-y-3">
-                            {socialLinks.map((social) => (
-                                <li key={social.label}>
-                                    <a
-                                        href={social.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
-                                    >
-                                        <social.icon size={15} aria-hidden />
-                                        {social.label}
-                                    </a>
-                                </li>
-                            ))}
-                            <li>
-                                <a
-                                    href={`mailto:${personalInfo.email}`}
-                                    className="inline-flex min-w-0 items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
-                                >
-                                    <Mail size={15} className="shrink-0" aria-hidden />
-                                    <span className="min-w-0 break-all">{personalInfo.email}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
 
-                <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 sm:flex-row sm:items-center">
+                <ul
+                    aria-label="Social profiles"
+                    className="mt-14 flex flex-wrap items-center justify-center gap-2 border-t border-border pt-8 sm:gap-3"
+                >
+                    {socialLinks.map((social) => (
+                        <li key={social.label}>
+                            <a
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={social.label}
+                                className="flex h-11 w-11 items-center justify-center rounded-full border border-border transition-colors hover:border-border-strong hover:bg-surface-hover"
+                            >
+                                <social.icon size={20} />
+                                <span className="sr-only">{social.label}</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className="mt-8 flex flex-col items-start gap-3 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-xs text-fg-muted">
-                        © {currentYear} {personalInfo.fullName} · {personalInfo.location} (GMT+9)
+                        © {currentYear} {personalInfo.fullName} ·{" "}
+                        {personalInfo.location} (GMT+9)
                     </p>
-                    <Link
-                        href="/admin"
-                        className="text-xs text-fg-muted transition-colors hover:text-fg"
-                    >
-                        Admin
-                    </Link>
+                    <div className="flex min-w-0 max-w-full items-center gap-4">
+                        <a
+                            href={`mailto:${personalInfo.email}`}
+                            className="inline-flex min-w-0 items-center gap-1.5 text-xs text-fg-muted transition-colors hover:text-fg"
+                        >
+                            <Mail size={13} className="shrink-0" aria-hidden />
+                            <span className="min-w-0 truncate">
+                                {personalInfo.email}
+                            </span>
+                        </a>
+                        <Link
+                            href="/admin"
+                            className="shrink-0 text-xs text-fg-muted transition-colors hover:text-fg"
+                        >
+                            Admin
+                        </Link>
+                    </div>
                 </div>
             </div>
         </footer>

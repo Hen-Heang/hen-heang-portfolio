@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test"
 test.describe("Backend Engineering curriculum", () => {
     test("loads every requested backend route with its expected primary heading", async ({ page }) => {
         const routes = [
-            ["/lab", "Engineering Lab"],
+            ["/lab", "Learn backend engineering by building real systems."],
             ["/lab/backend", "From fundamentals to production systems"],
             ["/lab/backend/roadmap", "Backend Engineering Roadmap"],
             ["/lab/backend/java-backend-fundamentals", "Java Backend Fundamentals"],
@@ -66,7 +66,11 @@ test.describe("Backend Engineering curriculum", () => {
         await page.getByRole("link", { name: "Backend Engineering" }).first().click()
         const search = page.getByRole("textbox", { name: "Search backend curriculum" })
         await search.fill("Spring Boot layered architecture")
-        await page.getByRole("link", { name: /Layered Spring Boot Architecture/ }).click()
+        await expect(page).toHaveURL((url) => url.searchParams.get("q") === "Spring Boot layered architecture")
+        await Promise.all([
+            page.waitForURL(/\/lab\/backend\/spring-boot-layered-architecture$/),
+            page.getByRole("link", { name: /Layered Spring Boot Architecture/ }).click(),
+        ])
         await expect(page.getByRole("heading", { name: "Layered Spring Boot Architecture", level: 1 })).toBeVisible()
 
         await page.getByRole("link", { name: "Backend Engineering" }).first().click()
@@ -98,11 +102,15 @@ test.describe("Backend Engineering curriculum", () => {
 
         await page.goto("/lab/backend")
         const search = page.getByRole("textbox", { name: "Search backend curriculum" })
+        const catalog = page.locator("#catalog")
+        const resultCount = catalog.locator("[aria-live=polite]")
+        const initialResultCount = await resultCount.textContent()
+        expect(initialResultCount).toMatch(/^\d+ items?$/)
         await search.fill("definitely-no-backend-result")
         await expect(page.getByText("No matching backend content")).toBeVisible()
         await page.getByRole("button", { name: "Clear filters" }).click()
         await expect(search).toHaveValue("")
-        await expect(page.getByText("40 items")).toBeVisible()
+        await expect(resultCount).toHaveText(initialResultCount!)
     })
 
     test("persists local progress and supports previous/next navigation", async ({ page }) => {
@@ -132,7 +140,7 @@ test.describe("Backend Engineering curriculum", () => {
         const drawer = page.getByRole("dialog", { name: "Engineering Lab navigation" })
         await expect(drawer).toBeVisible()
         await expect(drawer.getByRole("navigation", { name: "Lab sections" })).toBeVisible()
-        await expect(drawer.getByRole("link", { name: "Roadmap & Library" })).toHaveAttribute("aria-current", "page")
+        await expect(drawer.getByRole("link", { name: "Backend Path" })).toHaveAttribute("aria-current", "page")
 
         // Background content (including the header trigger) is aria-hidden and
         // cannot be interacted with while the modal drawer is open.
