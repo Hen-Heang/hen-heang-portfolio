@@ -1,12 +1,14 @@
-import type { UIMessage } from "ai"
+import type { PortfolioAssistantMeta, PortfolioUIMessage } from "@/src/lib/ai/response-schema"
 
 /**
  * Local persistence for the AI assistant conversation.
  *
  * History lives only in the visitor's browser (localStorage) — nothing is
- * stored server-side. Only plain text parts are persisted; anything else is
+ * stored server-side. Only plain text parts are persisted; anything else
+ * (including the `data-portfolio` evidence/skills/suggestions part) is
  * dropped on save and on load, so a tampered localStorage entry can never
- * inject rich payloads back into the chat.
+ * inject rich payloads back into the chat, and evidence links can never go
+ * stale across a portfolio content update.
  *
  * The assistant panel only mounts client-side (after a click on the
  * launcher), so `loadAssistantHistory` is safe to call in a useState
@@ -17,11 +19,17 @@ const STORAGE_KEY = "hh-assistant-history-v1"
 // always be submitted without immediately failing server-side validation.
 const MAX_STORED_MESSAGES = 20
 
-export function messageText(message: UIMessage): string {
+export function messageText(message: PortfolioUIMessage): string {
     return message.parts
         .filter((part): part is { type: "text"; text: string } => part.type === "text")
         .map((part) => part.text)
         .join("")
+}
+
+/** The structured evidence/skills/suggestions attached to an assistant message, if any. */
+export function messagePortfolioMeta(message: PortfolioUIMessage): PortfolioAssistantMeta | undefined {
+    const part = message.parts.find((p): p is { type: "data-portfolio"; data: PortfolioAssistantMeta } => p.type === "data-portfolio")
+    return part?.data
 }
 
 interface StoredMessage {
@@ -29,7 +37,7 @@ interface StoredMessage {
     text: string
 }
 
-export function loadAssistantHistory(): UIMessage[] {
+export function loadAssistantHistory(): PortfolioUIMessage[] {
     if (typeof window === "undefined") return []
     try {
         const raw = window.localStorage.getItem(STORAGE_KEY)
@@ -54,11 +62,11 @@ export function loadAssistantHistory(): UIMessage[] {
     }
 }
 
-export function saveAssistantHistory(messages: UIMessage[]): void {
+export function saveAssistantHistory(messages: PortfolioUIMessage[]): void {
     if (typeof window === "undefined") return
     try {
         const stored: StoredMessage[] = messages
-            .filter((m): m is UIMessage & { role: "user" | "assistant" } => m.role === "user" || m.role === "assistant")
+            .filter((m): m is PortfolioUIMessage & { role: "user" | "assistant" } => m.role === "user" || m.role === "assistant")
             .map((m) => ({ role: m.role, text: messageText(m) }))
             .filter((m) => m.text.length > 0)
             .slice(-MAX_STORED_MESSAGES)

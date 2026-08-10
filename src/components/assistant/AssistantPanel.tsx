@@ -10,6 +10,7 @@ import { StarterChips } from "./StarterChips"
 import { TypingIndicator } from "./TypingIndicator"
 import { clearAssistantHistory, loadAssistantHistory, saveAssistantHistory } from "./history"
 import type { PageContext } from "@/src/lib/ai/page-context"
+import type { PortfolioUIMessage } from "@/src/lib/ai/response-schema"
 
 const MAX_INPUT_CHARS = 1_000
 /** How close to the bottom (px) the user must be for auto-scroll to engage. */
@@ -54,8 +55,8 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
     // The panel only mounts after a click, so localStorage is available.
     const [initialMessages] = useState(loadAssistantHistory)
 
-    const { messages, sendMessage, regenerate, status, stop, error, clearError, setMessages } = useChat({
-        transport: new DefaultChatTransport({
+    const { messages, sendMessage, regenerate, status, stop, error, clearError, setMessages } = useChat<PortfolioUIMessage>({
+        transport: new DefaultChatTransport<PortfolioUIMessage>({
             api: "/api/chat",
             prepareSendMessagesRequest: ({ messages: reqMessages, trigger }) => ({
                 body: {
@@ -213,6 +214,9 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                             message.role === "assistant" && index === messages.length - 1
                                 ? (vote) => sendFeedback(vote, page)
                                 : undefined
+                        }
+                        onSuggestedQuestion={
+                            !isBusy && index === messages.length - 1 ? submit : undefined
                         }
                     />
                 ))}

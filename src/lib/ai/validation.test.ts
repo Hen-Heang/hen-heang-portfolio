@@ -43,6 +43,30 @@ describe("validateChatBody", () => {
         expect(validateChatBody({ messages }).ok).toBe(false)
     })
 
+    it("does not reject a follow-up turn just because a past assistant reply is long — only the visitor's own input is capped", () => {
+        const body = {
+            messages: [
+                userMessage("Tell me about the H-Phsar project", "1"),
+                { id: "2", role: "assistant", parts: [{ type: "text", text: "y".repeat(1500) }] },
+                userMessage("What was his role in H-Phsar?", "3"),
+            ],
+        }
+        const result = validateChatBody(body)
+        expect(result.ok).toBe(true)
+        expect(result.userTexts).toEqual(["Tell me about the H-Phsar project", "What was his role in H-Phsar?"])
+    })
+
+    it("still rejects an oversized user message even when it's a follow-up, not the first turn", () => {
+        const body = {
+            messages: [
+                userMessage("hi", "1"),
+                { id: "2", role: "assistant", parts: [{ type: "text", text: "hello" }] },
+                userMessage("x".repeat(1001), "3"),
+            ],
+        }
+        expect(validateChatBody(body).ok).toBe(false)
+    })
+
     it("strips control characters and ignores non-text parts", () => {
         const body = {
             messages: [
