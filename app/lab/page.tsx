@@ -22,8 +22,7 @@ export const revalidate = 60
 
 export const metadata: Metadata = {
     title: "Engineering Lab",
-    description:
-        "Exploring backend systems, architecture, AI engineering, and modern software development practices — how I design, build, test, and operate software.",
+    description: "Exploring backend systems, architecture, AI engineering, and modern software development practices — how I design, build, test, and operate software.",
     alternates: { canonical: `${profileData.portfolioUrl}/lab` },
     openGraph: {
         title: "Engineering Lab | Hen Heang",
@@ -48,6 +47,8 @@ export default async function EngineeringLabPage() {
             slug: p.slug,
             title: p.title,
             description: p.description,
+            image: p.slug === "h-phsar" ? "/image/h-phsar-preview.svg" : p.image,
+            imageFit: p.slug === "h-phsar" ? "cover" : p.imageFit,
             conceptsDemonstrated: p.engineeringFocus ?? [],
             category: p.category,
             technologies: p.technologies.slice(0, 3),
