@@ -23,15 +23,27 @@ test.describe("Engineering Lab homepage", () => {
 
     test("shows the Backend path as recommended and links to the roadmap", async ({ page }) => {
         await page.goto("/lab")
-        const backendCard = page.locator("article", { hasText: "Backend Engineering" })
+        const backendCard = page.locator("article", {
+            hasText: "Backend Engineering",
+        })
         await expect(backendCard.getByText("Recommended")).toBeVisible()
+    })
+
+    test("uses visual stack markers and real project previews", async ({ page }) => {
+        await page.goto("/lab")
+        await expect(page.getByLabel("Backend engineering learning stack")).toBeVisible()
+        await expect(page.getByText("Postgres", { exact: true })).toBeVisible()
+        await expect(page.getByRole("img", { name: /H-Phsar.*project preview/ })).toBeVisible()
+        await expect(page.getByRole("img", { name: /Hengo.*project preview/ })).toBeVisible()
     })
 
     test("search stays interactive and swaps only the library preview section", async ({ page }) => {
         await page.goto("/lab")
         await expect(page.getByRole("link", { name: "Backend curriculum" })).toBeVisible()
 
-        const search = page.getByRole("textbox", { name: "Search Engineering Lab" })
+        const search = page.getByRole("textbox", {
+            name: "Search Engineering Lab",
+        })
         await search.fill("docker")
         await expect(page.getByRole("link", { name: "Backend curriculum" })).toHaveCount(0)
         await expect(page.getByText(/\d+ results?$/)).toBeVisible()
@@ -43,7 +55,9 @@ test.describe("Engineering Lab homepage", () => {
 
     test("the Lab nav marks the current section with aria-current", async ({ page }) => {
         await page.goto("/lab")
-        const labNav = page.getByRole("navigation", { name: "Engineering Lab sections" })
+        const labNav = page.getByRole("navigation", {
+            name: "Engineering Lab sections",
+        })
         await expect(labNav.getByRole("link", { name: "Overview", exact: true })).toHaveAttribute("aria-current", "page")
 
         await page.goto("/lab/backend")
@@ -54,12 +68,18 @@ test.describe("Engineering Lab homepage", () => {
 test.describe("Engineering Lab library", () => {
     test("persists the query in the URL and survives a refresh", async ({ page }) => {
         await page.goto("/lab/library")
-        const search = page.getByRole("textbox", { name: "Search the Engineering Lab library" })
+        const search = page.getByRole("textbox", {
+            name: "Search the Engineering Lab library",
+        })
         await search.fill("spring")
         await expect(page).toHaveURL(/[?&]q=spring/)
 
         await page.reload()
-        await expect(page.getByRole("textbox", { name: "Search the Engineering Lab library" })).toHaveValue("spring")
+        await expect(
+            page.getByRole("textbox", {
+                name: "Search the Engineering Lab library",
+            }),
+        ).toHaveValue("spring")
     })
 
     test("filters by content type via the tab buttons", async ({ page }) => {
