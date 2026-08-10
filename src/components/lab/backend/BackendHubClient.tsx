@@ -11,6 +11,7 @@ import { LabNav } from "@/src/components/lab/ui/LabNav"
 import { LabPathHeader } from "@/src/components/lab/ui/LabPathHeader"
 import { LabProgressSummary } from "@/src/components/lab/ui/LabProgressSummary"
 import { LabPrimaryActions } from "@/src/components/lab/ui/LabPrimaryActions"
+import { Reveal } from "@/src/components/system/Reveal"
 
 const categoryLabel: Record<string, string> = {
     foundations: "Foundations", java: "Java", http: "Web & HTTP", database: "Database", spring: "Spring Boot",
@@ -134,7 +135,11 @@ export function BackendHubClient({ items, roadmapLevelCount }: { items: BackendI
 
                 {results.length > 0 ? (
                     <div className="mt-5 grid gap-4 md:grid-cols-2" onClickCapture={cancelPendingQuerySync}>
-                        {results.map((item) => <BackendCard key={item.id} item={item} complete={progress.has(item.id)} />)}
+                        {results.map((item, i) => (
+                            <Reveal key={item.id} delay={Math.min(i, 8) * 0.03}>
+                                <BackendCard item={item} complete={progress.has(item.id)} />
+                            </Reveal>
+                        ))}
                     </div>
                 ) : (
                     <div className="mt-5 rounded-2xl border border-dashed border-border py-16 text-center">

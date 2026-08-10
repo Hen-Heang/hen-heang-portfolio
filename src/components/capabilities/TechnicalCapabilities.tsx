@@ -2,7 +2,7 @@ import React from "react"
 import { Section } from "@/src/components/system/Section"
 import { CapabilityColumns } from "@/src/components/capabilities/CapabilityColumns"
 import { aiStatement } from "@/src/lib/content/capabilities"
-import { skills } from "@/data/skills"
+import { buildCapabilityEvidence } from "@/src/lib/content/capability-evidence"
 import type { ExperienceItem, Project } from "@/src/lib/types"
 
 /**
@@ -10,8 +10,9 @@ import type { ExperienceItem, Project } from "@/src/lib/types"
  * homepage and /about so the two pages can never drift apart — `variant`
  * only changes the surrounding band, never the content.
  *
- * The public carousel uses the complete 27-item static catalog so its count
- * and icon set stay deterministic on both the homepage and About page.
+ * The public view uses the curated capability model and links it back to real
+ * project/experience evidence. The complete catalog remains available to the
+ * admin and assistant knowledge layers.
  */
 export function TechnicalCapabilities({
     projects,
@@ -23,19 +24,18 @@ export function TechnicalCapabilities({
     experience: ExperienceItem[]
     variant?: "default" | "surface"
 }) {
-    void projects
-    void experience
+    const groups = buildCapabilityEvidence(projects, experience)
 
     return (
         <Section
             id="capabilities"
             eyebrow="Technical Skills"
-            title="All technologies"
-            description="27 skills across 4 categories, shown as a compact icon-only carousel. Hover or focus an icon to see its technology name."
+            title="Engineering stack"
+            description="Core technologies grouped by the work they support. Project-specific tools stay with the case studies where they were used."
             className={variant === "surface" ? "bg-surface" : undefined}
             revealHeader
         >
-            <CapabilityColumns categories={skills} aiStatement={aiStatement} />
+            <CapabilityColumns groups={groups} aiStatement={aiStatement} />
         </Section>
     )
 }

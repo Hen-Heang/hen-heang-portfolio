@@ -14,10 +14,13 @@ import type { Project } from "@/src/lib/types"
  */
 export function ProjectCard({ project }: { project: Project }) {
     const isLive = Boolean(project.demo && project.demo !== "#")
-    const metadata = [
-        project.category,
-        isLive ? "Live" : "Source available",
-    ].filter(Boolean)
+    const availability = project.confidential
+        ? { label: "Private", dot: "bg-warning" }
+        : isLive
+          ? { label: "Live", dot: "bg-success" }
+          : project.github
+            ? { label: "Source", dot: "bg-brand" }
+            : { label: "Case study", dot: "bg-fg-muted" }
 
     return (
         <div
@@ -49,11 +52,22 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
 
             <div className="flex flex-1 flex-col p-5">
-                {metadata.length > 0 && (
-                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-muted">
-                        {metadata.join(" · ")}
-                    </p>
-                )}
+                <div className="flex items-center justify-between gap-3">
+                    {project.category ? (
+                        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-muted">
+                            {project.category}
+                        </p>
+                    ) : (
+                        <span aria-hidden="true" />
+                    )}
+                    <span className="inline-flex shrink-0 items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-wider text-fg-muted">
+                        <span
+                            className={`h-1.5 w-1.5 rounded-full ${availability.dot}`}
+                            aria-hidden="true"
+                        />
+                        {availability.label}
+                    </span>
+                </div>
 
                 <h3 className="mt-3 text-lg font-semibold tracking-tight text-fg">
                     <Link
@@ -71,15 +85,26 @@ export function ProjectCard({ project }: { project: Project }) {
 
                 {project.role && (
                     <p className="mt-3 text-xs text-fg-muted">
-                        Role: {project.role}
+                        <span className="font-mono uppercase tracking-wider">
+                            Role
+                        </span>
+                        {" · "}
+                        {project.role}
                     </p>
                 )}
 
                 {project.engineeringFocus &&
                     project.engineeringFocus.length > 0 && (
-                        <p className="mt-2 text-xs text-fg-muted">
-                            {project.engineeringFocus.slice(0, 3).join(" · ")}
-                        </p>
+                        <div className="mt-3">
+                            <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
+                                Engineering focus
+                            </p>
+                            <p className="mt-1 line-clamp-2 text-xs leading-5 text-fg-secondary">
+                                {project.engineeringFocus
+                                    .slice(0, 3)
+                                    .join(" · ")}
+                            </p>
+                        </div>
                     )}
 
                 <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand transition-colors group-hover:text-brand-hover">
@@ -113,24 +138,26 @@ export function ProjectCard({ project }: { project: Project }) {
                     </p>
                 )}
 
-                {project.github && (
+                {(project.github || isLive) && (
                     <div className="relative z-10 mt-4 flex items-center gap-4 border-t border-border pt-4">
-                        <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
-                            aria-label={`View ${project.title} on GitHub (opens in a new tab)`}
-                        >
-                            <GithubIcon size={14} brand={false} />
-                            GitHub
-                        </a>
+                        {project.github && (
+                            <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                                aria-label={`View ${project.title} on GitHub (opens in a new tab)`}
+                            >
+                                <GithubIcon size={14} brand={false} />
+                                GitHub
+                            </a>
+                        )}
                         {isLive && (
                             <a
                                 href={project.demo}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                                className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
                                 aria-label={`Open ${project.title} live site (opens in a new tab)`}
                             >
                                 Live site

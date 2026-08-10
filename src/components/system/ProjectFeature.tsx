@@ -35,6 +35,13 @@ export function ProjectFeature({
     homepage = false,
 }: ProjectFeatureProps) {
     const isLive = Boolean(project.demo && project.demo !== "#")
+    const availabilityLabel = project.confidential
+        ? "Private"
+        : isLive
+          ? "Live"
+          : project.github
+            ? "Source"
+            : "Case study"
     const shortTitle = project.title.split("—")[0].trim()
     const preview: ProjectPreview =
         homepage && project.architecture?.length
@@ -49,14 +56,13 @@ export function ProjectFeature({
     const metadata = [
         project.category,
         project.ownership,
-        isLive ? "Live" : "Source available",
+        availabilityLabel,
     ].filter(Boolean)
 
     if (homepage) {
-        const homepageMetadata = [
-            project.category,
-            isLive ? "Live" : "Source available",
-        ].filter(Boolean)
+        const homepageMetadata = [project.category, availabilityLabel].filter(
+            Boolean,
+        )
 
         return (
             <article className="group grid items-start gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
@@ -248,7 +254,7 @@ export function ProjectFeature({
                     className="mt-5 flex flex-wrap gap-2"
                     aria-label={`${shortTitle} technologies`}
                 >
-                    {project.technologies.slice(0, 6).map((tech) => (
+                    {project.technologies.slice(0, 5).map((tech) => (
                         <li
                             key={tech}
                             className="rounded-md border border-border bg-surface px-2.5 py-1 font-mono text-xs text-fg-secondary"
@@ -274,7 +280,7 @@ export function ProjectFeature({
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                             aria-label={`View ${shortTitle} on GitHub (opens in a new tab)`}
                         >
                             <GithubIcon size={15} brand={false} />
@@ -287,7 +293,7 @@ export function ProjectFeature({
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                             aria-label={`Open ${shortTitle} live site (opens in a new tab)`}
                         >
                             Live site

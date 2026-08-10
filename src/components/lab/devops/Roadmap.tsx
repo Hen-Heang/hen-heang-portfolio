@@ -3,9 +3,11 @@
 import { useMemo, useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "motion/react"
-import { Check, Clock, ArrowRight } from "lucide-react"
+import { Check, Clock } from "lucide-react"
 import type { RoadmapTopic, LabDifficulty } from "@/src/lib/types/devops-lab"
 import { toggleDevOpsProgress, useDevOpsProgress } from "@/src/components/lab/devops/DevOpsProgress"
+import { HoverArrow } from "@/src/components/lab/ui/HoverArrow"
+import { interactiveCard, cn } from "@/src/lib/utils/utils"
 
 const TABS: LabDifficulty[] = ["beginner", "intermediate", "advanced"]
 
@@ -88,7 +90,7 @@ export function Roadmap({ topics }: { topics: RoadmapTopic[] }) {
                                         {topic.estimatedTime}
                                     </span>
                                     {topic.hasCard ? (
-                                        <ArrowRight size={13} className="text-border-strong group-hover:text-brand group-hover:translate-x-1 transition-all" />
+                                        <HoverArrow size={13} className="text-border-strong" />
                                     ) : (
                                         <span className="text-[11px] font-semibold uppercase tracking-wider text-fg-muted">Planned</span>
                                     )}
@@ -108,7 +110,7 @@ export function Roadmap({ topics }: { topics: RoadmapTopic[] }) {
                                 {topic.hasCard ? (
                                     <Link
                                         href={`/lab/devops/topics/${topic.slug}`}
-                                        className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-4 transition-all hover:border-border-strong hover:-translate-y-0.5"
+                                        className={cn("group flex h-full flex-col rounded-2xl border border-border bg-surface p-4", interactiveCard)}
                                     >
                                         {content}
                                     </Link>

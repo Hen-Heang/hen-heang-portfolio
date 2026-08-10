@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Terminal, FlaskConical, BookOpen, ArrowRight, PlayCircle } from "lucide-react"
+import { Terminal, FlaskConical, BookOpen, PlayCircle } from "lucide-react"
 import type { RoadmapTopic } from "@/src/lib/types/devops-lab"
 import { Roadmap } from "@/src/components/lab/devops/Roadmap"
 import { DiagramViewer } from "@/src/components/lab/devops/DiagramViewer"
@@ -11,6 +11,9 @@ import { LabNav } from "@/src/components/lab/ui/LabNav"
 import { LabPathHeader } from "@/src/components/lab/ui/LabPathHeader"
 import { LabProgressSummary } from "@/src/components/lab/ui/LabProgressSummary"
 import { LabPrimaryActions } from "@/src/components/lab/ui/LabPrimaryActions"
+import { HoverArrow } from "@/src/components/lab/ui/HoverArrow"
+import { Reveal } from "@/src/components/system/Reveal"
+import { interactiveCard, cn } from "@/src/lib/utils/utils"
 
 const quickLinks = [
     { href: "/lab/devops/labs", icon: FlaskConical, title: "Hands-on Labs", description: "Dockerize an app, wire up Nginx, ship a CI/CD pipeline" },
@@ -43,18 +46,24 @@ export function DevOpsLabHubClient({ topics }: { topics: RoadmapTopic[] }) {
             </LabPathHeader>
 
             <div className="mb-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {quickLinks.map((link) => (
-                    <Link
-                        key={link.href}
-                        href={link.href}
-                        className="group flex flex-col gap-2 rounded-2xl border border-border bg-surface px-5 py-4 transition-colors hover:border-border-strong"
-                    >
-                        <link.icon size={18} className="text-success" aria-hidden="true" />
-                        <div>
-                            <p className="text-base font-semibold text-fg">{link.title}</p>
-                            <p className="text-sm text-fg-muted">{link.description}</p>
-                        </div>
-                    </Link>
+                {quickLinks.map((link, i) => (
+                    <Reveal key={link.href} delay={i * 0.05}>
+                        <Link
+                            href={link.href}
+                            className={cn("group flex h-full flex-col gap-3 rounded-2xl border border-border bg-surface px-5 py-4", interactiveCard)}
+                        >
+                            <div className="flex items-start justify-between gap-2">
+                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-success/10 text-success transition-transform duration-200 group-hover:scale-110 motion-reduce:group-hover:scale-100">
+                                    <link.icon size={16} aria-hidden="true" />
+                                </span>
+                                <HoverArrow className="mt-1" />
+                            </div>
+                            <div>
+                                <p className="text-base font-semibold text-fg">{link.title}</p>
+                                <p className="text-sm text-fg-muted">{link.description}</p>
+                            </div>
+                        </Link>
+                    </Reveal>
                 ))}
             </div>
 
@@ -74,12 +83,12 @@ export function DevOpsLabHubClient({ topics }: { topics: RoadmapTopic[] }) {
 
             <Link
                 href="/lab/library"
-                className="group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 transition-colors hover:border-border-strong"
+                className={cn("group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4", interactiveCard)}
             >
                 <span className="text-base font-medium text-fg-secondary group-hover:text-fg">
                     Search across the whole Engineering Lab library
                 </span>
-                <ArrowRight size={13} aria-hidden="true" className="text-border-strong transition-all group-hover:translate-x-1 group-hover:text-brand" />
+                <HoverArrow />
             </Link>
         </div>
     )

@@ -1,172 +1,178 @@
-"use client"
+import Link from "next/link"
+import {
+    Bot,
+    Braces,
+    Database,
+    GitBranch,
+    PanelsTopLeft,
+    type LucideIcon,
+} from "lucide-react"
+import { Reveal } from "@/src/components/system/Reveal"
+import type { EnrichedCapabilityGroup } from "@/src/lib/content/capability-evidence"
 
-import { createElement, useEffect, useMemo, useRef, useState } from "react"
-import { Pause, Play } from "lucide-react"
-import { animate } from "motion/react"
-import { CodeIcon, TechIcons } from "@/src/components/icons/TechIcons"
-import type { SkillCategory } from "@/src/lib/types"
+interface EvidenceSource {
+    key: string
+    label: string
+    href?: string
+}
 
-function usePrefersReducedMotion() {
-    const [reduced, setReduced] = useState(false)
+const groupVisuals: Record<string, { icon: LucideIcon; accent: string }> = {
+    Backend: { icon: Braces, accent: "bg-brand/10 text-brand" },
+    Data: { icon: Database, accent: "bg-success/10 text-success" },
+    "Frontend Support": {
+        icon: PanelsTopLeft,
+        accent: "bg-warning/10 text-warning",
+    },
+    Delivery: {
+        icon: GitBranch,
+        accent: "bg-surface-elevated text-fg-secondary",
+    },
+}
 
-    useEffect(() => {
-        if (typeof window.matchMedia !== "function") return
-        const query = window.matchMedia("(prefers-reduced-motion: reduce)")
-        const update = () => setReduced(query.matches)
-        update()
-        query.addEventListener("change", update)
-        return () => query.removeEventListener("change", update)
-    }, [])
+function getEvidenceSources(group: EnrichedCapabilityGroup): EvidenceSource[] {
+    const sources = new Map<string, EvidenceSource>()
 
-    return reduced
+    for (const technology of group.technologies) {
+        for (const project of technology.projects) {
+            sources.set(`project:${project.slug}`, {
+                key: `project:${project.slug}`,
+                label: project.shortTitle,
+                href: `/projects/${project.slug}`,
+            })
+        }
+        for (const role of technology.roles) {
+            sources.set(`role:${role.company}`, {
+                key: `role:${role.company}`,
+                label: role.company,
+            })
+        }
+    }
+
+    return Array.from(sources.values()).slice(0, 3)
 }
 
 export function CapabilityColumns({
-    categories,
+    groups,
     aiStatement,
 }: {
-    categories: SkillCategory[]
+    groups: EnrichedCapabilityGroup[]
     aiStatement: string
 }) {
-    const [autoPlay, setAutoPlay] = useState(true)
-    const [interacting, setInteracting] = useState(false)
-    const trackRef = useRef<HTMLDivElement>(null)
-    const directionRef = useRef<1 | -1>(1)
-    const reducedMotion = usePrefersReducedMotion()
-
-    const technologies = useMemo(
-        () =>
-            categories.flatMap((category) =>
-                category.items.map((technology) => ({
-                    ...technology,
-                    category: category.category,
-                    icon: TechIcons[technology.name] ?? CodeIcon,
-                })),
-            ),
-        [categories],
-    )
-
-    useEffect(() => {
-        const track = trackRef.current
-        if (!track || !autoPlay || interacting || reducedMotion) return
-
-        const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth)
-        if (maxScroll === 0) return
-
-        let stopped = false
-        let controls: ReturnType<typeof animate> | undefined
-
-        const move = (direction: 1 | -1) => {
-            directionRef.current = direction
-            const target = direction === 1 ? maxScroll : 0
-            const distance = Math.abs(target - track.scrollLeft)
-
-            if (distance < 1) {
-                move(direction === 1 ? -1 : 1)
-                return
-            }
-
-            controls = animate(track.scrollLeft, target, {
-                duration: Math.max(distance / 40, 0.1),
-                ease: "linear",
-                onUpdate: (value) => {
-                    track.scrollLeft = value
-                },
-                onComplete: () => {
-                    if (!stopped) move(direction === 1 ? -1 : 1)
-                },
-            })
-        }
-
-        move(directionRef.current)
-        return () => {
-            stopped = true
-            controls?.stop()
-        }
-    }, [autoPlay, interacting, reducedMotion])
-
-    if (technologies.length === 0) return null
+    if (groups.length === 0) return null
 
     return (
         <div>
-            <div className="mb-5 flex items-end justify-between gap-4">
-                <div>
-                    <p className="text-sm text-fg-muted">
-                        {technologies.length} skills across {categories.length}{" "}
-                        categories
-                    </p>
-                    <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-fg-muted">
-                        Auto-scroll · Motion
-                    </p>
-                </div>
-                <button
-                    type="button"
-                    onClick={() => setAutoPlay((current) => !current)}
-                    disabled={reducedMotion}
-                    aria-label={
-                        autoPlay
-                            ? "Pause automatic technology scrolling"
-                            : "Start automatic technology scrolling"
-                    }
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-fg transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/70 disabled:cursor-not-allowed disabled:opacity-35"
-                >
-                    {autoPlay ? (
-                        <Pause size={16} aria-hidden />
-                    ) : (
-                        <Play size={16} aria-hidden />
-                    )}
-                </button>
-            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+                {groups.map((group, index) => {
+                    const visual =
+                        groupVisuals[group.label] ?? groupVisuals.Backend
+                    const Icon = visual.icon
+                    const evidenceSources = getEvidenceSources(group)
 
-            <div
-                ref={trackRef}
-                role="region"
-                aria-roledescription="carousel"
-                aria-label="All technology icons"
-                onMouseEnter={() => setInteracting(true)}
-                onMouseLeave={() => setInteracting(false)}
-                onPointerDown={() => setInteracting(true)}
-                onPointerUp={() => setInteracting(false)}
-                onPointerCancel={() => setInteracting(false)}
-                onFocusCapture={() => setInteracting(true)}
-                onBlurCapture={(event) => {
-                    if (!event.currentTarget.contains(event.relatedTarget)) {
-                        setInteracting(false)
-                    }
-                }}
-                className="overflow-x-auto rounded-2xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-                <ul className="flex w-max flex-nowrap gap-3 pb-2">
-                    {technologies.map((technology) => (
-                        <li
-                            key={`${technology.category}-${technology.name}`}
-                            className="shrink-0"
+                    return (
+                        <Reveal
+                            key={group.label}
+                            delay={index * 0.05}
+                            className="h-full"
                         >
-                            <span
-                                role="img"
-                                tabIndex={0}
-                                aria-label={`${technology.name}, ${technology.category}`}
-                                title={`${technology.name} — ${technology.category}`}
-                                className="group flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-2xl border border-border bg-surface p-3 transition-[transform,border-color,background-color] hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/70 motion-reduce:transform-none motion-reduce:transition-none"
-                            >
-                                <span
-                                    className="flex h-11 w-11 items-center justify-center"
-                                    aria-hidden
-                                >
-                                    {createElement(technology.icon)}
-                                </span>
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+                            <article className="flex h-full flex-col rounded-2xl border border-border bg-surface p-5 sm:p-6">
+                                <div className="flex items-start gap-3">
+                                    <span
+                                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${visual.accent}`}
+                                    >
+                                        <Icon size={18} aria-hidden="true" />
+                                    </span>
+                                    <div>
+                                        <h3 className="text-lg font-semibold tracking-tight text-fg">
+                                            {group.label}
+                                        </h3>
+                                        <p className="mt-1 text-sm leading-5 text-fg-secondary">
+                                            {group.summary}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <ul className="mt-5 grid gap-x-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+                                    {group.technologies.map((technology) => (
+                                        <li
+                                            key={technology.name}
+                                            className="flex min-h-10 items-center gap-2 border-t border-border py-2.5 text-sm font-medium text-fg"
+                                        >
+                                            <span
+                                                className="font-mono text-brand"
+                                                aria-hidden="true"
+                                            >
+                                                &gt;
+                                            </span>
+                                            <span>{technology.name}</span>
+                                            {technology.hasEvidence && (
+                                                <span className="sr-only">
+                                                    Verified in project or
+                                                    professional experience data
+                                                </span>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                {evidenceSources.length > 0 && (
+                                    <div className="mt-auto border-t border-border pt-4">
+                                        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-fg-muted">
+                                            <span className="font-mono text-[10px] font-semibold uppercase tracking-wider">
+                                                Used in
+                                            </span>
+                                            {evidenceSources.map(
+                                                (source, sourceIndex) => (
+                                                    <span
+                                                        key={source.key}
+                                                        className="inline-flex items-center gap-1.5"
+                                                    >
+                                                        {sourceIndex > 0 && (
+                                                            <span aria-hidden="true">
+                                                                ·
+                                                            </span>
+                                                        )}
+                                                        {source.href ? (
+                                                            <Link
+                                                                href={
+                                                                    source.href
+                                                                }
+                                                                className="font-medium text-fg-secondary underline-offset-4 hover:text-brand hover:underline"
+                                                            >
+                                                                {source.label}
+                                                            </Link>
+                                                        ) : (
+                                                            <span className="font-medium text-fg-secondary">
+                                                                {source.label}
+                                                            </span>
+                                                        )}
+                                                    </span>
+                                                ),
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                            </article>
+                        </Reveal>
+                    )
+                })}
             </div>
 
-            <p className="mt-8 border-t border-border pt-6 text-sm leading-relaxed text-fg-secondary">
-                <span className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
-                    AI
-                </span>
-                <span className="mt-2 block">{aiStatement}</span>
-            </p>
+            <Reveal delay={0.1}>
+                <aside className="mt-4 flex items-start gap-3 rounded-2xl border border-brand/20 bg-brand/[0.03] p-5 sm:p-6">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                        <Bot size={18} aria-hidden="true" />
+                    </span>
+                    <div>
+                        <h3 className="text-base font-semibold text-fg">
+                            AI Engineering
+                        </h3>
+                        <p className="mt-1 max-w-3xl text-sm leading-6 text-fg-secondary">
+                            {aiStatement}
+                        </p>
+                    </div>
+                </aside>
+            </Reveal>
         </div>
     )
 }

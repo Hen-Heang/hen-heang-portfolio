@@ -1,3 +1,6 @@
+"use client"
+
+import { motion } from "motion/react"
 import type { LabAccent } from "./LabPathHeader"
 
 const accentBar: Record<LabAccent, string> = { brand: "bg-brand", success: "bg-success", warning: "bg-warning" }
@@ -23,7 +26,12 @@ export function LabProgressSummary({
                 <span>{completed}/{total} · {percent}%</span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-surface-elevated">
-                <div className={`h-full rounded-full ${accentBar[accent]} transition-[width]`} style={{ width: `${percent}%` }} />
+                <motion.div
+                    className={`h-full rounded-full ${accentBar[accent]}`}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${percent}%` }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+                />
             </div>
         </div>
     )

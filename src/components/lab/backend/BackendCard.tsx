@@ -1,6 +1,8 @@
 import Link from "next/link"
-import { ArrowRight, Check, Clock3, LockKeyhole } from "lucide-react"
+import { Check, Clock3, LockKeyhole } from "lucide-react"
 import type { BackendItemSummary } from "@/src/lib/types/backend-engineering"
+import { HoverArrow } from "@/src/components/lab/ui/HoverArrow"
+import { interactiveCard, cn } from "@/src/lib/utils/utils"
 
 const categoryLabels: Record<string, string> = {
     foundations: "Foundations",
@@ -36,7 +38,7 @@ export function BackendCard({ item, complete = false }: { item: BackendItemSumma
                         <Check size={10} aria-hidden="true" /> complete
                     </span>
                 ) : (
-                    <ArrowRight size={15} aria-hidden="true" className="text-fg-muted transition-transform group-hover:translate-x-1 group-hover:text-brand" />
+                    <HoverArrow size={15} />
                 )}
             </div>
             <h3 className="mt-3 text-xl font-semibold text-fg">{item.title}</h3>
@@ -61,7 +63,7 @@ export function BackendCard({ item, complete = false }: { item: BackendItemSumma
     }
 
     return (
-        <Link href={`/lab/backend/${item.slug}`} className="group rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-border-strong">
+        <Link href={`/lab/backend/${item.slug}`} className={cn("group rounded-2xl border border-border bg-surface p-5", interactiveCard)}>
             {body}
         </Link>
     )
