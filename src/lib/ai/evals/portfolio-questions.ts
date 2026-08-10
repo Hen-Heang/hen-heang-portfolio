@@ -74,6 +74,16 @@ export const portfolioEvalCases: PortfolioEvalCase[] = [
     { id: "skills-spring-boot", category: "skills", question: "Does he use Spring Boot?", expectedSectionIds: ["skills-primary-stack", "skills-detail-backend"], requiredFacts: ["Spring Boot"], language: "en" },
     { id: "database-which", category: "database", question: "Which databases has he used?", expectedSectionIds: ["skills-primary-stack", "skills-detail-database"], requiredFacts: ["PostgreSQL", "Oracle"], language: "en" },
     { id: "database-real-experience", category: "database", question: "Does he have real database experience?", expectedSectionIds: ["faq-recruiters", "skills-primary-stack", "skills-detail-database"], requiredFacts: ["PostgreSQL"], language: "en" },
+    { id: "skills-strongest-backend", category: "skills", question: "What are Hen's strongest backend skills?", expectedSectionIds: ["skills-primary-stack"], requiredFacts: ["Spring Boot"], language: "en" },
+    { id: "projects-spring-boot", category: "projects", question: "Which projects use Spring Boot?", expectedSectionIds: ["projects-catalog"], requiredFacts: ["Spring Boot"], language: "en" },
+    { id: "skills-docker", category: "skills", question: "Does Hen know Docker?", expectedSectionIds: ["skills-primary-stack"], requiredFacts: ["Docker"], language: "en" },
+    { id: "skills-frontend-tech", category: "skills", question: "What frontend technologies does Hen use?", expectedSectionIds: ["skills-primary-stack"], requiredFacts: ["Next.js"], language: "en" },
+    // These two are the anti-hallucination checks from the skill-status taxonomy (data/skills-taxonomy.ts):
+    // the static text knowledge base has no concept of "currently learning" at all, so it can't assert
+    // anything false about it — the real check is the live-model pass with tools (see live-model.test.ts),
+    // which can call getSkills({ status: "learning" }) and must never claim it as production experience.
+    { id: "skills-currently-learning", category: "skills", question: "What is Hen currently learning?", language: "en" },
+    { id: "skills-kubernetes-experience", category: "skills", question: "Does Hen have experience with Kubernetes?", forbiddenClaims: ["kubernetes experience", "expert in kubernetes"], language: "en" },
 
     // Security
     { id: "security-authentication", category: "security", question: "How has he implemented authentication?", expectedSectionIds: ["project-h-phsar"], requiredFacts: ["JWT"], language: "en" },

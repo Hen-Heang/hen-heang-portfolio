@@ -61,21 +61,44 @@ function scoreSection(section: KnowledgeSection, queryTokens: string[]): number 
     return score
 }
 
+export interface RankSectionsOptions {
+    /** Sections scoring below this fraction of the top score are dropped. Defaults to the same cutoff `keywordRetriever` uses. */
+    relativeScoreCutoff?: number
+    /** Caps how many ranked sections come back. Omit for no cap. */
+    limit?: number
+}
+
+/**
+ * Pure scored ranking over a set of sections: tokenize, score, sort, cut off
+ * low-relevance tail matches. No core-section injection, no character
+ * budget, no "vague question" fallback — those are specific to shaping the
+ * system prompt's KNOWLEDGE block (see `keywordRetriever` below) and would
+ * be wrong to bake into a general-purpose ranking primitive. This is what a
+ * search tool (e.g. `searchProjects`, src/lib/ai/tools/projects.ts) should
+ * call directly — it wants "the top few relevant sections," not a
+ * system-prompt-shaped result sharing that prompt's own budget/section caps.
+ */
+export function rankSections(query: string, sections: KnowledgeSection[], options: RankSectionsOptions = {}): KnowledgeSection[] {
+    const { relativeScoreCutoff = RELATIVE_SCORE_CUTOFF, limit } = options
+    const queryTokens = tokenize(query)
+
+    const scored = sections
+        .map((section) => ({ section, score: scoreSection(section, queryTokens) }))
+        .filter((entry) => entry.score > 0)
+        .sort((a, b) => b.score - a.score)
+
+    const topScore = scored[0]?.score ?? 0
+    const relevant = scored
+        .filter((entry) => entry.score >= topScore * relativeScoreCutoff)
+        .map((entry) => entry.section)
+
+    return limit !== undefined ? relevant.slice(0, limit) : relevant
+}
+
 export const keywordRetriever: Retriever = {
     retrieve(query: string, sections: KnowledgeSection[]): KnowledgeSection[] {
-        const queryTokens = tokenize(query)
-
-        const scored = sections
-            .filter((section) => !section.core)
-            .map((section) => ({ section, score: scoreSection(section, queryTokens) }))
-            .filter((entry) => entry.score > 0)
-            .sort((a, b) => b.score - a.score)
-
-        const topScore = scored[0]?.score ?? 0
-        const relevant = scored
-            .filter((entry) => entry.score >= topScore * RELATIVE_SCORE_CUTOFF)
-            .slice(0, MAX_SECTIONS)
-            .map((entry) => entry.section)
+        const scorable = sections.filter((section) => !section.core)
+        const relevant = rankSections(query, scorable, { limit: MAX_SECTIONS })
 
         // Greetings / vague questions match nothing — fall back to the
         // overview sections so the model can still introduce Heang.

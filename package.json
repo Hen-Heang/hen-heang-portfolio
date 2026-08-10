@@ -14,7 +14,11 @@
     "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "seed": "npx tsx scripts/seed.ts"
+    "seed": "npx tsx scripts/seed.ts",
+    "ai:index:lab": "npx tsx --conditions=react-server scripts/index-lab-content.ts",
+    "eval:ai:smoke": "vitest run src/lib/ai/evals/retrieval-evals.test.ts",
+    "eval:ai": "vitest run src/lib/ai/evals/live-model.test.ts",
+    "eval:retrieval": "npx tsx --conditions=react-server scripts/eval-retrieval.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.11",

@@ -54,6 +54,8 @@ export interface Project {
     ownership?: ProjectOwnership
     /** Short topic labels for what the engineering work actually covered (e.g. "Authentication", "Order workflow") — distinct from `technologies` (the stack) and `architecture` (system layers). */
     engineeringFocus?: string[]
+    /** Stable skill ids (see `data/skills-taxonomy.ts`) this project is meaningful evidence for — a curated subset of `technologies`, not every technology used. Powers the AI assistant's `searchProjects`/`getProject` tools. */
+    skills?: string[]
     /** Company work whose source/screenshots can't be shown — case-study and card UI hide GitHub/demo links and surface a confidentiality note instead. */
     confidential?: boolean
     businessProblem?: string

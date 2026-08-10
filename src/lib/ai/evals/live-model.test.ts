@@ -5,6 +5,7 @@ import { openai } from "@ai-sdk/openai"
 import { buildContext } from "../retrieval"
 import { buildSystemPrompt } from "../system-prompt"
 import { MODELS } from "../models"
+import { portfolioTools } from "../tools"
 import { portfolioEvalCases } from "./portfolio-questions"
 
 /**
@@ -26,6 +27,7 @@ describe.skipIf(!liveEvalsEnabled)("portfolio live-model evals", () => {
                 model: openai.responses(MODELS.default),
                 system: buildSystemPrompt(context),
                 prompt: testCase.question,
+                tools: portfolioTools,
                 maxOutputTokens: 800,
             })
             const lower = text.toLowerCase()
