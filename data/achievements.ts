@@ -46,11 +46,11 @@ export const groupAchievementsByYearAndIssuer = (achievements: Achievement[]): A
 export const rawAchievements: Achievement[] = [
     {
         id: "1",
-        title: "Advanced Achievement Award",
+        title: "Korea Software HRD Center Graduation",
         issuer: "Korea Software HRD Center",
         date: "2023",
         type: "graduation",
-        description: "Graduated with honors in Computer Science with focus on web development and software engineering.",
+        description: "Completed the Korea Software HRD Center\'s intensive software development training program.",
         image: "/graduate-image.jpg",
     },
     {
@@ -64,11 +64,11 @@ export const rawAchievements: Achievement[] = [
     },
  {
         id: "2",
-        title: "Advanced Achievement Award",
+        title: "Top Team Award & Best Live Project Demonstration Award",
         issuer: "Korea Software HRD Center",
         date: "2023",
         type: "award",
-        description: "Recognized for outstanding performance and advanced technical proficiency in software development during the intensive training program.",
+        description: "Awarded at the closing ceremony of the 11th Advanced Training Course for placing 3rd in the team project category and winning the Best Live Project Demonstration Award.",
         image: "/advance-award.jpeg",
     },
     {
@@ -86,7 +86,7 @@ export const rawAchievements: Achievement[] = [
         issuer: "KSHRD",
         date: "2023",
         type: "certificate",
-        description: "Successfully completed the advanced course training program at KSHRD, demonstrating advanced skills and expertise.",
+        description: "Successfully completed the KSHRD advanced course training program in software development.",
         image: "/certificate/kshrd-advance-course.webp",
     },
     {

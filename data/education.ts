@@ -1,11 +1,10 @@
-
 import type { EducationItem } from "@/src/lib/types"
 
 export const education: EducationItem[] = [
     {
         period: "2021",
         title: "Basic C++ Programming",
-        institution: " ANT Technology Training Center",
+        institution: "ANT Technology Training Center",
         description: "Introduction to programming concepts using C++.",
     },
 
@@ -24,12 +23,11 @@ export const education: EducationItem[] = [
     },
 
     {
-        period: "2020-2024",
-        title: "Computer Science",
+        period: "2020–2024",
+        title: "Bachelor of Computer Science",
         institution: "Royal University of Phnom Penh",
-        description: "Pursuing a Bachelor's degree in Computer Science with a focus on software development and web technologies.",
+        description: "Completed a Bachelor's degree focused on software development, algorithms, and web technologies.",
     },
-
 
     {
         period: "In progress",

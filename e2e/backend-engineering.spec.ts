@@ -4,7 +4,7 @@ import { fillControlled } from "./support/interactions"
 test.describe("Backend Engineering curriculum", () => {
     test("loads every requested backend route with its expected primary heading", async ({ page }) => {
         const routes = [
-            ["/lab", "Learn backend engineering by building real systems."],
+            ["/lab", "Learn by building real systems — then prove they work."],
             ["/lab/backend", "From fundamentals to production systems"],
             ["/lab/backend/roadmap", "Backend Engineering Roadmap"],
             ["/lab/backend/java-backend-fundamentals", "Java Backend Fundamentals"],

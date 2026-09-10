@@ -1,9 +1,16 @@
 import Link from "next/link"
-import { Bot, Container, LibraryBig, ServerCog } from "lucide-react"
+import { Bot, BookMarked, Container, LibraryBig, ServerCog } from "lucide-react"
 import { HoverArrow } from "@/src/components/lab/ui/HoverArrow"
 import { cn, interactiveCard } from "@/src/lib/utils/utils"
 
 const browseLinks = [
+    {
+        href: "/lab/handbook",
+        icon: BookMarked,
+        label: "Agent Handbook",
+        detail: "Claude Code · Codex · Config",
+        accent: "bg-brand/10 text-brand",
+    },
     {
         href: "/lab/backend",
         icon: ServerCog,
@@ -19,10 +26,10 @@ const browseLinks = [
         accent: "bg-success/10 text-success",
     },
     {
-        href: "/ai-engineering",
+        href: "/lab/ax-engineering",
         icon: Bot,
-        label: "AI Engineering",
-        detail: "Agents · MCP · RAG",
+        label: "AX curriculum",
+        detail: "Harness · MCP · Evals",
         accent: "bg-warning/10 text-warning",
     },
     {
@@ -37,7 +44,7 @@ const browseLinks = [
 /** Compact browse preview — the full searchable catalog lives at /lab/library. */
 export function LabCategoryNav() {
     return (
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:grid-cols-5">
             {browseLinks.map((link) => (
                 <Link
                     key={link.href}

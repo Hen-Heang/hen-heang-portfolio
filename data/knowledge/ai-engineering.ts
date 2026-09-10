@@ -7,12 +7,14 @@ import type { KnowledgeSection } from "./types"
  *
  * 1. AI application integration — shipping LLM features inside real products.
  * 2. AI-assisted software development — using AI tools to build software.
+ * 3. AX Engineering learning — a documented curriculum, not a claim of
+ *    professional agent-infrastructure experience.
  *
  * Every item here is verified against this repository or the projects it
  * describes (app/api/chat/route.ts, data/projects.ts, data/cv-data.ts).
- * Deliberately excluded because unverified: model training, fine-tuning,
- * building vector databases, autonomous AI agents, and LangChain — none of
- * that appears in the codebase, so none of it is claimed here.
+ * Deliberately excluded because unverified: model training, fine-tuning, and
+ * production-scale autonomous-agent expertise. Learning topics remain
+ * explicitly labeled below.
  */
 const narrativeSections: KnowledgeSection[] = [
     {
@@ -51,6 +53,25 @@ const narrativeSections: KnowledgeSection[] = [
             "- AI-assisted code review as part of his regular workflow, alongside — not instead of — his own review and testing.",
             "",
             "This is a productivity practice, not a claimed engineering specialty: he does not do model training, fine-tuning, or machine learning engineering.",
+        ].join("\n"),
+    },
+    {
+        id: "ax-engineering-learning",
+        category: "ai-engineering",
+        title: "AX Engineering — learning and experimentation",
+        keywords: [
+            "ax engineering", "agent harness", "mcp", "model context protocol",
+            "agent orchestration", "subagent", "subagents", "agent evals",
+            "guardrails", "agent observability", "agentops", "handoff",
+            "context engineering", "quality gates",
+        ],
+        sourceLabel: "AX Engineering learning path",
+        sourceUrl: "https://henheang.site/lab/ax-engineering",
+        content: [
+            "Heang is learning and experimenting with AX Engineering concepts while keeping Backend / AX Software Engineer as his career direction and backend engineering as his primary foundation.",
+            "The version-controlled AX Engineering learning path explores Agent Harness design, context engineering, project instructions, skills, agents and subagents, MCP and tool calling, planning, permissions, sandboxing, hooks, quality gates, evaluations, observability, memory, handoff, and CI/CD integration.",
+            "These are learning and practice topics, not claims of professional production-scale agent orchestration, MCP infrastructure, advanced evaluation, guardrail, or AgentOps expertise.",
+            "Verified current practices remain AI-assisted development with Claude Code and Codex, plus the existing portfolio retrieval and evaluation implementation described elsewhere in the portfolio.",
         ].join("\n"),
     },
 ]

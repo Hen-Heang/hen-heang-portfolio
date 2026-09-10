@@ -1,12 +1,14 @@
 import Link from "next/link"
 
-export type LabNavKey = "overview" | "backend" | "devops" | "ai" | "practice" | "library" | "progress"
+export type LabNavKey = "overview" | "handbook" | "backend" | "devops" | "ax" | "ai" | "practice" | "library" | "progress"
 
 const items: { key: LabNavKey; label: string; href: string }[] = [
     { key: "overview", label: "Overview", href: "/lab" },
+    { key: "handbook", label: "Agent Handbook", href: "/lab/handbook" },
     { key: "backend", label: "Backend", href: "/lab/backend" },
     { key: "devops", label: "DevOps", href: "/lab/devops" },
-    { key: "ai", label: "AI Engineering", href: "/ai-engineering" },
+    { key: "ax", label: "AX Engineering", href: "/lab/ax-engineering" },
+    { key: "ai", label: "AI Library", href: "/ai-engineering" },
     { key: "practice", label: "Practice", href: "/lab/devops/labs" },
     { key: "library", label: "Library", href: "/lab/library" },
     { key: "progress", label: "Progress", href: "/lab/progress" },

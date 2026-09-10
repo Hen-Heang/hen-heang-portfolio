@@ -7,20 +7,19 @@ import { profileData } from "@/data/profile"
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: "CV — Hen Heang | Backend Developer",
-  description:
-    "Professional CV of Hen Heang — Backend Developer specialising in Java, Spring Boot, MyBatis, and PostgreSQL/Oracle. Based in Seoul, South Korea.",
-  alternates: {
-    canonical: `${profileData.portfolioUrl}/cv`,
-  },
-  openGraph: {
-    title: "CV — Hen Heang",
-    description: "Backend Developer · Java · Spring Boot · PostgreSQL",
-    type: "profile",
-  },
+    title: "CV — Hen Heang | Backend / AX Software Engineer",
+    description: "Professional CV of Hen Heang — a backend-first Backend / AX Software Engineer working with Java, Spring Boot, MyBatis, PostgreSQL/Oracle, and AI-assisted development.",
+    alternates: {
+        canonical: `${profileData.portfolioUrl}/cv`,
+    },
+    openGraph: {
+        title: "CV — Hen Heang",
+        description: "Backend / AX Software Engineer · Java · Spring Boot · PostgreSQL",
+        type: "profile",
+    },
 }
 
 export default async function CVRoute() {
-  const cv = await getSiteContent("cv")
-  return <CVPage cv={cv} />
+    const cv = await getSiteContent("cv")
+    return <CVPage cv={cv} />
 }

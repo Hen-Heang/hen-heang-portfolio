@@ -49,6 +49,18 @@
     --error: 0 72% 51%; /* #dc2626 — red-600, darkened for AA on white */
     --page-ambient: radial-gradient(ellipse 65% 26rem at 20% -8rem, rgb(29 78 216 / 0.05), transparent 60%), radial-gradient(ellipse 60% 22rem at 85% -6rem, rgb(56 189 248 / 0.06), transparent 62%);
 
+    /* Layered-hero tokens. The scrim is directional, not flat: the hero copy
+       is left-aligned, so it stays near-opaque on the left and opens up on
+       the right, where the drifting chips are free to read as texture. The
+       vignette then settles the rim. Both are authored per-theme rather than
+       reused with an opacity tweak — a dark hero needs a genuinely different
+       mix, not the light one dimmed. */
+    --hero-scrim: linear-gradient(to right, hsl(var(--surface) / 0.97) 0%, hsl(var(--surface) / 0.94) 38%, hsl(var(--surface) / 0.72) 72%, hsl(var(--surface) / 0.6) 100%);
+    --hero-vignette: radial-gradient(ellipse 70% 55% at 50% 50%, hsl(var(--background) / 0.08) 0%, hsl(var(--background) / 0.5) 100%);
+    --hero-tile-bg: hsl(var(--brand) / 0.05);
+    --hero-tile-border: hsl(var(--brand) / 0.12);
+    --hero-tile-fg: hsl(var(--brand) / 0.45);
+
     /* Code/terminal chrome: deliberately dark in both themes (same convention
        as GitHub/VS Code code blocks), so these are not overridden in .dark. */
     --surface-code: 240 8% 5%; /* #0c0c0e */
@@ -118,6 +130,12 @@
     --warning: 43 96% 56%; /* #fbbf24 */
     --error: 0 91% 71%; /* #f87171 */
     --page-ambient: radial-gradient(ellipse 65% 26rem at 20% -8rem, rgb(29 78 216 / 0.14), transparent 60%), radial-gradient(ellipse 60% 22rem at 85% -6rem, rgb(56 189 248 / 0.1), transparent 62%);
+
+    --hero-scrim: linear-gradient(to right, hsl(var(--background) / 0.95) 0%, hsl(var(--background) / 0.9) 38%, hsl(var(--background) / 0.62) 72%, hsl(var(--background) / 0.5) 100%);
+    --hero-vignette: radial-gradient(ellipse 70% 55% at 50% 50%, hsl(0 0% 0% / 0.2) 0%, hsl(0 0% 0% / 0.6) 100%);
+    --hero-tile-bg: hsl(var(--brand) / 0.08);
+    --hero-tile-border: hsl(var(--brand) / 0.18);
+    --hero-tile-fg: hsl(var(--brand) / 0.5);
 
     --foreground: var(--fg);
     --input: var(--border);
@@ -195,6 +213,112 @@
        rubber-band at the edge and trigger Chrome/macOS's swipe-to-navigate
        gesture, silently sending the visitor back or forward in history. */
     overscroll-behavior-x: none;
+  }
+
+  /* Shared hover treatment for cards and tiles across the lab.
+     Three properties move together — a 2px lift, the border warming to
+     brand, and a brand-tinted shadow — because one alone reads as a glitch
+     while all three read as a deliberate response. The distance is small on
+     purpose: 2px is felt, 8px is noticed.
+
+     `will-change` is omitted deliberately: promoting dozens of cards on a
+     long page costs more than the transition saves. */
+  .card-interactive {
+    transition-property: transform, border-color, box-shadow, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--brand) / 0.45);
+    box-shadow: 0 10px 30px -12px hsl(var(--brand) / 0.35);
+  }
+  /* Keyboard users get the same affordance, minus the lift (which can shift
+     an element out from under a screen-magnifier viewport). */
+  .card-interactive:focus-within {
+    border-color: hsl(var(--brand) / 0.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-interactive:hover {
+      transform: none;
+    }
+  }
+
+  /* Feathers a layer to transparent at both horizontal edges so a drifting
+     backdrop dissolves into the page instead of ending on a hard seam. The
+     many stops are deliberate: a 2-stop ramp bands visibly at this width. */
+  .mask-feather-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(0 0 0 / 0.15) 4%,
+      rgb(0 0 0 / 0.6) 9%,
+      rgb(0 0 0 / 0.9) 15%,
+      #000 22%,
+      #000 78%,
+      rgb(0 0 0 / 0.9) 85%,
+      rgb(0 0 0 / 0.6) 91%,
+      rgb(0 0 0 / 0.15) 96%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(0 0 0 / 0.15) 4%,
+      rgb(0 0 0 / 0.6) 9%,
+      rgb(0 0 0 / 0.9) 15%,
+      #000 22%,
+      #000 78%,
+      rgb(0 0 0 / 0.9) 85%,
+      rgb(0 0 0 / 0.6) 91%,
+      rgb(0 0 0 / 0.15) 96%,
+      transparent 100%
+    );
+  }
+
+  /* Same idea vertically, for the hero backdrop's top and bottom edges. */
+  .mask-feather-y {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 0.15) 6%,
+      rgb(0 0 0 / 0.5) 12%,
+      rgb(0 0 0 / 0.85) 20%,
+      #000 30%,
+      #000 70%,
+      rgb(0 0 0 / 0.85) 80%,
+      rgb(0 0 0 / 0.5) 88%,
+      rgb(0 0 0 / 0.15) 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 0.15) 6%,
+      rgb(0 0 0 / 0.5) 12%,
+      rgb(0 0 0 / 0.85) 20%,
+      #000 30%,
+      #000 70%,
+      rgb(0 0 0 / 0.85) 80%,
+      rgb(0 0 0 / 0.5) 88%,
+      rgb(0 0 0 / 0.15) 94%,
+      transparent 100%
+    );
+  }
+
+  /* Cross-fading both snapshots muddies a full-page theme swap. Killing the
+     default animation lets ThemeToggle drive a clip-path circular reveal
+     instead, with the incoming theme stacked above the outgoing one. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  ::view-transition-new(root) {
+    z-index: 9999;
   }
 
   ::-webkit-scrollbar {

@@ -77,8 +77,8 @@ export type SkillGroup = {
 export const cvData: CVData = {
   personal: {
     name: profileData.fullName,
-    title: "Backend Developer (Java & Spring Boot)",
-    subtitle: "Java · Spring Boot · MyBatis · REST APIs · PostgreSQL · Oracle · Next.js",
+    title: "Backend / AX Software Engineer",
+    subtitle: "Java · Spring Boot · MyBatis · PostgreSQL · Oracle · AI-Assisted Development",
     photo: profileData.myImage,
     location: profileData.location,
     email: profileData.email,
@@ -88,7 +88,7 @@ export const cvData: CVData = {
   } satisfies PersonalInfo,
 
   summary:
-    "Backend Developer with 2+ years of experience building Java and Spring Boot applications in Cambodian and Korean enterprise environments. Experienced in REST APIs, MyBatis, Spring Security, PostgreSQL, Oracle, and SQL-driven business logic for financial and B2B platforms. Also experienced in integrating practical LLM-powered application features and using AI-assisted development workflows — Claude Code and Codex — for code analysis, implementation, review, testing, and documentation.",
+    "Backend / AX Software Engineer with 2+ years of experience building Java and Spring Boot applications in Cambodian and Korean enterprise environments. Experienced in REST APIs, MyBatis, Spring Security, PostgreSQL, Oracle, and SQL-driven business logic for financial and B2B platforms. I have integrated practical LLM-powered product features and use Claude Code and Codex for AI-assisted planning, analysis, implementation, review, testing, and documentation. I am learning Agent Harness, MCP, guardrail, evaluation, and observability concepts through structured practice; these are growth areas, not claims of production-scale agent infrastructure experience.",
 
   experience: [
     {
@@ -114,7 +114,7 @@ export const cvData: CVData = {
       endDate: "October 2025",
       current: false,
       bullets: [
-        "Designed and developed REST APIs with Spring Boot and MyBatis for a large-scale B2B billing platform integrated with Vietnamese banking systems.",
+        "Designed and developed REST APIs with Spring Boot and MyBatis for an enterprise B2B billing platform integrated with Vietnamese banking systems.",
         "Designed PostgreSQL schemas and optimized query performance for high-volume transactions.",
         "Implemented Spring Security with JWT authentication to secure enterprise-grade APIs.",
         "Integrated Zalo, SMS, and Telegram delivery channels for transactional notifications.",

@@ -98,6 +98,10 @@ const skillDefinitions: SkillDefinition[] = [
     { id: "ai-assisted-development", name: "AI-Assisted Development (Claude Code, Codex)", category: "ai", status: "primary", description: "Practical AI-assisted development workflow used across his current projects." },
     { id: "openai", name: "OpenAI API", category: "ai", status: "primary", description: "Powers Hengo's AI Coach — conversation, message analysis, and structured feedback — via the Vercel AI SDK." },
     { id: "google-gemini", name: "Google Gemini", category: "ai", status: "primary", description: "Powers Money Flow's AI chat over the user's own transaction and budget data, via the Vercel AI SDK." },
+    { id: "agent-harness-design", name: "Agent Harness Design", category: "ai", status: "learning", description: "Learning how context, instructions, tools, permissions, verification, and state form a reusable operating environment for AI-assisted development." },
+    { id: "model-context-protocol", name: "Model Context Protocol (MCP)", category: "ai", status: "learning", description: "Exploring MCP architecture, bounded tool contracts, authentication, and read-only integration patterns through educational labs." },
+    { id: "ai-evaluations", name: "AI Evaluations", category: "ai", status: "learning", description: "Practicing representative test cases and quality checks for retrieval, tool selection, groundedness, and workflow behavior." },
+    { id: "agent-observability", name: "Agent Observability", category: "ai", status: "learning", description: "Building understanding of traceable model calls, tool activity, latency, failures, feedback, and privacy-aware execution records." },
 ]
 
 export const skills: Skill[] = skillDefinitions.map((skill) => ({

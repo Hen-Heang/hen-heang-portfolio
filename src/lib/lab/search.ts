@@ -16,6 +16,12 @@ export const LAB_SEARCH_ALIASES: Record<string, string[]> = {
     dockerize: ["docker"],
     auth: ["security"],
     ai: ["ai-assisted engineering"],
+    ax: ["ai-assisted engineering", "agent harness"],
+    agentops: ["observability", "agent operations"],
+    guardrail: ["permissions", "quality gates"],
+    guardrails: ["permissions", "quality gates"],
+    subagent: ["subagents"],
+    eval: ["evals", "evaluation"],
 }
 
 /** Unicode-aware tokenizer — keeps letters/marks/numbers together (so non-Latin text doesn't fragment) plus `+ # .` for tech terms like C++, C#, Node.js. */

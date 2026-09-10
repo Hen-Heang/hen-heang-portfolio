@@ -1,4 +1,4 @@
-export type EngineeringLabSource = "AI Engineering" | "Backend Engineering" | "DevOps Basics"
+export type EngineeringLabSource = "Agent Handbook" | "AI Engineering" | "AX Engineering" | "Backend Engineering" | "DevOps Basics"
 
 export interface EngineeringLabSearchItem {
     title: string

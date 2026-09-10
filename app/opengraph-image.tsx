@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og"
 import { readFileSync } from "fs"
 import { join } from "path"
 
-export const alt = "Hen Heang — Backend Developer"
+export const alt = "Hen Heang — Backend / AX Software Engineer"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -79,7 +79,7 @@ export default async function Image() {
                         marginBottom: 36, letterSpacing: "-0.01em",
                         display: "flex",
                     }}>
-                        Backend Developer · Java &amp; Spring Boot
+                        Backend / AX Software Engineer
                     </div>
 
                     {/* Tech pills */}

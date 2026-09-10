@@ -48,7 +48,7 @@ function NodeCard({ node }: { node: ArchNode }) {
     const type = node.type ?? "default"
     const Icon = TYPE_ICON[type]
     return (
-        <div className="flex min-w-[128px] flex-1 flex-col items-center gap-1 rounded-xl border border-border bg-surface-code px-3 py-3 text-center md:flex-none">
+        <div className="card-interactive flex min-w-[104px] flex-1 flex-col items-center gap-1 rounded-xl border border-border bg-surface-code px-3 py-3 text-center">
             <Icon size={14} aria-hidden="true" className={TYPE_COLOR[type]} />
             <span className="text-base font-semibold text-surface-code-foreground">{node.label}</span>
             {node.sublabel && <span className="text-[11px] text-surface-code-foreground/60">{node.sublabel}</span>}
@@ -60,11 +60,15 @@ export function ArchitectureDiagram({ title, steps }: { title?: string; steps: A
     return (
         <div className="my-6 rounded-2xl border border-border bg-surface p-5">
             {title && <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-fg-muted">{title}</p>}
-            <div className="flex flex-col items-stretch gap-1 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-2">
+            {/* No md:flex-wrap: a wrapped row strands its trailing arrow
+                pointing into empty space, and CSS can't detect the break.
+                Nodes shrink to share one row instead, and the whole strip
+                scrolls horizontally below that rather than wrapping. */}
+            <div className="flex flex-col items-stretch gap-1 md:flex-row md:items-center md:justify-center md:gap-2 md:overflow-x-auto md:pb-1">
                 {steps.map((step, i) => {
                     const nodes = normalizeStep(step)
                     return (
-                        <div key={i} className="flex flex-col items-center gap-1 md:flex-row md:gap-2">
+                        <div key={i} className="flex min-w-0 flex-1 flex-col items-center gap-1 md:flex-row md:gap-2">
                             <div className="flex flex-col items-center gap-2 md:flex-row">
                                 {nodes.map((node, ni) => (
                                     <NodeCard key={ni} node={node} />

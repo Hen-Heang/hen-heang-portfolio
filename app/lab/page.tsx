@@ -8,10 +8,7 @@ import { getBackendSummaries } from "@/src/lib/backend/catalog"
 import { LabNav } from "@/src/components/lab/ui/LabNav"
 import { LabHero } from "@/src/components/lab/home/LabHero"
 import { LabCategoryNav } from "@/src/components/lab/home/LabCategoryNav"
-import {
-    ApplyInProjects,
-    type AppliedProject,
-} from "@/src/components/lab/home/ApplyInProjects"
+import { ApplyInProjects, type AppliedProject } from "@/src/components/lab/home/ApplyInProjects"
 import { HandsOnPractice } from "@/src/components/lab/home/HandsOnPractice"
 import { LabSearchClient } from "@/src/components/lab/home/LabSearchClient"
 import { LabLearningDashboard } from "@/src/components/lab/home/LabLearningDashboard"
@@ -22,12 +19,11 @@ export const revalidate = 60
 
 export const metadata: Metadata = {
     title: "Engineering Lab",
-    description: "Exploring backend systems, architecture, AI engineering, and modern software development practices — how I design, build, test, and operate software.",
+    description: "A backend-first Engineering Lab for Java, Spring Boot, PostgreSQL, DevOps, and learning reliable AI-assisted / AX engineering workflows.",
     alternates: { canonical: `${profileData.portfolioUrl}/lab` },
     openGraph: {
         title: "Engineering Lab | Hen Heang",
-        description:
-            "Exploring backend systems, architecture, AI engineering, and modern software development practices.",
+        description: "A backend-first Engineering Lab for Java, Spring Boot, PostgreSQL, DevOps, and learning reliable AI-assisted / AX engineering workflows.",
         url: `${profileData.portfolioUrl}/lab`,
         type: "website",
     },
@@ -36,9 +32,7 @@ export const metadata: Metadata = {
 export default async function EngineeringLabPage() {
     const { items } = await getEngineeringLabIndex()
     const backendItems = getBackendSummaries()
-    const backendLabs = backendItems.filter(
-        (item) => item.type === "lab" && item.status === "published",
-    )
+    const backendLabs = backendItems.filter((item) => item.type === "lab" && item.status === "published")
 
     const appliedProjects = projects
         .filter((p) => p.featured)
@@ -52,39 +46,21 @@ export default async function EngineeringLabPage() {
             conceptsDemonstrated: p.engineeringFocus ?? [],
             category: p.category,
             technologies: p.technologies.slice(0, 3),
-            status: p.confidential
-                ? "private"
-                : p.demo && p.demo !== "#"
-                  ? "live"
-                  : p.github
-                    ? "source"
-                    : "case-study",
+            status: p.confidential ? "private" : p.demo && p.demo !== "#" ? "live" : p.github ? "source" : "case-study",
         }))
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8 md:px-8">
             <LabNav active="overview" />
             <LabHero />
-            <ContinueLearning
-                backendItems={backendItems}
-                devopsTopics={devopsRoadmap}
-            />
-            <LabLearningDashboard
-                backendItems={backendItems}
-                devopsTopics={devopsRoadmap}
-            />
+            <ContinueLearning backendItems={backendItems} devopsTopics={devopsRoadmap} />
+            <LabLearningDashboard backendItems={backendItems} devopsTopics={devopsRoadmap} />
             <LabSearchClient items={items}>
                 <LabCategoryNav />
             </LabSearchClient>
-            <HandsOnPractice
-                devopsLabs={devopsLabs}
-                backendLabs={backendLabs}
-            />
+            <HandsOnPractice devopsLabs={devopsLabs} backendLabs={backendLabs} />
             <ApplyInProjects projects={appliedProjects} />
-            <ProgressSummary
-                backendItems={backendItems}
-                devopsTopics={devopsRoadmap}
-            />
+            <ProgressSummary backendItems={backendItems} devopsTopics={devopsRoadmap} />
         </div>
     )
 }

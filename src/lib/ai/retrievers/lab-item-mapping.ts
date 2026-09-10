@@ -8,6 +8,7 @@ import { getAIArticleBySlug } from "@/src/lib/db/ai-engineering"
 import type { EngineeringLabSearchItem } from "@/src/lib/types/engineering-lab"
 import type { BackendBlock, BackendKnowledgeItem, BackendSection } from "@/src/lib/types/backend-engineering"
 import type { ContentBlock } from "@/src/lib/types/ai-engineering"
+import { axConcepts, axLabs, axRoadmap } from "@/data/lab/ax-engineering"
 
 /**
  * Shared "Lab item -> structured representation" toolkit. Used by:
@@ -43,9 +44,11 @@ export interface LabItemDetail extends LabKnowledgeResult {
 }
 
 export const CATEGORY_BY_SOURCE: Record<EngineeringLabSearchItem["source"], LabCategory> = {
+    "Agent Handbook": "ai",
     "Backend Engineering": "backend",
     "DevOps Basics": "devops",
     "AI Engineering": "ai",
+    "AX Engineering": "ai",
 }
 
 export const DEFAULT_EXCERPT_CHARS = 700
@@ -72,6 +75,8 @@ export function backendSlugFor(title: string): { slug: string; status: string } 
 /** Only Backend Engineering, DevOps topics/labs, and AI Engineering articles have an individually addressable slug/detail page — prompts, snippets, commands, and infrastructure terms don't. */
 export function deriveSlug(item: EngineeringLabSearchItem): string {
     if (item.source === "Backend Engineering") return backendSlugFor(item.title)?.slug ?? slugify(item.title)
+    if (item.source === "Agent Handbook") return `handbook-${slugify(item.title)}`
+    if (item.source === "AX Engineering") return `ax-${slugify(item.title)}`
     const match = item.href.match(/\/(topics|labs|articles)\/([a-z0-9-]+)$/)
     return match ? match[2] : slugify(item.title)
 }
@@ -198,6 +203,50 @@ export function devopsLabExcerpt(
  * fully represented by their search result.
  */
 export async function getLabItemDetail(slug: string): Promise<LabItemDetail | { error: string }> {
+    if (slug.startsWith("ax-")) {
+        const rawSlug = slug.slice(3)
+        const learningModule = axRoadmap.find((item) => item.slug === rawSlug || slugify(item.title) === rawSlug)
+        if (learningModule) {
+            return {
+                slug,
+                title: learningModule.title,
+                category: "ai",
+                type: "guide",
+                summary: learningModule.description,
+                technologies: learningModule.concepts,
+                source: "engineering-lab",
+                excerpt: truncate(`${learningModule.description} Learning scope: ${learningModule.estimatedScope}. Concepts: ${learningModule.concepts.join(", ")}. Status: ${learningModule.status}.`),
+            }
+        }
+        const concept = axConcepts.find((item) => item.slug === rawSlug || slugify(item.name) === rawSlug)
+        if (concept) {
+            return {
+                slug,
+                title: concept.name,
+                category: "ai",
+                type: "guide",
+                summary: concept.what,
+                technologies: [concept.group],
+                source: "engineering-lab",
+                excerpt: truncate(`${concept.what} ${concept.why} ${concept.how} Example: ${concept.example}`),
+            }
+        }
+        const lab = axLabs.find((item) => slugify(`${item.id} ${item.title}`) === rawSlug)
+        if (lab) {
+            return {
+                slug,
+                title: `${lab.id} ${lab.title}`,
+                category: "ai",
+                type: "lab",
+                summary: lab.objective,
+                technologies: lab.concepts,
+                status: "planned",
+                source: "engineering-lab",
+                excerpt: truncate(`${lab.objective} Planned deliverable: ${lab.deliverable}`),
+            }
+        }
+    }
+
     const backendItem = getBackendItemBySlug(slug)
     if (backendItem) {
         return { ...backendToResult(backendItem), excerpt: excerptFromBackendItem(backendItem) }

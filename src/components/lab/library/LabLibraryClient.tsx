@@ -9,7 +9,9 @@ import { LAB_CONTENT_TYPES, rankLabSearch, type LabContentType } from "@/src/lib
 import { Tag } from "@/src/components/ai-engineering/Tag"
 
 const sourceTextColors: Record<EngineeringLabSource, string> = {
+    "Agent Handbook": "text-brand",
     "AI Engineering": "text-brand",
+    "AX Engineering": "text-warning",
     "Backend Engineering": "text-success",
     "DevOps Basics": "text-warning",
 }
@@ -20,7 +22,7 @@ const DIFFICULTIES: { value: EngineeringLabSearchItem["difficulty"] & string; la
     { value: "advanced", label: "Advanced" },
 ]
 
-const SOURCES: EngineeringLabSource[] = ["Backend Engineering", "DevOps Basics", "AI Engineering"]
+const SOURCES: EngineeringLabSource[] = ["Agent Handbook", "Backend Engineering", "DevOps Basics", "AX Engineering", "AI Engineering"]
 
 function readParam(params: URLSearchParams, key: string): string {
     return params.get(key) ?? ""

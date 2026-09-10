@@ -8,8 +8,7 @@ import { SectionHeading } from "@/src/components/system/SectionHeading"
 
 export const metadata: Metadata = {
     title: "What I’m Working On",
-    description:
-        "Hen Heang’s current backend engineering, DevOps, AI-assisted development, Korean communication, and active project milestones.",
+    description: "Hen Heang’s current backend engineering, DevOps, AX Engineering, Korean communication, and active project milestones.",
     alternates: { canonical: "/journey" },
     openGraph: {
         title: "What I’m Working On — Hen Heang",
@@ -28,7 +27,7 @@ function formatUpdatedAt(value: string): string {
 }
 
 export default function JourneyPage() {
-    const latestUpdate = progressItems[0].updatedAt
+    const latestUpdate = progressItems.reduce((latest, item) => (item.updatedAt > latest ? item.updatedAt : latest), progressItems[0].updatedAt)
 
     return (
         <PageLayout>
@@ -39,13 +38,8 @@ export default function JourneyPage() {
                         <SectionHeading as="h1" size="display">
                             What I’m working on
                         </SectionHeading>
-                        <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg">
-                            A public snapshot of the skills I’m deepening, the systems I’m building, and the milestones guiding my next step as a backend engineer in Korea.
-                        </p>
-                        <time
-                            dateTime={latestUpdate}
-                            className="mt-6 block font-mono text-xs uppercase tracking-[0.14em] text-fg-muted"
-                        >
+                        <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg">A public snapshot of the backend skills I’m deepening, the systems I’m building, and the evidence guiding my growth toward Backend / AX Software Engineer.</p>
+                        <time dateTime={latestUpdate} className="mt-6 block font-mono text-xs uppercase tracking-[0.14em] text-fg-muted">
                             Last updated {formatUpdatedAt(latestUpdate)}
                         </time>
                     </div>

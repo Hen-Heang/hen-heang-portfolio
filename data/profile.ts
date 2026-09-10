@@ -2,7 +2,7 @@ export const profileData = {
     name: "Hen Heang",
     fullName: "Hen Heang",
     koreanName: "히엔 히엉",
-    title: "Backend Developer (Java & Spring Boot)",
+    title: "Backend / AX Software Engineer",
     company: "Bizplay",
     location: "Seoul, South Korea",
     locationEmoji: "🇰🇷",
@@ -10,12 +10,12 @@ export const profileData = {
     available: true,
     yearsExperience: "2+",
     heroValueProposition:
-        "Java & Spring Boot backend developer building secure APIs and enterprise systems.",
+        "Backend engineer building reliable Java systems and learning repeatable human + AI development workflows.",
     heroBio:
-        "I design transaction flows, business logic, and data models with Spring Boot, MyBatis, PostgreSQL, and Oracle—then connect them to Next.js products when needed.",
-    bio: "Backend developer in Seoul turning business rules into dependable Java services. I design REST APIs, transaction flows, and data models with Spring Boot, MyBatis, and PostgreSQL/Oracle — then carry the contract through to Next.js clients when a product needs it, with practical experience integrating AI features and using AI-assisted development workflows.",
+        "I design transaction flows, business logic, and data models with Spring Boot, MyBatis, PostgreSQL, and Oracle—then use AI-assisted development to plan, investigate, verify, and document work without giving up engineering judgment.",
+    bio: "Backend / AX Software Engineer in Seoul with a backend-first foundation. I turn business rules into dependable Java services, design REST APIs and data models with Spring Boot, MyBatis, and PostgreSQL/Oracle, and support delivery with Next.js when needed. I use AI-assisted development in practice and am learning Agent Harness, MCP, guardrails, evaluations, and observability through structured labs.",
     description:
-        "Backend Developer (Java & Spring Boot) based in Seoul with 2+ years of experience in the Korean enterprise sector. I build backend systems and REST APIs with Java, Spring Boot, and MyBatis on PostgreSQL/Oracle, and extend to frontends with Next.js and TypeScript when needed.",
+        "Backend / AX Software Engineer based in Seoul with 2+ years of software engineering experience across Cambodian and Korean enterprise environments. My verified foundation is Java, Spring Boot, MyBatis, REST APIs, SQL, PostgreSQL, and Oracle. I also integrate practical AI features and use AI-assisted development, while learning Agent Harness, MCP, guardrails, evaluations, and observability.",
     profileImage: "/image/heang_new.jpeg",
     myImage: "/image/heang_new.jpeg",
     socialLinks: {
@@ -47,6 +47,7 @@ export const profileData = {
         "eGovFramework",
         "REST APIs",
         "Claude Code",
+        "Codex",
     ],
     knowsAbout: [
         "Java",
@@ -56,12 +57,14 @@ export const profileData = {
         "jQuery",
         "SQL",
         "Next.js",
+        "AI-Assisted Development",
+        "AX Engineering",
     ],
     rotatingRoles: [
-        "Backend Developer (Java & Spring Boot)",
+        "Backend / AX Software Engineer",
         "Backend · MyBatis · PostgreSQL / Oracle",
-        "REST APIs · Spring Security",
-        "Next.js · TypeScript",
+        "Java · Spring Boot · REST APIs",
+        "AI-Assisted Development · Learning Agent Harness",
     ],
     // Single source of truth for language levels — data/cv-data.ts reuses this list.
     languages: [

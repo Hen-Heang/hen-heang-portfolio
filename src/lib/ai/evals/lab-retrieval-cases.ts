@@ -82,9 +82,6 @@ export const labRetrievalCases: LabRetrievalCase[] = [
         category: "ai",
         direct: "What does Hen know about AI agents?",
         semantic: "How does Hen think about giving an AI system tools it can call on its own?",
-        // No AI Engineering articles are indexed in an environment without Supabase
-        // configured (getAIArticles() returns [] — see src/lib/ai/retrievers/lab-documents.ts).
-        // Kept in the dataset for when that changes; not scored until then.
-        expectedSlugs: [],
+        expectedSlugs: ["ax-agent-harness-fundamentals", "ax-mcp-and-tool-calling", "ax-agents-and-subagents"],
     },
 ]

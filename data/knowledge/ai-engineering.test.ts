@@ -48,16 +48,18 @@ const snippet: Snippet = {
 const emptyData = { categories: [], articles: [], prompts: [], snippets: [] }
 
 describe("buildAIEngineeringKnowledge", () => {
-    it("always includes the two verified narrative sections", () => {
+    it("always includes verified AI work plus the explicitly learning-only AX section", () => {
         const sections = buildAIEngineeringKnowledge(emptyData)
         const ids = sections.map((s) => s.id)
         expect(ids).toContain("ai-application-integration")
         expect(ids).toContain("ai-assisted-development")
+        expect(ids).toContain("ax-engineering-learning")
+        expect(sections.find((section) => section.id === "ax-engineering-learning")?.content).toContain("not claims")
     })
 
     it("omits the catalog and per-item sections when Supabase has no rows, instead of rendering an empty list", () => {
         const sections = buildAIEngineeringKnowledge(emptyData)
-        expect(sections).toHaveLength(2)
+        expect(sections).toHaveLength(3)
         expect(sections.some((s) => s.id === "ai-engineering-catalog")).toBe(false)
     })
 

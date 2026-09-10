@@ -13,12 +13,14 @@ import { HoverArrow } from "@/src/components/lab/ui/HoverArrow"
 import { cn, interactiveCard } from "@/src/lib/utils/utils"
 
 const sourceTextColors: Record<EngineeringLabSource, string> = {
+    "Agent Handbook": "text-brand",
     "AI Engineering": "text-brand",
+    "AX Engineering": "text-warning",
     "Backend Engineering": "text-success",
     "DevOps Basics": "text-warning",
 }
 
-const suggestions = ["Spring Security", "Docker", "PostgreSQL", "CI/CD"]
+const suggestions = ["Spring Security", "Agent Harness", "MCP", "Quality Gate"]
 
 /**
  * The only interactive island on the Lab homepage. `children` is the
@@ -72,7 +74,7 @@ export function LabSearchClient({
                     <input
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search Docker, JWT, MyBatis, CI/CD..."
+                        placeholder="Search Spring, agent harness, MCP, evals..."
                         aria-label="Search Engineering Lab"
                         className="min-h-12 w-full rounded-2xl border border-border bg-surface py-3 pl-11 pr-11 text-base text-fg outline-none transition-colors placeholder:text-fg-muted focus:border-brand focus:ring-2 focus:ring-brand/15"
                     />

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import Link from "next/link"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
-import { Search, FileCode2, MessageSquareCode, Terminal, ArrowRight, X } from "lucide-react"
+import { Search, FileCode2, MessageSquareCode, Terminal, ArrowRight, X, Workflow } from "lucide-react"
 import type { AICategory, Article } from "@/src/lib/types/ai-engineering"
 import { ArticleCard } from "@/src/components/ai-engineering/ArticleCard"
 import { CategoryCard } from "@/src/components/ai-engineering/CategoryCard"
@@ -77,14 +77,26 @@ export function AIEngineeringHubClient({
         <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
             <LabNav active="ai" />
             <LabPathHeader
-                label="AI Engineering"
-                title="AI-assisted engineering, not AI engineering"
-                description="AI accelerates development, but engineers remain responsible for architecture, quality, security, and business logic. Here's how I use Claude Code and Codex as a collaborator — not a replacement — while building with Java, Spring Boot, MyBatis, and PostgreSQL."
+                label="AI Engineering Library"
+                title="Articles, prompts, and snippets for AI-assisted development."
+                description="A reference library for AI-assisted software development and selected AI product-integration notes. The separate AX Engineering path organizes the agent-harness concepts I am learning and practicing."
                 accent="warning"
             />
 
             {/* Quick links */}
-            <div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <Link
+                    href="/lab/ax-engineering"
+                    className="group flex items-center justify-between rounded-2xl border border-warning/30 bg-warning/5 px-5 py-4 hover:border-warning/60 transition-colors"
+                >
+                    <div className="flex items-center gap-3">
+                        <Workflow size={18} className="text-warning" />
+                        <div>
+                            <p className="text-sm font-semibold text-fg">AX Learning Path</p>
+                            <p className="text-xs text-fg-muted">Structured concepts and practice</p>
+                        </div>
+                    </div>
+                </Link>
                 <Link
                     href="/ai-engineering/prompts"
                     className="group flex items-center justify-between rounded-2xl border border-border bg-surface px-5 py-4 hover:border-border-strong transition-colors"

@@ -19,7 +19,7 @@ const stack = [
     { name: "Spring Boot", icon: Leaf },
     { name: "PostgreSQL", icon: Database },
     { name: "DevOps", icon: Terminal },
-    { name: "AI Engineering", icon: Bot },
+    { name: "AX Engineering", icon: Bot },
 ]
 
 const loop = [
@@ -39,13 +39,15 @@ export function LabHero() {
                     Engineering Lab
                 </span>
 
-                <h1 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-fg md:text-4xl">
-                    Learn backend engineering by building real systems.
+                <h1 className="mt-2.5 max-w-3xl text-[32px] font-bold leading-[1.1] tracking-tight text-fg md:text-[46px]">
+                    Learn by building real systems — then prove they work.
                 </h1>
 
-                <p className="mt-3 max-w-xl text-base leading-6 text-fg-secondary">
-                    Structured paths for Java, Spring Boot, databases, DevOps,
-                    and AI-assisted development.
+                <p className="mt-4 max-w-2xl text-[17px] leading-7 text-fg-secondary">
+                    Backend-first paths through Java, Spring Boot, PostgreSQL,
+                    and DevOps, plus a working handbook for Claude Code and
+                    Codex. Every path ends in something verified, not something
+                    read.
                 </p>
 
                 <ul

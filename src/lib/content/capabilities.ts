@@ -45,7 +45,8 @@ export const capabilityGroups: readonly CapabilityGroup[] = [
     },
     {
         label: "Data",
-        summary: "Modeling schemas and writing SQL across PostgreSQL and Oracle.",
+        summary:
+            "Modeling schemas and writing SQL across PostgreSQL and Oracle.",
         technologies: ["PostgreSQL", "Oracle", "SQL", "JPA/Flyway"],
     },
     {
@@ -73,7 +74,7 @@ export const capabilityGroups: readonly CapabilityGroup[] = [
  * product integrations he has actually shipped.
  */
 export const aiStatement =
-    "AI-assisted development with Claude Code and Codex, with product integrations using OpenAI and Gemini."
+    "Applied: AI-assisted development with Claude Code and Codex, plus product integrations using OpenAI and Gemini. Learning: Agent Harness design, MCP, guardrails, evaluations, and agent observability through structured practice."
 
 /**
  * Technologies that were previously shown as primary skills and now belong to

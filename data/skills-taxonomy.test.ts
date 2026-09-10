@@ -57,6 +57,8 @@ describe("skills taxonomy", () => {
     it("does not claim project evidence for a learning-only technology", () => {
         expect(getSkillById("kubernetes")?.projectSlugs).toEqual([])
         expect(getSkillById("redis")?.projectSlugs).toEqual([])
+        expect(getSkillById("agent-harness-design")?.projectSlugs).toEqual([])
+        expect(getSkillById("model-context-protocol")?.projectSlugs).toEqual([])
     })
 
     it("has real project evidence for primary backend/database technologies", () => {

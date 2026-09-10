@@ -14,12 +14,15 @@ export function LabPathHeader({
     title,
     description,
     accent,
+    bare = false,
     children,
 }: {
     label: string
     title: string
     description: string
     accent: LabAccent
+    /** Drop the divider and outer spacing when a parent (e.g. LabHeroBackdrop) already frames the header. */
+    bare?: boolean
     children?: ReactNode
 }) {
     return (
@@ -27,7 +30,7 @@ export function LabPathHeader({
             initial={{ opacity: 0.85, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: subtleDuration, ease: subtleEase }}
-            className="mb-8 border-b border-border pb-8"
+            className={bare ? "" : "mb-8 border-b border-border pb-8"}
         >
             <span className={`font-mono text-sm font-semibold uppercase tracking-[0.18em] ${accentText[accent]}`}>{label}</span>
             <h1 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-fg md:text-4xl">{title}</h1>

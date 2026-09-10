@@ -9,6 +9,8 @@ const LINKABLE: Record<string, string> = {
     backend: "Backend Engineering",
     roadmap: "Roadmap",
     devops: "DevOps",
+    handbook: "Agent Handbook",
+    "ax-engineering": "AX Engineering",
     labs: "Labs",
     commands: "Commands",
     infrastructure: "Infrastructure",

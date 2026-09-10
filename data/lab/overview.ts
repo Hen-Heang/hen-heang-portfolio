@@ -27,10 +27,10 @@ export const systemStatus: SystemStatusEntry[] = [
         detail: "App Router, TanStack Query, and Tailwind CSS — how every backend I build gets a face.",
     },
     {
-        area: "AI Engineering",
-        tech: "LLM Integration",
+        area: "AX Engineering",
+        tech: "Agent Harness · MCP · Evals",
         status: "experimenting",
-        detail: "Claude Code and Gemini as engineering collaborators — prompt patterns, AI-assisted workflows, and LLM features in apps.",
+        detail: "Using AI-assisted development in practice while learning how context, tools, guardrails, verification, and feedback form a reliable Agent Harness.",
     },
     {
         area: "DevOps",
@@ -45,7 +45,7 @@ export const currentFocus = [
     "PostgreSQL",
     "System Design",
     "Docker & CI/CD",
-    "AI-assisted Engineering",
+    "AX Engineering",
 ]
 
 export const engineeringPhilosophy =

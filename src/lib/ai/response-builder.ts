@@ -130,10 +130,13 @@ function asSingleLabResult(output: unknown): ToolLabResult | undefined {
     return isLabResult(output) ? output : undefined
 }
 
-/** Only Backend Engineering, DevOps topics/labs, and AI Engineering articles have an individually addressable page (mirrors src/lib/ai/lab-knowledge.ts) — everything else links to its Lab section index instead of a slug that doesn't resolve. */
+/** Addressable Lab content links to its detail route; compact/reference content falls back to the owning section index. */
 function labHref(item: ToolLabResult): string {
     if (item.category === "backend") return `/lab/backend/${item.slug}`
-    if (item.category === "ai") return item.type === "article" ? `/ai-engineering/articles/${item.slug}` : "/ai-engineering"
+    if (item.category === "ai") {
+        if (item.slug.startsWith("ax-")) return "/lab/ax-engineering"
+        return item.type === "article" ? `/ai-engineering/articles/${item.slug}` : "/ai-engineering"
+    }
     if (item.type === "lab") return `/lab/devops/labs/${item.slug}`
     if (item.type === "guide") return `/lab/devops/topics/${item.slug}`
     return "/lab/devops"

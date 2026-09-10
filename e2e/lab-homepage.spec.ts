@@ -7,7 +7,7 @@ test.describe("Engineering Lab homepage", () => {
         const html = await response.text()
 
         const positions = [
-            "Learn backend engineering by building real systems.",
+            "Learn by building real systems — then prove they work.",
             'id="continue-learning-heading"',
             'id="learning-paths-heading"',
             'id="lab-library-heading"',

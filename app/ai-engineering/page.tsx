@@ -8,46 +8,31 @@ import { AIEngineeringHubClient } from "@/src/components/ai-engineering/AIEngine
 export const revalidate = 60
 
 export const metadata: Metadata = {
-    title: "AI Engineering",
-    description:
-        "Backend engineering, AI workflows, architecture notes, prompt engineering, code reviews, experiments, and technical learning.",
+    title: "AI Engineering Library",
+    description: "A reference library of AI-assisted engineering articles, prompts, snippets, code reviews, and experiments. The structured AX learning path lives in Engineering Lab.",
     alternates: {
         canonical: `${profileData.portfolioUrl}/ai-engineering`,
     },
     openGraph: {
-        title: "AI Engineering | Hen Heang",
-        description:
-            "Backend engineering, AI workflows, architecture notes, prompt engineering, code reviews, experiments, and technical learning.",
+        title: "AI Engineering Library | Hen Heang",
+        description: "Articles, prompts, snippets, and experiments supporting a backend-first AI-assisted engineering workflow.",
         url: `${profileData.portfolioUrl}/ai-engineering`,
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "AI Engineering | Hen Heang",
-        description:
-            "Backend engineering, AI workflows, architecture notes, prompt engineering, code reviews, experiments, and technical learning.",
+        title: "AI Engineering Library | Hen Heang",
+        description: "Articles, prompts, snippets, and experiments supporting a backend-first AI-assisted engineering workflow.",
     },
 }
 
 export default async function AIEngineeringPage() {
-    const [articles, categories, prompts, snippets] = await Promise.all([
-        getAIArticles(),
-        getAICategories(),
-        getAIPrompts(),
-        getAISnippets(),
-    ])
+    const [articles, categories, prompts, snippets] = await Promise.all([getAIArticles(), getAICategories(), getAIPrompts(), getAISnippets()])
 
     return (
         <PageLayout showFooter={false}>
             <Suspense>
-                <AIEngineeringHubClient
-                    articles={articles}
-                    categories={categories}
-                    allTags={getAllTags(articles)}
-                    allTechnologies={getAllTechnologies(articles)}
-                    promptCount={prompts.length}
-                    snippetCount={snippets.length}
-                />
+                <AIEngineeringHubClient articles={articles} categories={categories} allTags={getAllTags(articles)} allTechnologies={getAllTechnologies(articles)} promptCount={prompts.length} snippetCount={snippets.length} />
             </Suspense>
         </PageLayout>
     )

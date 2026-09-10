@@ -8,14 +8,15 @@ import { getAIArticles } from "@/src/lib/db/ai-engineering"
 import { profileData } from "@/data/profile"
 import { excerptFromBackendItem, devopsTopicExcerpt, devopsLabExcerpt, articleExcerpt } from "./lab-item-mapping"
 import type { LabCategory } from "./types"
+import { axConcepts, axRoadmap } from "@/data/lab/ax-engineering"
 
 /**
  * Turns existing Engineering Lab content into documents suitable for File
  * Search indexing. This is the explicit allowlist for what may ever be
  * indexed (Step 19 of the retrieval-experiment task): it only ever reads
- * from these five named, already-public data sources — published Backend
- * Engineering Lab items, DevOps topics that have a real learning card,
- * DevOps labs, and AI Engineering articles. It never touches the
+ * from named, already-public data sources — published Backend Engineering
+ * Lab items, DevOps topics that have a real learning card, DevOps labs,
+ * AX learning modules, and AI Engineering articles. It never touches the
  * filesystem, never scans the repository, and never includes anything not
  * already rendered on a public /lab or /ai-engineering page.
  *
@@ -48,6 +49,27 @@ export interface LabDocument {
 const INDEX_CONTENT_MAX_CHARS = 4_000
 
 export async function buildLabDocuments(): Promise<LabDocument[]> {
+    const axModuleDocs: LabDocument[] = axRoadmap.map((module) => {
+        const relatedConcepts = axConcepts.filter((concept) =>
+            module.concepts.some((name) => name.toLowerCase().includes(concept.name.toLowerCase())),
+        )
+        return {
+            slug: `ax-${module.slug}`,
+            title: module.title,
+            category: "ai",
+            contentType: "learning-module",
+            technologies: [],
+            topics: module.concepts,
+            status: "published",
+            summary: module.description,
+            content: [
+                `${module.description} This module is currently ${module.status} with an estimated learning scope of ${module.estimatedScope}.`,
+                ...relatedConcepts.map((concept) => `${concept.name}: ${concept.what} ${concept.why}`),
+            ].join(" "),
+            url: `${profileData.portfolioUrl}/lab/ax-engineering#module-${module.slug}`,
+        }
+    })
+
     const backendDocs: LabDocument[] = getPublishedBackendItems().map((item) => ({
         slug: item.slug,
         title: item.title,
@@ -108,5 +130,5 @@ export async function buildLabDocuments(): Promise<LabDocument[]> {
         url: `${profileData.portfolioUrl}/ai-engineering/articles/${article.slug}`,
     }))
 
-    return [...backendDocs, ...devopsTopicDocs, ...devopsLabDocs, ...articleDocs]
+    return [...backendDocs, ...devopsTopicDocs, ...devopsLabDocs, ...axModuleDocs, ...articleDocs]
 }

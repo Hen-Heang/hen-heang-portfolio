@@ -165,11 +165,17 @@ export function CapabilityColumns({
                     </span>
                     <div>
                         <h3 className="text-base font-semibold text-fg">
-                            AI Engineering
+                            AI-assisted &amp; AX Engineering
                         </h3>
                         <p className="mt-1 max-w-3xl text-sm leading-6 text-fg-secondary">
                             {aiStatement}
                         </p>
+                        <Link
+                            href="/lab/ax-engineering"
+                            className="mt-3 inline-flex text-sm font-medium text-brand underline-offset-4 hover:underline"
+                        >
+                            Explore the learning path →
+                        </Link>
                     </div>
                 </aside>
             </Reveal>

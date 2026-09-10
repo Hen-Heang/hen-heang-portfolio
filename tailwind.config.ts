@@ -71,7 +71,7 @@ const config: Config = {
 					elevated: "hsl(var(--navy-elevated) / <alpha-value>)",
 				},
 				border: {
-					DEFAULT: "hsl(var(--border))",
+					DEFAULT: "hsl(var(--border) / <alpha-value>)",
 					strong: "hsl(var(--border-strong) / <alpha-value>)",
 				},
 				input: "hsl(var(--input))",
@@ -115,6 +115,11 @@ const config: Config = {
 				"gradient-console": "var(--gradient-console)",
 				"gemini-gradient": "linear-gradient(135deg, #4285F4 0%, #38BDF8 35%, #8B5CF6 70%, #EC4899 100%)",
 			},
+			boxShadow: {
+				// Brand-tinted lift for hover states — a neutral grey shadow on a
+				// cyan-accented card reads as dirt rather than depth.
+				brand: "0 10px 30px -12px hsl(var(--brand) / 0.35)",
+			},
 			keyframes: {
 				"accordion-down": {
 					from: { height: "0" },
@@ -124,10 +129,18 @@ const config: Config = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: "0" },
 				},
+				// Track holds two identical copies of its children, so translating
+				// exactly -50% lands on the seam and the loop is invisible.
+				drift: {
+					from: { transform: "translateX(0)" },
+					to: { transform: "translateX(-50%)" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				drift: "drift 240s linear infinite",
+				"drift-slow": "drift 360s linear infinite",
 			},
 		},
 	},

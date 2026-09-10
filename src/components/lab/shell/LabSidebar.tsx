@@ -11,6 +11,7 @@ import {
     FlaskConical,
     ScrollText,
     BookOpen,
+    BookMarked,
     Network,
     Braces,
     Database,
@@ -44,7 +45,9 @@ const navGroups: LabNavGroup[] = [
         items: [
             { label: "Backend Path", href: "/lab/backend", icon: Braces, matchPrefixes: ["/lab/backend/"] },
             { label: "DevOps Path", href: "/lab/devops", icon: Terminal, matchPrefixes: ["/lab/devops/topics"] },
-            { label: "AI Engineering", href: "/ai-engineering", icon: Sparkles, matchPrefixes: ["/ai-engineering/articles"] },
+            { label: "Agent Handbook", href: "/lab/handbook", icon: BookMarked },
+            { label: "AX Engineering", href: "/lab/ax-engineering", icon: Sparkles },
+            { label: "AI Engineering Library", href: "/ai-engineering", icon: BookOpen, matchPrefixes: ["/ai-engineering/articles"] },
         ],
     },
     {

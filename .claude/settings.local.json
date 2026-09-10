@@ -22,5 +22,9 @@
       "Bash(sed -n '1,16p' app/about/page.tsx)",
       "Bash(mv /tmp/page_resolved.tsx app/about/page.tsx)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "idea"
+  ],
+  "enableAllProjectMcpServers": true
 }

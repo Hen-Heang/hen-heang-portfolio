@@ -24,10 +24,10 @@ const paths = {
             "Take a service from local code to a reachable, recoverable deployment.",
         technologies: ["Docker", "CI/CD", "Nginx", "Git"],
     },
-    ai: {
+    ax: {
         outcome:
-            "Use AI as a careful partner across research, implementation, and review.",
-        technologies: ["Claude Code", "Gemini", "Prompt Design"],
+            "Learn to design reliable human + AI development workflows using context, agents, tools, guardrails, verification, and evaluation.",
+        technologies: ["Agent Harness", "MCP", "Evals", "AI Workflow"],
     },
 }
 
@@ -121,12 +121,12 @@ export function LabLearningDashboard({
                 />
                 <LearningPathCard
                     icon={Bot}
-                    title="AI-Assisted Engineering"
+                    title="AX Engineering"
                     status="experimenting"
-                    outcome={paths.ai.outcome}
-                    technologies={paths.ai.technologies}
-                    href="/ai-engineering"
-                    action="Start with practical articles"
+                    outcome={paths.ax.outcome}
+                    technologies={paths.ax.technologies}
+                    href="/lab/ax-engineering"
+                    action="Explore the learning path"
                     accent="warning"
                 />
             </motion.div>
