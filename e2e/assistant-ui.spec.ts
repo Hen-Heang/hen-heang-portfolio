@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test"
+import { fillControlled } from "./support/interactions"
 
 const viewports = [
     { name: "320px", width: 320, height: 700 },
@@ -46,12 +47,17 @@ async function openAssistant(page: Page): Promise<Locator> {
 
 async function expectInsideViewport(page: Page, locator: Locator) {
     const viewport = page.viewportSize()
-    const box = await locator.boundingBox()
-    expect(box).not.toBeNull()
-    expect(box!.x).toBeGreaterThanOrEqual(-1)
-    expect(box!.y).toBeGreaterThanOrEqual(-1)
-    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport!.width + 1)
-    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport!.height + 1)
+    // boundingBox() is a one-shot read, and layout settles a frame or two after
+    // a viewport change — poll so the assertion describes the settled layout
+    // rather than whichever frame it happened to sample.
+    await expect(async () => {
+        const box = await locator.boundingBox()
+        expect(box).not.toBeNull()
+        expect(box!.x).toBeGreaterThanOrEqual(-1)
+        expect(box!.y).toBeGreaterThanOrEqual(-1)
+        expect(box!.x + box!.width).toBeLessThanOrEqual(viewport!.width + 1)
+        expect(box!.y + box!.height).toBeLessThanOrEqual(viewport!.height + 1)
+    }).toPass({ timeout: 5_000 })
 }
 
 async function expectNoPageOverflow(page: Page) {
@@ -129,8 +135,10 @@ test.describe("Portfolio Assistant responsive UI", () => {
 
         await expectInsideViewport(page, dialog)
         await expectInsideViewport(page, input)
-        const dialogBox = await dialog.boundingBox()
-        expect(Math.abs((dialogBox?.height ?? 0) - 500)).toBeLessThanOrEqual(1)
+        await expect(async () => {
+            const dialogBox = await dialog.boundingBox()
+            expect(Math.abs((dialogBox?.height ?? 0) - 500)).toBeLessThanOrEqual(1)
+        }).toPass({ timeout: 5_000 })
     })
 
     test("contains long messages, links, code, and tables at 320px", async ({ page }, testInfo) => {
@@ -182,7 +190,7 @@ test.describe("Portfolio Assistant responsive UI", () => {
 
         const dialog = await openAssistant(page)
         const input = dialog.getByRole("textbox", { name: "Ask about Heang's experience or projects..." })
-        await input.fill("Summarize the backend experience.")
+        await fillControlled(input, "Summarize the backend experience.")
         await dialog.getByRole("button", { name: "Send message" }).click()
 
         await expect(dialog.getByRole("button", { name: "Stop generating" })).toBeVisible()

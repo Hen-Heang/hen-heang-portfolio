@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test"
+import { fillControlled } from "./support/interactions"
 
 test.describe("Backend Engineering curriculum", () => {
     test("loads every requested backend route with its expected primary heading", async ({ page }) => {
@@ -36,18 +37,18 @@ test.describe("Backend Engineering curriculum", () => {
         await page.goto("/lab")
         const search = page.getByRole("textbox", { name: "Search Engineering Lab" })
 
-        await search.fill("Java Backend Fundamentals")
+        await fillControlled(search, "Java Backend Fundamentals")
         const published = page.getByRole("link", { name: /Backend Engineering.*Java Backend Fundamentals/ })
         await expect(published).toHaveAttribute("href", "/lab/backend/java-backend-fundamentals")
         await expect(published.getByText(/Backend Engineering/)).toHaveClass(/text-success/)
 
-        await search.fill("Java Concurrency and Virtual Threads")
+        await fillControlled(search, "Java Concurrency and Virtual Threads")
         await expect(page.getByRole("link", { name: /Java Concurrency and Virtual Threads/ })).toHaveAttribute(
             "href",
             "/lab/backend/roadmap"
         )
 
-        await search.fill("Docker")
+        await fillControlled(search, "Docker")
         const devopsSource = page.getByText(/DevOps Basics/).first()
         await expect(devopsSource).toHaveClass(/text-warning/)
     })
@@ -65,7 +66,7 @@ test.describe("Backend Engineering curriculum", () => {
 
         await page.getByRole("link", { name: "Backend Engineering" }).first().click()
         const search = page.getByRole("textbox", { name: "Search backend curriculum" })
-        await search.fill("Spring Boot layered architecture")
+        await fillControlled(search, "Spring Boot layered architecture")
         await expect(page).toHaveURL((url) => url.searchParams.get("q") === "Spring Boot layered architecture")
         await Promise.all([
             page.waitForURL(/\/lab\/backend\/spring-boot-layered-architecture$/),
@@ -74,17 +75,17 @@ test.describe("Backend Engineering curriculum", () => {
         await expect(page.getByRole("heading", { name: "Layered Spring Boot Architecture", level: 1 })).toBeVisible()
 
         await page.getByRole("link", { name: "Backend Engineering" }).first().click()
-        await search.fill("transactions")
+        await fillControlled(search, "transactions")
         await expect(page.getByRole("link", { name: /Spring Transaction Fundamentals/ })).toBeVisible()
 
-        await search.fill("")
+        await fillControlled(search, "")
         const categoryFilter = page.getByRole("combobox", { name: "Category" })
         await categoryFilter.selectOption("security")
         await expect(categoryFilter).toHaveValue("security")
         await expect(page.getByRole("link", { name: /Spring Security Authentication Flow/ })).toBeVisible()
 
         await page.getByRole("button", { name: "Clear filters" }).click()
-        await search.fill("Task API")
+        await fillControlled(search, "Task API")
         await page.getByRole("link", { name: /Lab: Build a Spring Boot Task API/ }).click()
         await expect(page.getByRole("heading", { name: "Lab: Build a Spring Boot Task API", level: 1 })).toBeVisible()
 
@@ -106,7 +107,7 @@ test.describe("Backend Engineering curriculum", () => {
         const resultCount = catalog.locator("[aria-live=polite]")
         const initialResultCount = await resultCount.textContent()
         expect(initialResultCount).toMatch(/^\d+ items?$/)
-        await search.fill("definitely-no-backend-result")
+        await fillControlled(search, "definitely-no-backend-result")
         await expect(page.getByText("No matching backend content")).toBeVisible()
         await page.getByRole("button", { name: "Clear filters" }).click()
         await expect(search).toHaveValue("")

@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test"
+import { fillControlled } from "./support/interactions"
 
 test.describe("Site navigation", () => {
     test("desktop nav prioritizes Work, Lab, About, and Resume with one active route", async ({
@@ -102,12 +103,12 @@ test.describe("Command menu", () => {
 
         const search = page.getByRole("combobox", { name: "Command search" })
         await expect(search).toBeFocused()
-        await search.fill("lab")
+        await fillControlled(search, "lab")
         await expect(
             page.getByRole("option", { name: "Open Engineering Lab" }),
         ).toBeVisible()
 
-        await search.fill("journey")
+        await fillControlled(search, "journey")
         await expect(
             page.getByRole("option", { name: "View Current Journey" }),
         ).toBeVisible()
