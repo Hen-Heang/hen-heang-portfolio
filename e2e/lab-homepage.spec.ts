@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test"
+import { fillControlled } from "./support/interactions"
 
 test.describe("Engineering Lab homepage", () => {
     test("renders the compact hero, Continue Learning, learning paths, and library sections in order", async ({ page }) => {
@@ -29,12 +30,15 @@ test.describe("Engineering Lab homepage", () => {
         await expect(backendCard.getByText("Recommended")).toBeVisible()
     })
 
-    test("uses visual stack markers and real project previews", async ({ page }) => {
+    test("shows the hero technology chips and the real applied projects", async ({ page }) => {
         await page.goto("/lab")
-        await expect(page.getByLabel("Backend engineering learning stack")).toBeVisible()
-        await expect(page.getByText("Postgres", { exact: true })).toBeVisible()
-        await expect(page.getByRole("img", { name: /H-Phsar.*project preview/ })).toBeVisible()
-        await expect(page.getByRole("img", { name: /Hengo.*project preview/ })).toBeVisible()
+        const stack = page.getByLabel("Core technologies")
+        await expect(stack).toBeVisible()
+        await expect(stack.getByText("PostgreSQL", { exact: true })).toBeVisible()
+
+        const applied = page.locator('section[aria-labelledby="apply-projects-heading"]')
+        await expect(applied.getByRole("heading", { name: /H-Phsar/ })).toBeVisible()
+        await expect(applied.getByRole("heading", { name: /Hengo/ })).toBeVisible()
     })
 
     test("search stays interactive and swaps only the library preview section", async ({ page }) => {
@@ -44,12 +48,12 @@ test.describe("Engineering Lab homepage", () => {
         const search = page.getByRole("textbox", {
             name: "Search Engineering Lab",
         })
-        await search.fill("docker")
+        await fillControlled(search, "docker")
         await expect(page.getByRole("link", { name: "Backend curriculum" })).toHaveCount(0)
         await expect(page.getByText(/\d+ results?$/)).toBeVisible()
         await expect(page.getByRole("link", { name: /Open in full library/ })).toBeVisible()
 
-        await search.fill("")
+        await fillControlled(search, "")
         await expect(page.getByRole("link", { name: "Backend curriculum" })).toBeVisible()
     })
 
@@ -71,7 +75,7 @@ test.describe("Engineering Lab library", () => {
         const search = page.getByRole("textbox", {
             name: "Search the Engineering Lab library",
         })
-        await search.fill("spring")
+        await fillControlled(search, "spring")
         await expect(page).toHaveURL(/[?&]q=spring/)
 
         await page.reload()
