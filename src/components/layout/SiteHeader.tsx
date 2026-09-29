@@ -47,7 +47,7 @@ export const NAV_LINKS = [
     },
 ]
 
-const DESKTOP_NAV_LINKS = NAV_LINKS.filter((link) => link.label !== "Journey")
+const DESKTOP_NAV_LINKS = NAV_LINKS
 
 function isActive(pathname: string, match: string[]): boolean {
     return match.some((m) => pathname === m || pathname.startsWith(`${m}/`))
@@ -104,25 +104,25 @@ export function SiteHeader() {
             <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6">
                 <Link
                     href="/"
-                    className="flex items-center gap-2 transition-opacity hover:opacity-80"
+                    className="flex items-center gap-2.5 transition-opacity hover:opacity-85"
                     aria-label="Hen Heang — home"
                 >
                     <Image
                         src="/image/heang_new.png"
                         alt="Hen Heang"
-                        width={48}
-                        height={48}
+                        width={38}
+                        height={38}
                         priority
-                        className="h-12 w-12 rounded-full object-cover ring-1 ring-border"
+                        className="h-9 w-9 rounded-full object-cover ring-2 ring-border shadow-xs"
                     />
-                    <span className="hidden text-sm font-semibold tracking-tight text-fg sm:inline">
-                        Hen Heang
+                    <span className="text-sm font-bold tracking-tight text-fg">
+                        Hen Heang<span className="text-brand">.</span>
                     </span>
                 </Link>
 
                 <nav
                     aria-label="Main"
-                    className="hidden items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 p-1 lg:flex"
+                    className="hidden items-center gap-0.5 rounded-full border border-border/70 bg-surface/75 p-1 shadow-xs backdrop-blur-md lg:flex"
                 >
                     {DESKTOP_NAV_LINKS.map((link) => {
                         const active = isActive(pathname, link.match)
@@ -132,7 +132,7 @@ export function SiteHeader() {
                                 key={link.label}
                                 href={link.href}
                                 aria-current={active ? "page" : undefined}
-                                className={`relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                                className={`relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
                                     active
                                         ? "text-fg"
                                         : "text-fg-secondary hover:text-fg"
@@ -141,9 +141,9 @@ export function SiteHeader() {
                                 {active && (
                                     <motion.span
                                         layoutId="nav-active-pill"
-                                        className="absolute inset-0 rounded-full bg-surface-hover shadow-sm ring-1 ring-border"
+                                        className="absolute inset-0 rounded-full bg-surface-hover shadow-xs ring-1 ring-border"
                                         transition={{
-                                            duration: 0.24,
+                                            duration: 0.22,
                                             ease: "easeOut",
                                         }}
                                     />
@@ -160,23 +160,24 @@ export function SiteHeader() {
                     })}
                 </nav>
 
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                     <button
                         type="button"
                         onClick={openCommandMenu}
                         aria-label="Open command menu, keyboard shortcut Command or Control K"
                         aria-keyshortcuts="Meta+K Control+K"
-                        className="hidden h-9 items-center gap-1.5 rounded-lg border border-border px-2.5 font-mono text-xs text-fg-muted transition-colors hover:border-border-strong hover:text-fg lg:flex"
+                        className="hidden h-9 items-center gap-2 rounded-lg border border-border bg-surface/60 px-2.5 font-mono text-xs text-fg-muted transition-colors hover:border-border-strong hover:text-fg lg:flex"
                     >
                         <Command size={13} aria-hidden />
-                        <span aria-hidden>⌘K</span>
+                        <span>Search</span>
+                        <kbd className="rounded border border-border bg-background px-1 py-0.2 text-[10px] text-fg-muted" aria-hidden>⌘K</kbd>
                     </button>
                     <ThemeToggle />
                     <Link
                         href="/contact"
-                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-gradient-brand px-4 text-sm font-medium text-white transition-[filter] hover:brightness-110 lg:flex"
+                        className="ml-1 hidden h-9 items-center gap-2 rounded-lg bg-gradient-brand px-4 text-xs font-semibold text-white shadow-xs transition-all hover:brightness-110 active:scale-[0.98] lg:flex"
                     >
-                        <MessageCircle size={15} aria-hidden />
+                        <MessageCircle size={14} aria-hidden />
                         Contact
                     </Link>
                     <button
@@ -186,7 +187,7 @@ export function SiteHeader() {
                         aria-label="Open navigation menu"
                         aria-expanded={menuOpen}
                         aria-haspopup="dialog"
-                        className="flex h-11 w-11 items-center justify-center rounded-lg text-fg-secondary transition-colors hover:bg-surface-hover hover:text-fg lg:hidden"
+                        className="flex h-10 w-10 items-center justify-center rounded-lg text-fg-secondary transition-colors hover:bg-surface-hover hover:text-fg lg:hidden"
                     >
                         <Menu size={20} aria-hidden />
                     </button>

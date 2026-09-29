@@ -1,37 +1,45 @@
 import React from "react"
 import Link from "next/link"
+import { ArrowRight, FileText, MessageCircle } from "lucide-react"
 import { Container } from "@/src/components/system/Container"
 import { Reveal } from "@/src/components/system/Reveal"
 
 export function ContactCTASection() {
     return (
-        <section className="border-t border-border pb-32 pt-section sm:py-section">
+        <section className="border-t border-border py-16 sm:py-24">
             <Container>
                 <Reveal>
-                    <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
-                        <div className="max-w-2xl">
-                            <h2 className="text-display-sm text-fg">
-                                Have a system to build?
-                            </h2>
-                            <p className="mt-4 max-w-lg text-lg leading-relaxed text-fg-secondary">
-                                I&apos;m available for Java and Spring Boot
-                                backend roles, API work, and product teams that
-                                value dependable systems.
-                            </p>
-                        </div>
-                        <div className="flex w-full flex-wrap gap-3 sm:w-auto">
-                            <Link
-                                href="/contact"
-                                className="inline-flex h-12 w-full items-center justify-center rounded-lg bg-gradient-brand px-5 text-sm font-medium text-white transition-[filter] hover:brightness-110 sm:w-auto"
-                            >
-                                Start a conversation
-                            </Link>
-                            <Link
-                                href="/resume"
-                                className="inline-flex h-12 w-full items-center justify-center rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover sm:w-auto"
-                            >
-                                View Resume
-                            </Link>
+                    <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-surface via-surface to-surface-elevated/80 p-8 shadow-sm sm:p-12 lg:p-16">
+                        <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-brand/5 blur-3xl" />
+                        <div className="relative z-10 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+                            <div className="max-w-2xl">
+                                <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+                                    Let&apos;s Build Together
+                                </span>
+                                <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-fg sm:text-4xl lg:text-5xl leading-tight">
+                                    Have a system or service to build?
+                                </h2>
+                                <p className="mt-4 max-w-xl text-base leading-relaxed text-fg-secondary sm:text-lg">
+                                    Available for Java and Spring Boot backend engineering, API architecture, and product engineering teams that value dependability.
+                                </p>
+                            </div>
+                            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                                <Link
+                                    href="/contact"
+                                    className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-brand px-6 text-sm font-semibold text-white shadow-xs transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+                                >
+                                    <MessageCircle size={16} aria-hidden />
+                                    <span>Start a conversation</span>
+                                    <ArrowRight size={15} aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                                </Link>
+                                <Link
+                                    href="/resume"
+                                    className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-surface px-5 text-sm font-medium text-fg transition-all duration-200 hover:border-border-strong hover:bg-surface-hover active:scale-[0.98]"
+                                >
+                                    <FileText size={15} aria-hidden />
+                                    <span>View Resume</span>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </Reveal>

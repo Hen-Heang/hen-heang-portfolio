@@ -1,9 +1,9 @@
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, ArrowUpRight, FileText } from "lucide-react"
 import { GithubIcon } from "@/src/components/icons/social"
 import { Container } from "@/src/components/system/Container"
-import { Eyebrow } from "@/src/components/system/Eyebrow"
 import {
     TechnicalPanel,
     type TechnicalTab,
@@ -105,86 +105,120 @@ export function Hero({
     const tabs = buildTabs(projects)
 
     return (
-        <section className="pb-12 pt-12 sm:pt-16 md:pb-16 md:pt-24">
+        <section className="pb-12 pt-10 sm:pt-14 md:pb-16 md:pt-20">
             <Container>
                 <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="flex max-w-xl flex-col items-start">
-                        <HeroEntrance className="mb-5">
-                            <Eyebrow>Engineering portfolio</Eyebrow>
+                        <HeroEntrance className="mb-6">
+                            <div className="flex items-center gap-3.5">
+                                <div className="relative shrink-0">
+                                    <Image
+                                        src={profile.profileImage || "/image/heang_new.png"}
+                                        alt={profile.name}
+                                        width={52}
+                                        height={52}
+                                        priority
+                                        className="h-13 w-13 rounded-2xl object-cover ring-2 ring-border shadow-md"
+                                    />
+                                    {profile.available && (
+                                        <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-surface ring-2 ring-surface" title="Available for opportunities">
+                                            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="min-w-0">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+                                            Backend / AX Engineer
+                                        </span>
+                                    </div>
+                                    <p className="text-xs text-fg-muted mt-0.5">
+                                        Based in {profile.location} · {profile.available ? "Open to opportunities" : "Active"}
+                                    </p>
+                                </div>
+                            </div>
                         </HeroEntrance>
 
                         <HeroEntrance delay={0.06}>
-                            <h1 className="whitespace-nowrap text-[clamp(2.75rem,12vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-fg">
+                            <h1 className="text-balance text-4xl font-extrabold tracking-tight text-fg sm:text-5xl lg:text-6xl leading-[1.06]">
                                 {profile.name}
                             </h1>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.12} className="mt-4">
-                            <p className="text-balance text-xl font-medium leading-snug text-fg-secondary sm:text-2xl lg:text-[1.7rem]">
+                        <HeroEntrance delay={0.12} className="mt-3">
+                            <p className="text-balance text-lg font-semibold leading-snug text-brand sm:text-xl">
                                 {positioning.title}
                             </p>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.18} className="mt-5">
-                            <p className="text-balance text-lg leading-snug text-fg-secondary">
+                        <HeroEntrance delay={0.18} className="mt-4">
+                            <p className="text-balance text-base leading-relaxed text-fg-secondary sm:text-lg">
                                 {positioning.description}
                             </p>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.22} className="mt-5">
-                            <p className="text-base leading-relaxed text-fg-secondary">
+                        <HeroEntrance delay={0.22} className="mt-3">
+                            <p className="text-sm leading-relaxed text-fg-muted sm:text-base">
                                 {positioning.supporting}
                             </p>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.24} className="mt-8">
+                        <HeroEntrance delay={0.24} className="mt-8 w-full">
                             <div className="flex w-full flex-wrap items-center gap-3">
                                 <Link
                                     href="#work"
-                                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-gradient-brand px-5 text-sm font-medium text-white transition-[filter] hover:brightness-110 xs:w-auto"
+                                    className="group inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-brand px-5 text-sm font-semibold text-white shadow-xs transition-all duration-200 hover:brightness-110 active:scale-[0.98] sm:w-auto"
                                 >
-                                    View Backend Work
-                                    <ArrowRight size={15} aria-hidden />
+                                    <span>View Backend Work</span>
+                                    <ArrowRight size={15} aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5" />
                                 </Link>
                                 <Link
                                     href="/resume"
-                                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-hover xs:w-auto"
+                                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface px-5 text-sm font-medium text-fg transition-all duration-200 hover:border-border-strong hover:bg-surface-hover active:scale-[0.98] sm:w-auto"
                                 >
                                     <FileText size={15} aria-hidden />
-                                    View Resume
+                                    <span>Resume & Skills</span>
                                 </Link>
                                 <a
                                     href={profile.socialLinks.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                                    className="inline-flex h-11 items-center gap-1.5 px-3 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
                                     aria-label="View Hen Heang on GitHub (opens in a new tab)"
                                 >
                                     <GithubIcon size={16} />
-                                    GitHub
-                                    <ArrowUpRight size={13} aria-hidden />
+                                    <span>GitHub</span>
+                                    <ArrowUpRight size={13} aria-hidden className="text-fg-muted" />
                                 </a>
                             </div>
                         </HeroEntrance>
 
-                        <HeroEntrance delay={0.3} className="mt-9 w-full">
-                            <div
-                                className="flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-border py-3 font-mono text-xs text-fg-muted"
-                                aria-label="Professional metadata"
-                            >
-                                <span>
-                                    {profile.yearsExperience} years experience
-                                </span>
-                                <span>{profile.location}</span>
-                                {profile.available && (
-                                    <span className="inline-flex items-center gap-2 text-success">
-                                        <span
-                                            className="h-1.5 w-1.5 rounded-full bg-success"
-                                            aria-hidden
-                                        />
-                                        Open to roles
-                                    </span>
-                                )}
+                        <HeroEntrance delay={0.3} className="mt-8 w-full">
+                            <div className="grid grid-cols-3 gap-3 border-y border-border py-4 w-full">
+                                <div>
+                                    <div className="font-mono text-2xl font-bold tracking-tight text-fg tabular-nums sm:text-3xl">
+                                        {profile.yearsExperience}
+                                    </div>
+                                    <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
+                                        Years Exp
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="font-mono text-2xl font-bold tracking-tight text-fg tabular-nums sm:text-3xl">
+                                        4+
+                                    </div>
+                                    <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
+                                        Core Systems
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="font-mono text-2xl font-bold tracking-tight text-emerald-500 tabular-nums sm:text-3xl">
+                                        100%
+                                    </div>
+                                    <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
+                                        Production
+                                    </div>
+                                </div>
                             </div>
                         </HeroEntrance>
                     </div>

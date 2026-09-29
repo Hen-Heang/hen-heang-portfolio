@@ -25,7 +25,7 @@ export function ProjectCard({ project }: { project: Project }) {
     return (
         <div
             className={cn(
-                "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface",
+                "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-xs transition-all duration-300 hover:border-brand/40 hover:shadow-md hover:-translate-y-1",
                 interactiveCard,
             )}
         >
@@ -46,15 +46,16 @@ export function ProjectCard({ project }: { project: Project }) {
                         project.imageFit === "contain"
                             ? "object-contain"
                             : "object-cover",
-                        "transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+                        "transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
                     )}
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </div>
 
             <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center justify-between gap-3">
                     {project.category ? (
-                        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-muted">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand font-medium">
                             {project.category}
                         </p>
                     ) : (
@@ -69,7 +70,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     </span>
                 </div>
 
-                <h3 className="mt-3 text-lg font-semibold tracking-tight text-fg">
+                <h3 className="mt-3 text-lg font-bold tracking-tight text-fg transition-colors group-hover:text-brand">
                     <Link
                         href={`/projects/${project.slug}`}
                         className="static-link"
@@ -107,12 +108,12 @@ export function ProjectCard({ project }: { project: Project }) {
                         </div>
                     )}
 
-                <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand transition-colors group-hover:text-brand-hover">
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand transition-colors group-hover:text-brand-hover">
                     View case study
                     <ArrowRight
-                        size={14}
+                        size={13}
                         aria-hidden
-                        className="transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0"
+                        className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
                     />
                 </span>
 
@@ -125,7 +126,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     {project.technologies.slice(0, 3).map((tech) => (
                         <li
                             key={tech}
-                            className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-fg-secondary"
+                            className="rounded-lg border border-border/80 bg-surface-elevated/50 px-2 py-0.5 font-mono text-[11px] text-fg-secondary"
                         >
                             {tech}
                         </li>
@@ -139,13 +140,13 @@ export function ProjectCard({ project }: { project: Project }) {
                 )}
 
                 {(project.github || isLive) && (
-                    <div className="relative z-10 mt-4 flex items-center gap-4 border-t border-border pt-4">
+                    <div className="relative z-10 mt-4 flex items-center gap-4 border-t border-border pt-3.5">
                         {project.github && (
                             <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                                className="inline-flex min-h-9 items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
                                 aria-label={`View ${project.title} on GitHub (opens in a new tab)`}
                             >
                                 <GithubIcon size={14} brand={false} />
@@ -157,10 +158,10 @@ export function ProjectCard({ project }: { project: Project }) {
                                 href={project.demo}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
+                                className="inline-flex min-h-9 items-center gap-1.5 text-xs font-medium text-fg-secondary transition-colors hover:text-fg"
                                 aria-label={`Open ${project.title} live site (opens in a new tab)`}
                             >
-                                Live site
+                                Live demo
                                 <ExternalLink size={12} aria-hidden />
                             </a>
                         )}

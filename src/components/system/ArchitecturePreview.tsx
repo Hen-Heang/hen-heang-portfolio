@@ -22,27 +22,27 @@ export function ArchitecturePreview({
     return (
         <figure
             className={cn(
-                "rounded-xl border border-border bg-surface p-5 sm:p-6",
+                "rounded-2xl border border-border bg-surface/90 p-5 shadow-xs sm:p-6",
                 className,
             )}
             aria-label={`Architecture flow: ${layers.join(" to ")}`}
         >
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
-                architecture
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-brand font-semibold">
+                Architecture Flow
             </p>
-            <div className={cn("flex flex-col", compact ? "gap-1" : "gap-1.5")}>
+            <div className={cn("flex flex-col", compact ? "gap-1" : "gap-2")}>
                 {layers.map((layer, i) => (
                     <React.Fragment key={layer}>
                         {i > 0 && (
                             <ArrowDown
                                 size={13}
-                                className="mx-auto shrink-0 text-fg-muted"
+                                className="mx-auto shrink-0 text-brand/60"
                                 aria-hidden
                             />
                         )}
                         <div
                             className={cn(
-                                "rounded-lg border border-border bg-background/60 text-center font-mono text-sm text-fg-secondary",
+                                "rounded-xl border border-border/80 bg-background/80 text-center font-mono text-xs sm:text-sm text-fg-secondary shadow-xs transition-colors hover:border-brand/40 hover:text-fg",
                                 compact ? "px-3 py-1.5" : "px-4 py-2.5",
                             )}
                         >
@@ -52,7 +52,7 @@ export function ArchitecturePreview({
                 ))}
             </div>
             {note && (
-                <figcaption className="mt-4 text-[13px] leading-relaxed text-fg-muted">
+                <figcaption className="mt-4 border-t border-border pt-3 text-xs leading-relaxed text-fg-muted">
                     {note}
                 </figcaption>
             )}

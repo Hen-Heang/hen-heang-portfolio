@@ -81,17 +81,17 @@ export function Footer() {
                     </div>
 
                     <div className="min-w-0 md:col-span-6">
-                        <h2 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-fg-muted">
-                            Site
+                        <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg-muted">
+                            Navigation
                         </h2>
-                        <ul className="mt-4 space-y-3">
+                        <ul className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-4">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
-                                        className="inline-flex items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-fg"
+                                        className="inline-flex items-center gap-2 text-sm text-fg-secondary transition-colors hover:text-brand"
                                     >
-                                        <link.icon size={15} aria-hidden />
+                                        <link.icon size={14} aria-hidden />
                                         {link.name}
                                     </Link>
                                 </li>
