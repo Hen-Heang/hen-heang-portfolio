@@ -27,7 +27,7 @@ test.describe("Homepage polish", () => {
         expect(html).toContain(positioning.title)
         expect(html).toContain(positioning.description)
         expect(html).toContain(positioning.supporting)
-        expect(html).toContain("years experience")
+        expect(html).toContain("Years Exp")
 
         await page.goto("/")
         const main = page.locator("main")
@@ -36,7 +36,9 @@ test.describe("Homepage polish", () => {
             main.getByRole("link", { name: "View Backend Work" }),
         ).toHaveAttribute("href", "#work")
 
-        const resumeLinks = main.getByRole("link", { name: "View Resume" })
+        const resumeLinks = main.getByRole("link", {
+            name: /^(View Resume|Resume & Skills)$/,
+        })
         await expect(resumeLinks).toHaveCount(2)
         for (const link of await resumeLinks.all()) {
             await expect(link).toHaveAttribute("href", "/resume")
@@ -60,7 +62,9 @@ test.describe("Homepage polish", () => {
             page.locator("#work"),
             page.locator("#experience"),
             page.locator("#about"),
-            page.getByRole("heading", { name: "Have a system to build?" }),
+            page.getByRole("heading", {
+                name: "Have a system or service to build?",
+            }),
         ]
         const positions = await Promise.all(
             landmarks.map((landmark) =>

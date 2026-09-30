@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test"
 import { fillControlled } from "./support/interactions"
 
 test.describe("Site navigation", () => {
-    test("desktop nav prioritizes Work, Lab, About, and Resume with one active route", async ({
+    test("desktop nav shows Work, Lab, Journey, About, and Resume with one active route", async ({
         page,
     }) => {
         await page.setViewportSize({ width: 1280, height: 900 })
@@ -19,7 +19,7 @@ test.describe("Site navigation", () => {
         ).toHaveAttribute("href", "/resume")
         await expect(
             mainNav.getByRole("link", { name: "Journey" }),
-        ).toHaveCount(0)
+        ).toHaveAttribute("href", "/journey")
         await expect(
             mainNav.getByRole("link", { name: "Experience" }),
         ).toHaveCount(0)
