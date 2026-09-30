@@ -1,8 +1,0 @@
-{
-  "name": "Hen Heang — Portfolio & Engineering Lab",
-  "description": "Portfolio and Engineering Lab of Hen Heang — Backend / AX Software Engineer specializing in Java, Spring Boot, PostgreSQL, and AI-assisted engineering workflows.",
-  "requestFramePermissions": [],
-  "capabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}
