@@ -27,6 +27,12 @@ export function ProjectFilterBar({
     active: ProjectFilter
     counts: Record<ProjectFilter, number>
 }) {
+    // An empty filter is a dead end, so hide it — unless it is the active one
+    // (e.g. a shared `?filter=` link), so the current state stays visible.
+    const visibleFilters = filters.filter(
+        (filter) => filter.id === "all" || filter.id === active || counts[filter.id] > 0,
+    )
+
     return (
         // Below `sm`, the strip scrolls horizontally instead of wrapping to
         // several lines; the mask fades the trailing edge as a scroll
@@ -37,7 +43,7 @@ export function ProjectFilterBar({
                 role="group"
                 aria-label="Filter projects by type"
             >
-                {filters.map((filter) => {
+                {visibleFilters.map((filter) => {
                     const isActive = filter.id === active
                     return (
                         <Link

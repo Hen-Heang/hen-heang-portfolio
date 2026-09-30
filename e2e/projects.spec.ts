@@ -24,20 +24,32 @@ test.describe("Projects index", () => {
         const group = page.getByRole("group", { name: "Filter projects by type" })
         await expect(group).toBeVisible()
 
-        // "Live" is the last pill and requires horizontal scroll at 320px —
-        // confirm the scroll container (the group's parent) actually
-        // overflows, then reach and use it.
+        // "Live" is the last pill. Empty filters are hidden, so whether the
+        // strip overflows at 320px depends on the data — assert instead that
+        // the last pill can be brought fully into the scroll container.
         const scrollContainer = group.locator("xpath=..")
-        const overflow = await scrollContainer.evaluate((el) => ({ scrollWidth: el.scrollWidth, clientWidth: el.clientWidth }))
-        expect(overflow.scrollWidth).toBeGreaterThan(overflow.clientWidth)
-
         const liveFilter = group.getByRole("link", { name: /^Live/ })
         await liveFilter.scrollIntoViewIfNeeded()
         const box = await liveFilter.boundingBox()
+        const container = await scrollContainer.boundingBox()
+        expect(box!.x).toBeGreaterThanOrEqual(container!.x)
+        expect(box!.x + box!.width).toBeLessThanOrEqual(container!.x + container!.width + 1)
         expect(box!.height).toBeGreaterThanOrEqual(44)
         await liveFilter.click()
         await expect(page).toHaveURL(/filter=live/)
         await expect(liveFilter).toHaveAttribute("aria-current", "page")
+    })
+
+    test("hides empty filters unless they are the active one", async ({ page }) => {
+        await page.goto("/projects")
+        const group = page.getByRole("group", { name: "Filter projects by type" })
+        for (const link of await group.getByRole("link").all()) {
+            const text = (await link.textContent())?.trim() ?? ""
+            if (!text.startsWith("All")) expect(text).not.toMatch(/\D0$/)
+        }
+
+        await page.goto("/projects?filter=full-stack")
+        await expect(group.getByRole("link", { name: /^Full-stack/ })).toHaveAttribute("aria-current", "page")
     })
 
     test("shows an editorial no-results message and clears back to all", async ({ page }) => {
