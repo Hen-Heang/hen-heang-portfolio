@@ -23,6 +23,7 @@ export function ProfessionalExperience({
             title="Professional Experience"
             description="Backend and full-stack roles in Korean enterprise teams — REST APIs, database-backed business logic, and production web applications."
             className="bg-surface"
+            layout="split"
             revealHeader
         >
             <Reveal delay={0.05}>

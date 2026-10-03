@@ -18,9 +18,11 @@ import {
     Gauge,
     TestTubes,
     ArrowLeft,
+    Library,
+    ChartNoAxesColumn,
 } from "lucide-react"
 import { profileData } from "@/data/profile"
-import { HHLogo } from "@/src/components/icons/HHLogo"
+import Image from "next/image"
 
 interface LabNavItem {
     label: string
@@ -38,7 +40,11 @@ interface LabNavGroup {
 
 const navGroups: LabNavGroup[] = [
     {
-        items: [{ label: "Overview", href: "/lab", icon: LayoutDashboard }],
+        items: [
+            { label: "Overview", href: "/lab", icon: LayoutDashboard },
+            { label: "Library", href: "/lab/library", icon: Library },
+            { label: "Progress", href: "/lab/progress", icon: ChartNoAxesColumn },
+        ],
     },
     {
         title: "Learning paths",
@@ -70,6 +76,7 @@ const navGroups: LabNavGroup[] = [
             { label: "Experiments", href: "/lab/experiments", icon: TestTubes },
         ],
     },
+
 ]
 
 function isActive(pathname: string, item: LabNavItem): boolean {
@@ -86,7 +93,13 @@ export function LabSidebar({ onNavigate }: { onNavigate?: () => void }) {
             {/* Brand */}
             <div className="flex items-center gap-3 border-b border-border px-5 py-4">
                 <Link href="/" onClick={onNavigate} aria-label="Back to portfolio home">
-                    <HHLogo size={28} className="rounded-lg ring-1 ring-border hover:ring-border-strong transition-all" />
+                    <Image
+                        src="/image/heang_new.jpeg"
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 rounded-full object-cover ring-1 ring-border transition-all hover:ring-border-strong"
+                    />
                 </Link>
                 <div className="min-w-0">
                     <p className="truncate text-lg font-bold text-fg">Engineering Lab</p>

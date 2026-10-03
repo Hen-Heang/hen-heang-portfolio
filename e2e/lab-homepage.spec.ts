@@ -43,21 +43,23 @@ test.describe("Engineering Lab homepage", () => {
 
     test("search stays interactive and swaps only the library preview section", async ({ page }) => {
         await page.goto("/lab")
-        await expect(page.getByRole("link", { name: "Backend curriculum" })).toBeVisible()
+        await expect(page.getByRole("link", { name: /Full searchable library/ })).toBeVisible()
 
         const search = page.getByRole("textbox", {
             name: "Search Engineering Lab",
         })
         await fillControlled(search, "docker")
-        await expect(page.getByRole("link", { name: "Backend curriculum" })).toHaveCount(0)
+        await expect(page.getByRole("link", { name: /Full searchable library/ })).toHaveCount(0)
         await expect(page.getByText(/\d+ results?$/)).toBeVisible()
         await expect(page.getByRole("link", { name: /Open in full library/ })).toBeVisible()
 
         await fillControlled(search, "")
-        await expect(page.getByRole("link", { name: "Backend curriculum" })).toBeVisible()
+        await expect(page.getByRole("link", { name: /Full searchable library/ })).toBeVisible()
     })
 
     test("the Lab nav marks the current section with aria-current", async ({ page }) => {
+        // The tab-style Lab nav is mobile-only; desktop relies on the sidebar.
+        await page.setViewportSize({ width: 390, height: 844 })
         await page.goto("/lab")
         const labNav = page.getByRole("navigation", {
             name: "Engineering Lab sections",

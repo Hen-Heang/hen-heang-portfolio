@@ -1,4 +1,3 @@
-import Link from "next/link"
 import {
     ArrowRight,
     BookOpen,
@@ -9,7 +8,6 @@ import {
     Hammer,
     Leaf,
     Lightbulb,
-    Search,
     Terminal,
 } from "lucide-react"
 import { Reveal } from "@/src/components/system/Reveal"
@@ -30,7 +28,11 @@ const loop = [
 ]
 
 /** Compact hero with one gentle entrance for the whole composition. Keeping the
- * motion boundary in Reveal lets this component remain server-rendered. */
+ * motion boundary in Reveal lets this component remain server-rendered.
+ *
+ * No CTA buttons here: "Continue learning" directly below is the primary
+ * action, the search section is on the same page, and the learning paths
+ * follow immediately — hero buttons pointing at each just repeated them. */
 export function LabHero() {
     return (
         <section className="mb-8 border-b border-border pb-8">
@@ -68,26 +70,6 @@ export function LabHero() {
                         </li>
                     ))}
                 </ul>
-
-                <div className="mt-5 flex flex-wrap items-center gap-3">
-                    <Link
-                        href="/lab/library"
-                        className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-base font-semibold text-fg-secondary transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:text-fg active:translate-y-0 active:scale-[0.98] motion-reduce:hover:translate-y-0"
-                    >
-                        <Search size={14} aria-hidden="true" /> Search the Lab
-                    </Link>
-                    <Link
-                        href="#learning-paths"
-                        className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-brand px-4 py-2.5 text-base font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 active:scale-[0.98] motion-reduce:hover:translate-y-0"
-                    >
-                        Browse learning paths
-                        <ArrowRight
-                            size={14}
-                            aria-hidden="true"
-                            className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
-                        />
-                    </Link>
-                </div>
 
                 <ol
                     aria-label="The Lab learning loop"

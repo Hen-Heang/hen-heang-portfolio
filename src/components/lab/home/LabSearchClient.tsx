@@ -169,7 +169,7 @@ export function LabSearchClient({
                     )}
                 </div>
             ) : (
-                children
+                <div className="mb-14">{children}</div>
             )}
         </section>
     )

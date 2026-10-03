@@ -1,5 +1,6 @@
 "use client"
 
+import type React from "react"
 import { Mail, MapPin, MessageSquare, ExternalLink } from "lucide-react"
 import {
     FacebookIcon,
@@ -7,6 +8,7 @@ import {
     InstagramIcon,
     LinkedinIcon,
     TelegramIcon,
+    type SocialIconProps,
 } from "@/src/components/icons/social"
 import { ContactForm } from "@/src/components/sections/contact/ContactForm"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
@@ -16,15 +18,27 @@ import { Container } from "@/src/components/system/Container"
 import { Eyebrow } from "@/src/components/system/Eyebrow"
 import { StatusBadge } from "@/src/components/system/StatusBadge"
 
+// Contact cards tint every icon with the single brand accent, so the social
+// marks render as monochrome glyphs instead of five competing brand colours.
+const mono = (Icon: (props: SocialIconProps) => React.ReactElement) =>
+    function MonoSocialIcon(props: Omit<SocialIconProps, "brand">) {
+        return <Icon {...props} brand={false} />
+    }
+const MonoLinkedin = mono(LinkedinIcon)
+const MonoTelegram = mono(TelegramIcon)
+const MonoGithub = mono(GithubIcon)
+const MonoFacebook = mono(FacebookIcon)
+const MonoInstagram = mono(InstagramIcon)
+
 export function ContactPageClient() {
     const personalInfo = usePersonalInfo()
     const contactCards = [
         { title: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}`, newTab: false, icon: Mail },
-        { title: "LinkedIn", value: "Hen Heang", href: personalInfo.socialLinks.linkedin, newTab: true, icon: LinkedinIcon },
-        { title: "Telegram", value: "@henheang", href: personalInfo.socialLinks.telegram, newTab: true, icon: TelegramIcon },
-        { title: "GitHub", value: "Hen-Heang", href: personalInfo.socialLinks.github, newTab: true, icon: GithubIcon },
-        { title: "Facebook", value: "HenHeang15", href: personalInfo.socialLinks.facebook, newTab: true, icon: FacebookIcon },
-        { title: "Instagram", value: "@hen_heang", href: personalInfo.socialLinks.instagram, newTab: true, icon: InstagramIcon },
+        { title: "LinkedIn", value: "Hen Heang", href: personalInfo.socialLinks.linkedin, newTab: true, icon: MonoLinkedin },
+        { title: "Telegram", value: "@henheang", href: personalInfo.socialLinks.telegram, newTab: true, icon: MonoTelegram },
+        { title: "GitHub", value: "Hen-Heang", href: personalInfo.socialLinks.github, newTab: true, icon: MonoGithub },
+        { title: "Facebook", value: "HenHeang15", href: personalInfo.socialLinks.facebook, newTab: true, icon: MonoFacebook },
+        { title: "Instagram", value: "@hen_heang", href: personalInfo.socialLinks.instagram, newTab: true, icon: MonoInstagram },
     ].filter((card) => Boolean(card.href))
 
     return (

@@ -14,8 +14,9 @@ import {
 // Re-render at most once a minute so admin edits show up without a redeploy.
 export const revalidate = 60
 
-// Recruiter-scan order: who he is, what he works with, the work, where he did
-// it, the background, then a direct contact path. Each purpose appears once —
+// Recruiter-scan order: who he is, the work (proof first), where he did it,
+// what he works with, the background, then a direct contact path. Sections
+// alternate plain / surface backgrounds in this order. Each purpose appears once —
 // the previous "Engineering Proof Strip", "Professional Profile", and
 // "Engineering Growth" sections restated Selected Work, Experience, and
 // Technical Capabilities respectively.
@@ -29,13 +30,12 @@ export default async function HomePage() {
     return (
         <PageLayout>
             <Hero profile={profile} projects={projects} />
+            <SelectedWork projects={projects} />
+            <ProfessionalExperience experience={experience} />
             <TechnicalCapabilities
                 projects={projects}
                 experience={experience}
-                variant="surface"
             />
-            <SelectedWork projects={projects} />
-            <ProfessionalExperience experience={experience} />
             <AboutSummary />
             <ContactCTASection />
         </PageLayout>

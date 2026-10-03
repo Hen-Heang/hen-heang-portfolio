@@ -108,7 +108,7 @@ export function SiteHeader() {
                     aria-label="Hen Heang — home"
                 >
                     <Image
-                        src="/image/heang_new.png"
+                        src="/image/heang_new.jpeg"
                         alt="Hen Heang"
                         width={38}
                         height={38}

@@ -26,6 +26,6 @@
   </g>
 
   <text fill="#ffffff" x="185" y="95" font-family="system-ui" font-size="32" font-weight="bold">AuthHub</text>
-  <text fill="#c7d2fe" x="185" y="122" font-family="system-ui" font-size="16">Reusable Authentication Service</text>
+  <text fill="#c7d2fe" x="185" y="122" font-family="system-ui" font-size="13" textLength="195" lengthAdjust="spacingAndGlyphs">Reusable Authentication Service</text>
   <text fill="#a5b4fc" x="185" y="145" font-family="system-ui" font-size="10">JWT · MFA · RBAC · Spring Boot 3.5</text>
 </svg>

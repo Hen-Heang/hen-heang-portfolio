@@ -14,29 +14,16 @@ import type { Project } from "@/src/lib/types"
 import type { ProfileContentParsed } from "@/src/lib/schemas/content"
 
 /**
- * Builds the hero's technical views from real project data, architecture
- * first (the default, visible-on-mobile tab) per the recommended priority:
- * architecture, then API request, then database. The API response body and
- * pipeline stages are labeled illustrative in their captions. Pipeline is
- * extra desktop-only depth — mobile only ever shows the first tab.
+ * Builds the hero's technical views from real project data: API request
+ * first (the default, visible-on-mobile tab), then database, then pipeline.
+ * The H-Phsar architecture flow is deliberately absent — Selected Work shows
+ * it directly below, and repeating it here made the page say the same thing
+ * twice. The API response body and pipeline stages are labeled illustrative
+ * in their captions.
  */
 function buildTabs(projects: Project[]): TechnicalTab[] {
     const bySlug = (slug: string) => projects.find((p) => p.slug === slug)
     const tabs: TechnicalTab[] = []
-
-    const hphsar = bySlug("h-phsar")
-    if (hphsar?.architecture?.length) {
-        tabs.push({
-            id: "architecture",
-            label: "architecture",
-            data: {
-                kind: "architecture",
-                layers: ["Client", ...hphsar.architecture.slice(0, 4)],
-                caption:
-                    "H-Phsar request flow, from the client boundary to persistence.",
-            },
-        })
-    }
 
     const authhub = bySlug("authhub")
     const authEndpoint = authhub?.apiEndpoints?.[0]
@@ -51,8 +38,8 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
                 responseLines: [
                     "HTTP/1.1 200 OK",
                     "{",
-                    '  "accessToken":  "eyJhbGciOiJIUzI1…",',
-                    '  "refreshToken": "d290f1ee-6c54-4b01…",',
+                    '  "accessToken":  "eyJhbGci…",',
+                    '  "refreshToken": "d290f1ee…",',
                     '  "tokenType":    "Bearer",',
                     '  "expiresIn":    900',
                     "}",
@@ -103,6 +90,17 @@ export function Hero({
     projects: Project[]
 }) {
     const tabs = buildTabs(projects)
+    const visibleProjects = projects.filter((p) => !p.hidden)
+    const liveCount = visibleProjects.filter(
+        (p) => p.demo && p.demo !== "#",
+    ).length
+    // Every stat is countable from the projects list, so a reviewer can
+    // verify it by scrolling down — no unverifiable "100%" claims.
+    const stats = [
+        { value: profile.yearsExperience, label: "Years Exp" },
+        { value: String(visibleProjects.length), label: "Projects" },
+        { value: String(liveCount), label: "Live Products" },
+    ]
 
     return (
         <section className="pb-12 pt-10 sm:pt-14 md:pb-16 md:pt-20">
@@ -113,7 +111,7 @@ export function Hero({
                             <div className="flex items-center gap-3.5">
                                 <div className="relative shrink-0">
                                     <Image
-                                        src={profile.profileImage || "/image/heang_new.png"}
+                                        src={profile.profileImage || "/image/heang_new.jpeg"}
                                         alt={profile.name}
                                         width={52}
                                         height={52}
@@ -127,13 +125,11 @@ export function Hero({
                                     )}
                                 </div>
                                 <div className="min-w-0">
-                                    <div className="flex items-center gap-2">
-                                        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-brand">
-                                            Backend / AX Engineer
-                                        </span>
-                                    </div>
-                                    <p className="text-xs text-fg-muted mt-0.5">
-                                        Based in {profile.location} · {profile.available ? "Open to opportunities" : "Active"}
+                                    <p className="text-sm font-medium text-fg">
+                                        Based in {profile.location}
+                                    </p>
+                                    <p className="mt-0.5 text-xs text-fg-muted">
+                                        {profile.available ? "Open to opportunities" : "Currently not looking"}
                                     </p>
                                 </div>
                             </div>
@@ -183,7 +179,7 @@ export function Hero({
                                     href={profile.socialLinks.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex h-11 items-center gap-1.5 px-3 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+                                    className="inline-flex h-11 w-full items-center justify-center gap-1.5 px-3 text-sm font-medium text-fg-secondary sm:w-auto transition-colors hover:text-fg"
                                     aria-label="View Hen Heang on GitHub (opens in a new tab)"
                                 >
                                     <GithubIcon size={16} />
@@ -194,32 +190,18 @@ export function Hero({
                         </HeroEntrance>
 
                         <HeroEntrance delay={0.3} className="mt-8 w-full">
-                            <div className="grid grid-cols-3 gap-3 border-y border-border py-4 w-full">
-                                <div>
-                                    <div className="font-mono text-2xl font-bold tracking-tight text-fg tabular-nums sm:text-3xl">
-                                        {profile.yearsExperience}
+                            <dl className="grid w-full grid-cols-3 gap-3 border-y border-border py-4">
+                                {stats.map((stat) => (
+                                    <div key={stat.label} className="flex flex-col-reverse">
+                                        <dt className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
+                                            {stat.label}
+                                        </dt>
+                                        <dd className="font-mono text-2xl font-bold tracking-tight text-fg tabular-nums sm:text-3xl">
+                                            {stat.value}
+                                        </dd>
                                     </div>
-                                    <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
-                                        Years Exp
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="font-mono text-2xl font-bold tracking-tight text-fg tabular-nums sm:text-3xl">
-                                        4+
-                                    </div>
-                                    <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
-                                        Core Systems
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="font-mono text-2xl font-bold tracking-tight text-emerald-500 tabular-nums sm:text-3xl">
-                                        100%
-                                    </div>
-                                    <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-fg-muted">
-                                        Production
-                                    </div>
-                                </div>
-                            </div>
+                                ))}
+                            </dl>
                         </HeroEntrance>
                     </div>
 

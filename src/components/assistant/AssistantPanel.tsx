@@ -140,7 +140,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
     return (
         <div className="flex h-full flex-col bg-[#050816] text-[#F8FAFC]">
             <header className="flex items-center gap-3 border-b border-slate-400/15 px-4 py-3 shrink-0">
-                <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gemini-gradient shadow-sm">
+                <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-brand shadow-sm">
                     <Sparkles className="h-4 w-4 text-white" aria-hidden />
                     <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#050816] bg-green-500" aria-label="Available" />
                 </div>
@@ -163,7 +163,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                     type="button"
                     onClick={onClose}
                     aria-label="Close assistant"
-                    className="flex h-11 w-11 items-center justify-center rounded-md text-[#94A3B8] transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                    className="flex h-11 w-11 items-center justify-center rounded-md text-[#94A3B8] transition-colors hover:bg-slate-800/50 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 >
                     <X className="h-4 w-4" aria-hidden />
                 </button>
@@ -189,13 +189,13 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                             <div className="flex flex-wrap gap-2 pt-1">
                                 <a
                                     href="/resume"
-                                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-400/15 bg-[#11182B] px-4 py-1.5 text-xs font-medium text-[#94A3B8] transition-colors hover:border-[#4285F4]/40 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-400/15 bg-[#11182B] px-4 py-1.5 text-xs font-medium text-[#94A3B8] transition-colors hover:border-[#4285F4]/40 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                                 >
                                     View resume
                                 </a>
                                 <a
                                     href="/contact"
-                                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-400/15 bg-[#11182B] px-4 py-1.5 text-xs font-medium text-[#94A3B8] transition-colors hover:border-[#4285F4]/40 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-400/15 bg-[#11182B] px-4 py-1.5 text-xs font-medium text-[#94A3B8] transition-colors hover:border-[#4285F4]/40 hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                                 >
                                     Contact Heang
                                 </a>
@@ -271,7 +271,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                             type="button"
                             onClick={() => stop()}
                             aria-label="Stop generating"
-                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-[#94A3B8] transition-colors hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4]"
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-[#94A3B8] transition-colors hover:text-[#F8FAFC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                         >
                             <Square className="h-4 w-4" aria-hidden />
                         </button>
@@ -280,7 +280,7 @@ export default function AssistantPanel({ onClose, page = "other", projectSlug }:
                             type="submit"
                             disabled={input.trim().length === 0}
                             aria-label="Send message"
-                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gemini-gradient text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4285F4] disabled:pointer-events-none disabled:opacity-40"
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-40"
                         >
                             <Send className="h-4 w-4 ml-0.5" aria-hidden />
                         </button>
