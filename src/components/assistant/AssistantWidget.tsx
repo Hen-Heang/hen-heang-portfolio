@@ -42,7 +42,7 @@ export function AssistantWidget() {
             <DialogPrimitive.Trigger
                 type="button"
                 aria-label="Ask about my work"
-                className="fixed z-[70] bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-3 lg:bottom-6 lg:right-6 flex items-center justify-center gap-2 rounded-full lg:rounded-2xl bg-gradient-brand p-3 lg:pl-3.5 lg:pr-4 lg:py-3 text-sm font-medium text-white shadow-lg transition-all hover:shadow-xl hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white data-[state=open]:hidden"
+                className="fixed z-[70] bottom-[calc(6.25rem+env(safe-area-inset-bottom))] right-4 lg:bottom-6 lg:right-6 flex items-center justify-center gap-2 rounded-full lg:rounded-2xl bg-gradient-brand p-3 lg:pl-3.5 lg:pr-4 lg:py-3 text-sm font-medium text-white shadow-lg transition-all hover:shadow-xl hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white data-[state=open]:hidden"
             >
                 <Sparkles size={20} className="lg:w-4 lg:h-4" aria-hidden />
                 <span className="hidden lg:inline">Ask about my work</span>
