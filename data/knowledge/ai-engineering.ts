@@ -22,7 +22,7 @@ const narrativeSections: KnowledgeSection[] = [
         category: "ai-engineering",
         title: "AI application integration",
         keywords: [
-            "ai", "artificial intelligence", "llm", "openai", "gemini", "gpt",
+            "ai", "artificial intelligence", "llm", "openai", "anthropic", "claude", "gemini", "gpt",
             "ai feature", "ai chat", "ai integration", "ai application",
             "assistant", "chatbot", "responses api", "vercel ai sdk",
         ],
@@ -31,8 +31,8 @@ const narrativeSections: KnowledgeSection[] = [
         content: [
             "Heang integrates LLM features into shipped products, using the Vercel AI SDK as the integration layer:",
             "- **This portfolio's own assistant** — the chat widget you're using right now — is built on the **OpenAI Responses API** with retrieval grounded in the portfolio's own structured data, so it only answers from real Heang content.",
-            "- **Money Flow** (personal finance PWA) ships an AI chat, powered by **Google Gemini**, that answers questions grounded in the user's own transaction and budget data.",
-            "- **Hengo** (AI companion / Korean-learning app) has an AI Coach with four modes: free chat, message analysis, phrasing generation by formality level, and spaced-repetition review of past mistakes.",
+            "- **Luyra** (personal finance workspace) includes an optional **Anthropic-powered Money Coach** that answers questions grounded in the user's own finance data.",
+            "- **Hengo** (focused Korean-learning platform) uses OpenAI through authenticated Next.js AI routes for conversation, workplace-message analysis, phrasing generation, structured corrections, and AI Korean voice coaching.",
         ].join("\n"),
     },
     {

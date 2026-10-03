@@ -77,6 +77,7 @@ export const portfolioEvalCases: PortfolioEvalCase[] = [
     { id: "skills-strongest-backend", category: "skills", question: "What are Hen's strongest backend skills?", expectedSectionIds: ["skills-primary-stack"], requiredFacts: ["Spring Boot"], language: "en" },
     { id: "projects-spring-boot", category: "projects", question: "Which projects use Spring Boot?", expectedSectionIds: ["projects-catalog"], requiredFacts: ["Spring Boot"], language: "en" },
     { id: "skills-docker", category: "skills", question: "Does Hen know Docker?", expectedSectionIds: ["skills-primary-stack"], requiredFacts: ["Docker"], language: "en" },
+    { id: "skills-devops-fundamentals", category: "skills", question: "Does Hen have DevOps fundamentals?", expectedSectionIds: ["skills-detail-tools"], requiredFacts: ["DevOps Fundamentals", "Foundational training"], language: "en" },
     { id: "skills-frontend-tech", category: "skills", question: "What frontend technologies does Hen use?", expectedSectionIds: ["skills-primary-stack"], requiredFacts: ["Next.js"], language: "en" },
     // These two are the anti-hallucination checks from the skill-status taxonomy (data/skills-taxonomy.ts):
     // the static text knowledge base has no concept of "currently learning" at all, so it can't assert
@@ -90,7 +91,7 @@ export const portfolioEvalCases: PortfolioEvalCase[] = [
 
     // AI-assisted engineering
     { id: "ai-assisted-development", category: "ai-engineering", question: "How does he use AI in software development?", expectedSectionIds: ["ai-assisted-development"], requiredFacts: ["Claude Code"], language: "en" },
-    { id: "ai-application-integration", category: "ai-engineering", question: "Has he built AI features into any of his products?", expectedSectionIds: ["ai-application-integration"], requiredFacts: ["Gemini"], language: "en" },
+    { id: "ai-application-integration", category: "ai-engineering", question: "Has he built AI features into any of his products?", expectedSectionIds: ["ai-application-integration"], requiredFacts: ["Anthropic"], language: "en" },
     { id: "ai-unverified-claims", category: "ai-engineering", question: "Has Heang done machine learning model training or built AI agents with LangChain?", forbiddenClaims: ["fine-tuning experience", "LangChain expert", "trains machine learning models"], language: "en" },
 
     // Resume / availability / contact

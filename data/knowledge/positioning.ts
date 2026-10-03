@@ -40,7 +40,7 @@ export function buildPositioningKnowledge(profile: ProfileContentParsed): Knowle
             content: [
                 "**Best-fit roles:** backend, Java/Spring Boot, or backend-first AX software engineering positions, especially where REST API design, MyBatis/JPA data access, PostgreSQL/Oracle, and responsible AI-assisted development are useful. Roles requiring production-scale agent platforms, ML model training, or advanced AI infrastructure would be growth roles rather than established-specialist matches.",
                 "",
-                `**Strongest backend evidence:** production REST APIs and data-access work at ${profile.company ?? "his current employer"} (Korean enterprise, government/corporate financial systems) and KOSIGN (B2B billing platform integrated with banking systems), plus personal Spring Boot projects (H-Phsar, AuthHub, and Dev Lab) covering authentication, order/state-machine logic, and schema design end to end.`,
+                `**Strongest backend evidence:** production REST APIs and data-access work at ${profile.company ?? "his current employer"} (Korean enterprise, government/corporate financial systems) and KOSIGN (B2B billing platform integrated with banking systems), plus personal projects (H-Phsar, AuthHub, and VSTV Agent) covering authentication, order/state-machine logic, operations workflows, and schema design end to end.`,
                 "",
                 "**Enterprise experience:** yes — both employers operate in regulated, enterprise-scale environments (government-facing systems, banking integrations).",
                 "",

@@ -15,9 +15,9 @@ describe("Hengo technology accuracy", () => {
         // Mirrors how buildProjectsKnowledge merges a DB row with the static case-study fields.
         const dbHengo = {
             slug: "hengo",
-            title: "Hengo — AI Companion for Daily Growth",
-            description: "An AI-powered Korean learning and growth platform.",
-            technologies: ["Next.js 16", "React 19", "TypeScript", "Supabase", "Vercel AI SDK", "OpenAI"],
+            title: "Hengo — Focused Korean Learning Platform",
+            description: "A focused AI-assisted Korean learning platform.",
+            technologies: ["Next.js 16", "React 19", "TypeScript", "Supabase", "Vercel AI SDK", "OpenAI", "Tailwind CSS"],
         }
         const merged = staticProjects.map((p) => (p.slug === "hengo" ? { ...p, ...dbHengo } : p))
         const sections = buildProjectsKnowledge(merged)
@@ -38,17 +38,9 @@ describe("project classification — professional work vs. personal projects vs.
         }
     })
 
-    it("classifies Dev Lab as a Learning Lab, distinct from shipped personal projects", () => {
-        const devLab = projectsKnowledge.find((s) => s.id === "project-dev-lab")
-        const hPhsar = projectsKnowledge.find((s) => s.id === "project-h-phsar")
-
-        expect(devLab?.content).toContain("Type: Learning Lab")
-        expect(hPhsar?.content).toContain("Type: Personal Project")
-    })
-
     it("the catalog summary carries the ownership label alongside each project", () => {
         const catalog = projectsKnowledge.find((s) => s.id === "projects-catalog")
-        expect(catalog?.content).toContain("Dev Lab")
-        expect(catalog?.content).toContain("(Learning Lab)")
+        expect(catalog?.content).toContain("VSTV Agent")
+        expect(catalog?.content).toContain("(Personal Project)")
     })
 })

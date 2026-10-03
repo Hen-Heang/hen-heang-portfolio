@@ -166,14 +166,14 @@ export const cvData: CVData = {
       // Supporting capability, not the primary identity — kept as plain text
       // tags (no proficiency levels) and placed after core backend/database
       // skills. Every item here is verified: app/api/chat/route.ts (OpenAI
-      // Responses API), data/projects.ts money-flow (Google Gemini via
-      // Vercel AI SDK), and data/progress.ts "ai" entry (Claude Code, Codex,
-      // Prompt Design, AI-supported code review — self-reported, in progress).
+      // Responses API), data/projects.ts luyra (Anthropic Money Coach), and
+      // data/progress.ts "ai" entry (Claude Code, Codex, Prompt Design,
+      // AI-supported code review — self-reported, in progress).
       category: "AI & Developer Productivity",
       items: [
         "Claude Code",
         "Codex",
-        "Google Gemini API",
+        "Anthropic API",
         "OpenAI API",
         "LLM Integration",
         "Prompt Design",
@@ -186,7 +186,7 @@ export const cvData: CVData = {
     },
     {
       category: "Tools & Delivery",
-      items: ["Git", "GitHub", "IntelliJ IDEA", "WebStorm", "Postman", "Swagger", "Vercel", "Railway"],
+      items: ["DevOps Fundamentals", "Git", "GitHub", "IntelliJ IDEA", "WebStorm", "Postman", "Swagger", "Vercel", "Railway"],
     },
   ] satisfies SkillGroup[],
 
@@ -214,32 +214,32 @@ export const cvData: CVData = {
       featured: true,
     },
     {
-      name: "Money Flow",
-      category: "Backend API",
+      name: "Luyra",
+      category: "Full-Stack App",
       description:
-        "Personal finance API and PWA on Supabase Postgres with row-level security, backed up daily to Neon.",
+        "Personal finance workspace on Next.js, Supabase Auth, and Neon Postgres with scheduled reviews and finance automation.",
       bullets: [
-        "Implemented budgeting, savings-goal, and recurring-transaction logic behind Postgres row-level security.",
-        "Added an AI chat endpoint over Google Gemini for spending insights and web-push budget alerts.",
+        "Built transaction, budgeting, savings, analytics, and financial-review workflows behind authenticated Next.js route handlers.",
+        "Added an optional Anthropic Money Coach plus scheduled budget alerts, summaries, reports, and multi-channel delivery.",
       ],
-      technologies: ["Next.js", "TypeScript", "Supabase", "Google Gemini", "Web Push"],
-      github: "https://github.com/Hen-Heang/money-flow",
-      live: "https://money-flow.henheang.site/",
-      caseStudy: "/projects/money-flow",
+      technologies: ["Next.js 16", "TypeScript", "Supabase Auth", "Neon Postgres", "Anthropic"],
+      github: "https://github.com/Hen-Heang/luyra-web",
+      live: "https://luyra.henheang.site/",
+      caseStudy: "/projects/luyra",
       featured: true,
     },
     {
       name: "Hengo",
       category: "Full-Stack App",
       description:
-        "AI-powered workplace Korean and growth platform on Next.js, Supabase Auth/Postgres with RLS, and JWT-verified AI routes.",
+        "Focused AI-assisted Korean learning platform on Next.js, Supabase Auth/Postgres with RLS, and JWT-verified AI routes.",
       bullets: [
-        "Built Today’s Mission, spaced-repetition learning, interview preparation, and progress tracking in one workspace.",
-        "Kept data behind Supabase RLS and routed authenticated AI work through thin Next.js handlers.",
+        "Built the Today, Vocabulary, Practice, Coach, and Study loop around spaced repetition, workplace Korean, and voice practice.",
+        "Kept data behind Supabase RLS and routed authenticated AI work through thin Next.js handlers with OpenAI and the Vercel AI SDK.",
       ],
-      technologies: ["Next.js 16", "TypeScript", "Supabase", "Vercel AI SDK", "OpenAI"],
+      technologies: ["Next.js 16", "TypeScript", "Supabase", "Vercel AI SDK", "OpenAI", "Tailwind CSS"],
       github: "https://github.com/Hen-Heang/hengo",
-      live: "https://koriai-frontend.vercel.app/",
+      live: "https://hengo.henheang.site/home",
       caseStudy: "/projects/hengo",
       featured: false,
     },

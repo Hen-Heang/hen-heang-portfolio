@@ -13,10 +13,15 @@ export interface PerformanceEntry {
  * Every entry quotes an existing solution/lesson from data/projects.ts by reference
  * (not retyped) so this view can never drift from the source of truth.
  */
+const technique = (category: PerformanceEntry["category"], slug: string, solutionIndex: number): PerformanceEntry => {
+    const project = bySlug(slug)
+    return { category, slug, project: project.title, text: project.solutions![solutionIndex] }
+}
+
 export const performanceTechniques: PerformanceEntry[] = [
-    { category: "Caching", slug: "hengo", project: bySlug("hengo").title, text: bySlug("hengo").solutions![1] },
-    { category: "Background Jobs", slug: "money-flow", project: bySlug("money-flow").title, text: bySlug("money-flow").solutions![0] },
-    { category: "Reliability", slug: "money-flow", project: bySlug("money-flow").title, text: bySlug("money-flow").solutions![1] },
-    { category: "Data Access", slug: "money-flow", project: bySlug("money-flow").title, text: bySlug("money-flow").solutions![2] },
-    { category: "Data Access", slug: "h-phsar", project: bySlug("h-phsar").title, text: bySlug("h-phsar").solutions![0] },
+    technique("Caching", "hengo", 1),
+    technique("Background Jobs", "luyra", 1),
+    technique("Reliability", "luyra", 2),
+    technique("Data Access", "luyra", 0),
+    technique("Data Access", "h-phsar", 0),
 ]

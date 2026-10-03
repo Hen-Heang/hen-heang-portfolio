@@ -51,7 +51,7 @@ describe("canonical capability model", () => {
         expect(aiStatement).toContain("Claude Code")
         expect(aiStatement).toContain("Codex")
         expect(aiStatement).toContain("OpenAI")
-        expect(aiStatement).toContain("Gemini")
+        expect(aiStatement).toContain("Anthropic")
     })
 })
 

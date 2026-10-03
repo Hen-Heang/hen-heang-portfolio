@@ -73,7 +73,7 @@ const skillDefinitions: SkillDefinition[] = [
 
     // --- Frontend -----------------------------------------------------
     // Primary four match capabilityGroups' "Frontend Support" group (JavaScript/jQuery split in two).
-    { id: "nextjs", name: "Next.js", category: "frontend", status: "primary", description: "Primary frontend framework when a product needs a client — used across all three active full-stack personal projects." },
+    { id: "nextjs", name: "Next.js", category: "frontend", status: "primary", description: "Primary frontend framework when a product needs a client — used across the active full-stack personal projects." },
     { id: "typescript", name: "TypeScript", category: "frontend", status: "primary", description: "Primary language for every Next.js frontend he ships." },
     { id: "javascript", name: "JavaScript", category: "frontend", status: "primary", description: "Used daily in his current role building frontend pages at Bizplay." },
     { id: "jquery", name: "jQuery", category: "frontend", status: "primary", description: "Used daily in his current role and at KOSIGN for enterprise frontend work." },
@@ -90,6 +90,7 @@ const skillDefinitions: SkillDefinition[] = [
     { id: "maven", name: "Maven", category: "devops", status: "primary", description: "Primary build tool for the Spring Boot projects." },
     { id: "gradle", name: "Gradle", category: "devops", status: "primary", description: "Build tool for AuthHub's multi-module Gradle monorepo." },
     { id: "docker", name: "Docker", category: "devops", status: "primary", description: "Packages backend services as Docker images, e.g. H-Phsar's API." },
+    { id: "devops-fundamentals", name: "DevOps Fundamentals", category: "devops", status: "working-knowledge", description: "Verified foundational training through TFDevs' DevOps Essential certificate, reinforced by Git, Docker, CI/CD, and deployment study in the Engineering Lab." },
     { id: "nginx", name: "Nginx", category: "devops", status: "working-knowledge", description: "Documented in depth in the DevOps Engineering Lab guide, but not yet used to deploy a shipped project." },
     { id: "docker-compose", name: "Docker Compose", category: "devops", status: "working-knowledge", description: "Documented in the DevOps Engineering Lab guide for local multi-container development." },
     { id: "kubernetes", name: "Kubernetes", category: "devops", status: "learning", description: "Mentioned as an overview topic in the Backend Engineering Lab's planned deployment-strategies module — not yet hands-on or used in a project." },
@@ -97,7 +98,7 @@ const skillDefinitions: SkillDefinition[] = [
     // --- AI -------------------------------------------------------------
     { id: "ai-assisted-development", name: "AI-Assisted Development (Claude Code, Codex)", category: "ai", status: "primary", description: "Practical AI-assisted development workflow used across his current projects." },
     { id: "openai", name: "OpenAI API", category: "ai", status: "primary", description: "Powers Hengo's AI Coach — conversation, message analysis, and structured feedback — via the Vercel AI SDK." },
-    { id: "google-gemini", name: "Google Gemini", category: "ai", status: "primary", description: "Powers Money Flow's AI chat over the user's own transaction and budget data, via the Vercel AI SDK." },
+    { id: "anthropic", name: "Anthropic API", category: "ai", status: "working-knowledge", description: "Powers Luyra's optional Money Coach over the user's own finance data." },
     { id: "agent-harness-design", name: "Agent Harness Design", category: "ai", status: "learning", description: "Learning how context, instructions, tools, permissions, verification, and state form a reusable operating environment for AI-assisted development." },
     { id: "model-context-protocol", name: "Model Context Protocol (MCP)", category: "ai", status: "learning", description: "Exploring MCP architecture, bounded tool contracts, authentication, and read-only integration patterns through educational labs." },
     { id: "ai-evaluations", name: "AI Evaluations", category: "ai", status: "learning", description: "Practicing representative test cases and quality checks for retrieval, tool selection, groundedness, and workflow behavior." },

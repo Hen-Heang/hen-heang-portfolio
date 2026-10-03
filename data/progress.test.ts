@@ -23,7 +23,7 @@ describe("current portfolio progress", () => {
             "Hengo",
             "AuthHub",
             "Developer Portfolio",
-            "Money Flow",
+            "Luyra",
         ])
     })
 

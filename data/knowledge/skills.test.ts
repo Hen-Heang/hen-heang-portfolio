@@ -6,6 +6,7 @@ import {
 } from "./skills"
 import { capabilityGroups, secondaryTechnologies } from "@/src/lib/content/capabilities"
 import { keywordRetriever } from "@/src/lib/ai/retrieval"
+import { skills as staticSkills } from "@/data/skills"
 import type { SkillCategory } from "@/src/lib/types"
 
 const dbSkills: SkillCategory[] = [
@@ -117,5 +118,14 @@ describe("skills retrieval", () => {
         // stack, so a React question must not surface the primary-stack claim.
         const { content } = buildPrimaryStackSection()
         expect(content).not.toMatch(/^Frontend Support: .*React/m)
+    })
+
+    it("retrieves the DevOps Fundamentals detail for the certificate-backed skill", () => {
+        const result = keywordRetriever.retrieve(
+            "Does Hen have DevOps fundamentals?",
+            buildSkillsKnowledge(staticSkills),
+        )
+
+        expect(result.map((section) => section.id)).toContain("skills-detail-tools")
     })
 })

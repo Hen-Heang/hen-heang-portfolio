@@ -17,7 +17,7 @@ import type { KnowledgeSection } from "./types"
  *   which invited the model to make comparative depth claims the portfolio
  *   doesn't support. Levels are still stored (admin data) but are no longer
  *   sent to the model.
- * - The primary stack is a fixed short list rather than all 27 database rows,
+ * - The primary stack is a fixed short list rather than all 28 database rows,
  *   so a "what's his stack?" question gets the same answer a recruiter reads
  *   on the page.
  */
@@ -83,7 +83,10 @@ export function buildSkillDetailSections(
             keywords: [
                 group.category.toLowerCase(),
                 "how long", "years", "experience", "duration", "since", "when",
-                ...group.items.map((item) => item.name.toLowerCase()),
+                ...group.items.flatMap((item) => {
+                    const name = item.name.toLowerCase()
+                    return [name, ...name.split(/[\s/]+/).filter(Boolean)]
+                }),
             ],
             content: [
                 `How long he has worked with each ${group.category.toLowerCase()} technology:`,

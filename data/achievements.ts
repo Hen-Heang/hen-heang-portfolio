@@ -154,7 +154,15 @@ export const rawAchievements: Achievement[] = [
         image: "/certificate/openai-ai-foundations.png",
         link: "/certificate/openai-ai-foundations.pdf",
     },
+    {
+        id: "19",
+        title: "DevOps Essential",
+        issuer: "TFDevs",
+        date: "2026",
+        type: "certificate",
+        description: "Completed and passed TFDevs' DevOps Essential course. Certificate No. TFD-2026-000019.",
+        image: "/certificate/tfdevs-devops-essential-redacted.png",
+    },
 ]
 
 export const groupedAchievements = groupAchievementsByYearAndIssuer(rawAchievements)
-
