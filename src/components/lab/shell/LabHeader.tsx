@@ -43,14 +43,22 @@ export function LabHeader({
     menuButtonRef?: React.RefObject<HTMLButtonElement | null>
 }) {
     const pathname = usePathname()
-    const segments = pathname.split("/").filter(Boolean).slice(1) // drop leading "lab"
+    // The AI Library lives at /ai-engineering but renders inside the Lab
+    // shell, so its crumbs root at "ai library" under "lab".
+    const [root, ...segments] = pathname.split("/").filter(Boolean)
+    const isAILibrary = root === "ai-engineering"
+    const base = isAILibrary ? "/ai-engineering" : "/lab"
 
-    const crumbs = segments.map((seg, i) => {
-        const href = `/lab/${segments.slice(0, i + 1).join("/")}`
-        if (LINKABLE[seg]) return { label: LINKABLE[seg], href }
-        if (UNLINKABLE[seg]) return { label: UNLINKABLE[seg], href: null }
-        return { label: slugToTitle(seg), href: null }
-    })
+    const crumbs = [
+        ...(isAILibrary ? [{ label: "AI Library", href: base as string | null }] : []),
+        ...segments.map((seg, i) => {
+            const href = `${base}/${segments.slice(0, i + 1).join("/")}`
+            if (isAILibrary && seg === "articles") return { label: "Articles", href: null }
+            if (LINKABLE[seg]) return { label: LINKABLE[seg], href }
+            if (UNLINKABLE[seg]) return { label: UNLINKABLE[seg], href: null }
+            return { label: slugToTitle(seg), href: null }
+        }),
+    ]
 
     return (
         <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-md md:px-6">

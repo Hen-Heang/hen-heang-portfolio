@@ -54,13 +54,13 @@ test.describe("Homepage polish", () => {
         await page.setViewportSize({ width: 390, height: 844 })
         await page.goto("/")
 
-        // Recruiter-scan order: who he is, what he works with, the work, where
-        // he did it, the background, then a direct contact path.
+        // Recruiter-scan order: who he is, the work (proof first), where he
+        // did it, what he works with, the background, then a contact path.
         const landmarks = [
             page.getByRole("heading", { name: "Hen Heang", level: 1 }),
-            page.locator("#capabilities"),
             page.locator("#work"),
             page.locator("#experience"),
+            page.locator("#capabilities"),
             page.locator("#about"),
             page.getByRole("heading", {
                 name: "Have a system or service to build?",
@@ -144,20 +144,23 @@ test.describe("Homepage polish", () => {
         await page.setViewportSize({ width: 1440, height: 900 })
         await page.goto("/")
 
+        // The hero opens on the API view; the H-Phsar architecture flow is
+        // shown once, in Selected Work, rather than duplicated here.
         const tabList = page.getByRole("tablist", { name: "Engineering views" })
-        const architecture = tabList.getByRole("tab", { name: "architecture" })
         const api = tabList.getByRole("tab", { name: "api" })
-        await expect(architecture).toHaveAttribute("aria-selected", "true")
-
-        const panel = tabList.locator("xpath=../../..")
-        const before = await panel.boundingBox()
-        await architecture.focus()
-        await page.keyboard.press("ArrowRight")
-        await expect(api).toBeFocused()
+        const database = tabList.getByRole("tab", { name: "database" })
+        await expect(tabList.getByRole("tab", { name: "architecture" })).toHaveCount(0)
         await expect(api).toHaveAttribute("aria-selected", "true")
         await expect(page.getByRole("tabpanel")).toContainText(
             "HTTP/1.1 200 OK",
         )
+
+        const panel = tabList.locator("xpath=../../..")
+        const before = await panel.boundingBox()
+        await api.focus()
+        await page.keyboard.press("ArrowRight")
+        await expect(database).toBeFocused()
+        await expect(database).toHaveAttribute("aria-selected", "true")
         const after = await panel.boundingBox()
 
         expect(

@@ -31,7 +31,8 @@ export function ProjectCard({ project }: { project: Project }) {
         >
             <div
                 className={cn(
-                    "relative aspect-[16/10] overflow-hidden border-b border-border",
+                    // 16:9 matches the project preview artwork, so cover-fit never crops its text.
+                    "relative aspect-video overflow-hidden border-b border-border",
                     project.imageFit === "contain"
                         ? "bg-[#000611]"
                         : "bg-background",
@@ -44,7 +45,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className={cn(
                         project.imageFit === "contain"
-                            ? "object-contain"
+                            ? "object-contain p-6 sm:p-8" // breathing room for square marks/posters
                             : "object-cover",
                         "transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
                     )}

@@ -43,6 +43,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
             eyebrow="Selected Work"
             title="Backend systems, explained end to end"
             description="A quick view of the problem, solution, and implementation—full architecture and trade-offs stay in each case study."
+            className="border-t border-border"
             revealHeader
         >
             <Reveal delay={0.05}>

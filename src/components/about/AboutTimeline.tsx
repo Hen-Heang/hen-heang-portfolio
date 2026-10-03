@@ -23,6 +23,7 @@ export function AboutTimeline({
             title="Experience, education & milestones"
             description="One chronological journey through schools, training programs, companies, awards, and certifications—from Cambodia to Korea. Credentials appear under the institution that awarded them."
             className="bg-surface"
+            layout="split"
         >
             <Timeline items={items} />
         </Section>

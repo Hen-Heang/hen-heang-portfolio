@@ -15,10 +15,12 @@ export function AboutSummary() {
             id="about"
             eyebrow="About"
             title="Backend engineering, built on real business problems"
+            className="bg-surface"
+            layout="split"
             revealHeader
         >
             <Reveal delay={0.05}>
-                <div className="max-w-2xl space-y-5">
+                <div className="max-w-2xl space-y-5 lg:pt-10">
                     {positioning.about.map((paragraph) => (
                         <p
                             key={paragraph}

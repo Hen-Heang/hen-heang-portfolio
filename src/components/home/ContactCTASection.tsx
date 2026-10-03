@@ -23,10 +23,10 @@ export function ContactCTASection() {
                                     Available for Java and Spring Boot backend engineering, API architecture, and product engineering teams that value dependability.
                                 </p>
                             </div>
-                            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                            <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
                                 <Link
                                     href="/contact"
-                                    className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-brand px-6 text-sm font-semibold text-white shadow-xs transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+                                    className="group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-gradient-brand px-6 text-sm font-semibold text-white shadow-xs transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
                                 >
                                     <MessageCircle size={16} aria-hidden />
                                     <span>Start a conversation</span>
@@ -34,7 +34,7 @@ export function ContactCTASection() {
                                 </Link>
                                 <Link
                                     href="/resume"
-                                    className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-surface px-5 text-sm font-medium text-fg transition-all duration-200 hover:border-border-strong hover:bg-surface-hover active:scale-[0.98]"
+                                    className="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-border bg-surface px-5 text-sm font-medium text-fg transition-all duration-200 hover:border-border-strong hover:bg-surface-hover active:scale-[0.98]"
                                 >
                                     <FileText size={15} aria-hidden />
                                     <span>View Resume</span>

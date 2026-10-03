@@ -105,7 +105,7 @@ export function AIEngineeringHubClient({
                         <MessageSquareCode size={18} className="text-brand" />
                         <div>
                             <p className="text-sm font-semibold text-fg">Prompt Library</p>
-                            <p className="text-xs text-fg-muted">{promptCount} copy-ready prompts for real backend work</p>
+                            <p className="text-xs text-fg-muted">{promptCount > 0 ? `${promptCount} copy-ready prompts` : "Copy-ready prompts"} for real backend work</p>
                         </div>
                     </div>
                 </Link>
@@ -117,7 +117,7 @@ export function AIEngineeringHubClient({
                         <FileCode2 size={18} className="text-brand" />
                         <div>
                             <p className="text-sm font-semibold text-fg">Code Snippets</p>
-                            <p className="text-xs text-fg-muted">{snippetCount} snippets — MyBatis, idempotency, Thymeleaf patterns</p>
+                            <p className="text-xs text-fg-muted">{snippetCount > 0 ? `${snippetCount} snippets` : "Snippets"} — MyBatis, idempotency, Thymeleaf patterns</p>
                         </div>
                     </div>
                 </Link>
@@ -161,19 +161,21 @@ export function AIEngineeringHubClient({
                 </p>
             </section>
 
-            {/* Categories */}
-            <section className="mb-12">
-                <h2 className="mb-4 text-lg font-bold text-fg">Browse by category</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {categories.map((cat) => (
-                        <CategoryCard
-                            key={cat.slug}
-                            category={cat}
-                            count={articles.filter((a) => a.category === cat.slug).length}
-                        />
-                    ))}
-                </div>
-            </section>
+            {/* Categories — hidden rather than rendered as a bare heading when none are loaded */}
+            {categories.length > 0 && (
+                <section className="mb-12">
+                    <h2 className="mb-4 text-lg font-bold text-fg">Browse by category</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {categories.map((cat) => (
+                            <CategoryCard
+                                key={cat.slug}
+                                category={cat}
+                                count={articles.filter((a) => a.category === cat.slug).length}
+                            />
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {/* Featured */}
             {!hasActiveFilters && featured.length > 0 && (
@@ -187,7 +189,23 @@ export function AIEngineeringHubClient({
                 </section>
             )}
 
-            {/* Search + filters */}
+            {/* Search + filters. With no articles at all, filters only lead to a
+                "no matches" dead end, so show one honest empty state instead. */}
+            {articles.length === 0 ? (
+                <section className="rounded-2xl border border-dashed border-border px-6 py-12 text-center">
+                    <h2 className="text-lg font-bold text-fg">Articles are on the way</h2>
+                    <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-fg-secondary">
+                        Long-form write-ups are still being drafted. Meanwhile, the AX Learning Path and the Agent
+                        Handbook cover the same ground in structured form.
+                    </p>
+                    <Link
+                        href="/lab/handbook"
+                        className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:underline"
+                    >
+                        Open the Agent Handbook <ArrowRight size={13} aria-hidden />
+                    </Link>
+                </section>
+            ) : (
             <section>
                 <div className="mb-5 flex items-center justify-between gap-3">
                     <h2 className="text-lg font-bold text-fg">All articles</h2>
@@ -261,6 +279,7 @@ export function AIEngineeringHubClient({
                     </motion.div>
                 )}
             </section>
+            )}
 
             {/* Back to the unified hub */}
             <Link

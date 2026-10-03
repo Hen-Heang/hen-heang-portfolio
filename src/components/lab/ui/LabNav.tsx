@@ -20,10 +20,13 @@ const items: { key: LabNavKey; label: string; href: string }[] = [
  * and labels never get clipped since overflow scrolls instead of wrapping.
  * `active` is passed explicitly (rather than read from usePathname) so this
  * can render from a Server Component on every Lab route.
+ *
+ * Mobile only: on desktop the persistent LabSidebar already lists every one
+ * of these destinations, and showing both read as two competing navs.
  */
 export function LabNav({ active }: { active: LabNavKey }) {
     return (
-        <nav aria-label="Engineering Lab sections" className="mb-6 -mx-1 flex gap-1 overflow-x-auto px-1 pb-1">
+        <nav aria-label="Engineering Lab sections" className="mb-6 -mx-1 flex gap-1 overflow-x-auto px-1 pb-1 lg:hidden">
             {items.map((item) => {
                 const isActive = item.key === active
                 return (

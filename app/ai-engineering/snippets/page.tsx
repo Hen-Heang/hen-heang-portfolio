@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { getAISnippets } from "@/src/lib/db/ai-engineering"
-import { PageLayout } from "@/src/components/layout/PageLayout"
 import { SnippetsPageClient } from "@/src/components/ai-engineering/SnippetsPageClient"
 
 export const revalidate = 60
@@ -18,8 +17,8 @@ export default async function SnippetsPage() {
     const snippets = await getAISnippets()
     const allTags = Array.from(new Set(snippets.flatMap((s) => s.tags))).sort()
     return (
-        <PageLayout showFooter={false}>
+        <>
             <SnippetsPageClient snippets={snippets} allTags={allTags} />
-        </PageLayout>
+        </>
     )
 }

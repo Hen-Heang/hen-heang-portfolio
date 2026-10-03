@@ -15,8 +15,8 @@ const TECH = [
 ]
 
 export default async function Image() {
-    const imgBuffer = readFileSync(join(process.cwd(), "public/image/heang_new.png"))
-    const photo = `data:image/png;base64,${imgBuffer.toString("base64")}`
+    const imgBuffer = readFileSync(join(process.cwd(), "public/image/heang_new.jpeg"))
+    const photo = `data:image/jpeg;base64,${imgBuffer.toString("base64")}`
 
     return new ImageResponse(
         (

@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { usePersonalInfo } from "@/src/providers/site-content-provider"
 import Link from "next/link"
+import Image from "next/image"
 import {
     FacebookIcon,
     GithubIcon,
@@ -67,11 +68,21 @@ export function Footer() {
             <div className="mx-auto max-w-content px-4 py-16 sm:px-6">
                 <div className="grid gap-12 md:grid-cols-12">
                     <div className="md:col-span-6">
+                        {/* Same photo + wordmark lockup as SiteHeader, so the site has one brand mark. */}
                         <Link
                             href="/"
-                            className="font-mono text-lg font-semibold tracking-tight text-fg transition-colors hover:text-brand"
+                            className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-85"
                         >
-                            HH<span className="text-brand">.</span>
+                            <Image
+                                src="/image/heang_new.jpeg"
+                                alt=""
+                                width={32}
+                                height={32}
+                                className="h-8 w-8 rounded-full object-cover ring-1 ring-border"
+                            />
+                            <span className="text-base font-semibold tracking-tight text-fg">
+                                {personalInfo.fullName}<span className="text-brand">.</span>
+                            </span>
                         </Link>
                         <p className="mt-4 max-w-sm text-sm leading-relaxed text-fg-secondary">
                             {personalInfo.fullName} — backend engineer building
@@ -112,9 +123,9 @@ export function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title={social.label}
-                                className="flex h-11 w-11 items-center justify-center rounded-full border border-border transition-colors hover:border-border-strong hover:bg-surface-hover"
+                                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-fg-secondary transition-colors hover:border-brand/45 hover:bg-surface-hover hover:text-brand"
                             >
-                                <social.icon size={20} />
+                                <social.icon size={20} brand={false} />
                                 <span className="sr-only">{social.label}</span>
                             </a>
                         </li>
@@ -126,23 +137,15 @@ export function Footer() {
                         © {currentYear} {personalInfo.fullName} ·{" "}
                         {personalInfo.location} (GMT+9)
                     </p>
-                    <div className="flex min-w-0 max-w-full items-center gap-4">
-                        <a
-                            href={`mailto:${personalInfo.email}`}
-                            className="inline-flex min-w-0 items-center gap-1.5 text-xs text-fg-muted transition-colors hover:text-fg"
-                        >
-                            <Mail size={13} className="shrink-0" aria-hidden />
-                            <span className="min-w-0 truncate">
-                                {personalInfo.email}
-                            </span>
-                        </a>
-                        <Link
-                            href="/admin"
-                            className="shrink-0 text-xs text-fg-muted transition-colors hover:text-fg"
-                        >
-                            Admin
-                        </Link>
-                    </div>
+                    <a
+                        href={`mailto:${personalInfo.email}`}
+                        className="inline-flex min-w-0 max-w-full items-center gap-1.5 text-xs text-fg-muted transition-colors hover:text-fg"
+                    >
+                        <Mail size={13} className="shrink-0" aria-hidden />
+                        <span className="min-w-0 truncate">
+                            {personalInfo.email}
+                        </span>
+                    </a>
                 </div>
             </div>
         </footer>

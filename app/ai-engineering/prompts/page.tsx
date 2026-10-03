@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { profileData } from "@/data/profile"
 import { getAIPrompts } from "@/src/lib/db/ai-engineering"
-import { PageLayout } from "@/src/components/layout/PageLayout"
 import { PromptsPageClient } from "@/src/components/ai-engineering/PromptsPageClient"
 
 export const revalidate = 60
@@ -17,8 +16,8 @@ export const metadata: Metadata = {
 export default async function PromptsPage() {
     const prompts = await getAIPrompts()
     return (
-        <PageLayout showFooter={false}>
+        <>
             <PromptsPageClient prompts={prompts} />
-        </PageLayout>
+        </>
     )
 }

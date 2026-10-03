@@ -4,7 +4,6 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react"
 import { profileData } from "@/data/profile"
 import { getAIArticleBySlug, getAIArticleSlugs, getAIArticles, getAICategories, getRelatedArticles } from "@/src/lib/db/ai-engineering"
-import { PageLayout } from "@/src/components/layout/PageLayout"
 import { ArticleBody } from "@/src/components/ai-engineering/ArticleBody"
 import { TableOfContents } from "@/src/components/ai-engineering/TableOfContents"
 import { DifficultyBadge } from "@/src/components/ai-engineering/DifficultyBadge"
@@ -86,7 +85,7 @@ export default async function ArticlePage({
     }
 
     return (
-        <PageLayout showFooter={false}>
+        <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
             <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
@@ -198,6 +197,6 @@ export default async function ArticlePage({
                     <TableOfContents items={tocItems} />
                 </div>
             </div>
-        </PageLayout>
+        </>
     )
 }

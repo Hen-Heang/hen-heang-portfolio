@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Bot, BookMarked, Container, LibraryBig, ServerCog } from "lucide-react"
+import { BookMarked, LibraryBig } from "lucide-react"
 import { HoverArrow } from "@/src/components/lab/ui/HoverArrow"
 import { cn, interactiveCard } from "@/src/lib/utils/utils"
 
@@ -12,27 +12,6 @@ const browseLinks = [
         accent: "bg-brand/10 text-brand",
     },
     {
-        href: "/lab/backend",
-        icon: ServerCog,
-        label: "Backend curriculum",
-        detail: "Java · Spring Boot · Data",
-        accent: "bg-brand/10 text-brand",
-    },
-    {
-        href: "/lab/devops",
-        icon: Container,
-        label: "DevOps curriculum",
-        detail: "Docker · CI/CD · Cloud",
-        accent: "bg-success/10 text-success",
-    },
-    {
-        href: "/lab/ax-engineering",
-        icon: Bot,
-        label: "AX curriculum",
-        detail: "Harness · MCP · Evals",
-        accent: "bg-warning/10 text-warning",
-    },
-    {
         href: "/lab/library",
         icon: LibraryBig,
         label: "Full searchable library",
@@ -41,10 +20,14 @@ const browseLinks = [
     },
 ]
 
-/** Compact browse preview — the full searchable catalog lives at /lab/library. */
+/**
+ * Compact browse preview — the full searchable catalog lives at /lab/library.
+ * The Backend / DevOps / AX paths are deliberately absent: the Learning paths
+ * cards directly above already link them.
+ */
 export function LabCategoryNav() {
     return (
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-2.5 sm:grid-cols-2">
             {browseLinks.map((link) => (
                 <Link
                     key={link.href}
@@ -63,7 +46,7 @@ export function LabCategoryNav() {
                         <span className="block text-base font-semibold text-fg">
                             {link.label}
                         </span>
-                        <span className="mt-0.5 block truncate font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+                        <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-wider text-fg-muted">
                             {link.detail}
                         </span>
                     </span>
