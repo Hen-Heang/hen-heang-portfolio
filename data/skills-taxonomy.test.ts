@@ -61,6 +61,15 @@ describe("skills taxonomy", () => {
         expect(getSkillById("model-context-protocol")?.projectSlugs).toEqual([])
     })
 
+    it("records DevOps Fundamentals as verified working knowledge without project evidence", () => {
+        expect(getSkillById("devops-fundamentals")).toMatchObject({
+            name: "DevOps Fundamentals",
+            category: "devops",
+            status: "working-knowledge",
+            projectSlugs: [],
+        })
+    })
+
     it("has real project evidence for primary backend/database technologies", () => {
         expect(getSkillById("spring-boot")?.projectSlugs.length).toBeGreaterThan(0)
         expect(getSkillById("postgresql")?.projectSlugs.length).toBeGreaterThan(0)

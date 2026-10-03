@@ -39,6 +39,7 @@ export const skills: SkillCategory[] = [
     {
         category: "Tools",
         items: [
+            { name: "DevOps Fundamentals", level: 2, experience: "Foundational training" },
             { name: "Git", level: 4, experience: "2+ years" },
             { name: "GitHub", level: 4, experience: "2+ years" },
             { name: "IntelliJ IDEA", level: 4, experience: "2+ years" },

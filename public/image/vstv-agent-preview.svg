@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" role="img" aria-labelledby="title desc">
+  <title id="title">VSTV Agent real estate platform</title>
+  <desc id="desc">VSTV Agent logo with a Phnom Penh real estate platform label.</desc>
+  <defs>
+    <linearGradient id="vstv_bg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#170f0c"/>
+      <stop offset="52%" stop-color="#4b1e14"/>
+      <stop offset="100%" stop-color="#8f2419"/>
+    </linearGradient>
+    <radialGradient id="vstv_glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(108 70) scale(200)">
+      <stop offset="0%" stop-color="#f3b63e" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#f3b63e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="400" height="225" fill="url(#vstv_bg)"/>
+  <rect width="400" height="225" fill="url(#vstv_glow)"/>
+  <circle cx="88" cy="112" r="58" fill="#fffaf2" opacity="0.98"/>
+  <image href="/image/vstv-logo-mark.png" x="31" y="55" width="114" height="114" preserveAspectRatio="xMidYMid slice"/>
+
+  <text fill="#fffaf2" x="172" y="91" font-family="system-ui, sans-serif" font-size="30" font-weight="750" letter-spacing="0.5">VSTV Agent</text>
+  <text fill="#f4c978" x="174" y="120" font-family="system-ui, sans-serif" font-size="15" font-weight="600">Real estate platform</text>
+  <text fill="#f8ddd2" x="174" y="146" font-family="system-ui, sans-serif" font-size="10">Property discovery · Staff workspace</text>
+  <text fill="#efb15c" x="174" y="166" font-family="system-ui, sans-serif" font-size="10">Next.js · Neon · Telegram</text>
+</svg>

@@ -14,8 +14,8 @@ test.describe("Projects index", () => {
         await page.goto("/projects?filter=backend")
         await expect(page.getByRole("link", { name: /^Backend/ })).toHaveAttribute("aria-current", "page")
         await expect(page.getByRole("link", { name: /^All /, exact: false })).not.toHaveAttribute("aria-current", "page")
-        // Money Flow is not a backend project and must not appear at all under this filter.
-        await expect(page.getByRole("heading", { name: "Money Flow", exact: false })).toHaveCount(0)
+        // Luyra is not a backend project and must not appear at all under this filter.
+        await expect(page.getByRole("heading", { name: "Luyra", exact: false })).toHaveCount(0)
     })
 
     test("filter bar is reachable and scrollable at 320px with comfortable touch targets", async ({ page }) => {
@@ -60,8 +60,8 @@ test.describe("Projects index", () => {
     test("grid card CTA is visible without hover and github/live links are separate from the card link", async ({ page }) => {
         await page.setViewportSize({ width: 1440, height: 1200 })
         await page.goto("/projects")
-        // Money Flow is in the "All projects" grid, not the featured section.
-        const card = page.locator("a.static-link", { hasText: "Money Flow" }).locator("xpath=../..")
+        // Luyra is in the "All projects" grid, not the featured section.
+        const card = page.locator("a.static-link", { hasText: "Luyra" }).locator("xpath=../..")
         const cta = card.getByText("View case study", { exact: true })
         // Not hovering — the CTA must already be in the accessibility tree and rendered (opacity/visibility default state).
         await expect(cta).toBeVisible()

@@ -49,16 +49,16 @@ function buildTabs(projects: Project[]): TechnicalTab[] {
         })
     }
 
-    const moneyFlow = bySlug("money-flow")
-    if (moneyFlow?.dataModel?.length) {
+    const luyra = bySlug("luyra")
+    if (luyra?.dataModel?.length) {
         tabs.push({
             id: "database",
             label: "database",
             data: {
                 kind: "database",
-                tables: moneyFlow.dataModel.slice(0, 10),
+                tables: luyra.dataModel.slice(0, 10),
                 caption:
-                    "Money Flow schema — per-user access enforced with Postgres Row Level Security.",
+                    "Luyra finance schema — authenticated access is scoped server-side before Neon queries.",
             },
         })
     }

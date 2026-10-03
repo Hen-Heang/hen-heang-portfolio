@@ -621,6 +621,7 @@ export const TechIcons: Record<string, React.FC> = {
     Bootstrap: BootstrapIcon,
     Git: GitIcon,
     GitHub: GitHubIcon,
+    "DevOps Fundamentals": CodeIcon,
     "IntelliJ IDEA": IntellijIcon,
     WebStorm: WebStormIcon,
     Postman: PostmanIcon,

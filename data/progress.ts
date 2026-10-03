@@ -58,10 +58,11 @@ export const progressItems: ProgressItem[] = [
         statusLabel: "Learning & Practicing",
         currentFocus: "Containerizing Spring Boot and Next.js applications",
         technologies: ["Docker", "GitHub Actions", "Linux", "Nginx", "CI/CD"],
-        updatedAt: "2026-07-17",
+        updatedAt: "2026-10-02",
         milestones: [
             { label: "Linux, Git, and environment configuration fundamentals", state: "completed" },
             { label: "GitHub Actions build and test workflow", state: "completed" },
+            { label: "TFDevs DevOps Essential certificate", state: "completed" },
             { label: "Multi-stage containers for Spring Boot and Next.js", state: "current" },
             { label: "Nginx reverse proxy and HTTPS setup", state: "planned" },
             { label: "Deployment monitoring and rollback practice", state: "planned" },
@@ -118,10 +119,10 @@ export const activeProjects: ActiveProject[] = [
         id: "hengo",
         name: "Hengo",
         description:
-            "An AI-powered Korean learning and growth platform for engineers working in Korea. Originally built as KoriAI.",
+            "A focused AI-assisted Korean learning platform for engineers and international professionals living and working in Korea.",
         status: "Building",
         href: "/projects/hengo",
-        technologies: ["Next.js", "Supabase", "OpenAI"],
+        technologies: ["Next.js", "Supabase", "OpenAI", "Vercel AI SDK"],
     },
     {
         id: "authhub",
@@ -142,12 +143,12 @@ export const activeProjects: ActiveProject[] = [
         technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
     },
     {
-        id: "money-flow",
-        name: "Money Flow",
+        id: "luyra",
+        name: "Luyra",
         description:
-            "An installable personal finance PWA with budgets, savings goals, and AI chat over your own spending.",
+            "A personal finance workspace for budgets, savings, analytics, reviews, and AI-assisted money coaching.",
         status: "Iterating",
-        href: "/projects/money-flow",
-        technologies: ["Next.js", "Supabase", "Google Gemini"],
+        href: "/projects/luyra",
+        technologies: ["Next.js", "Neon", "Supabase Auth", "Anthropic"],
     },
 ]

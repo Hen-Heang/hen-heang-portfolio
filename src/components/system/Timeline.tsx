@@ -2,12 +2,15 @@ import React from "react"
 import Image from "next/image"
 import { Award, GraduationCap, Medal } from "lucide-react"
 import { cn } from "@/src/lib/utils/utils"
+import { TextLink } from "@/src/components/system/TextLink"
 
 export interface TimelineCredential {
     title: string
     type: "certificate" | "graduation" | "award"
     /** Image rendered directly beneath the matching school/company entry. */
     image?: string
+    /** Public verification or certificate URL. */
+    link?: string
 }
 
 export interface TimelineEntry {
@@ -22,6 +25,8 @@ export interface TimelineEntry {
     credentials?: TimelineCredential[]
     /** Preview rendered directly for a standalone `kind: "certificate"` entry. */
     image?: string
+    /** Public verification or certificate URL for a standalone credential. */
+    link?: string
     kind?: "education" | "work" | "direction" | "certificate"
 }
 
@@ -122,12 +127,22 @@ export function Timeline({ items, className }: { items: TimelineEntry[]; classNa
                                                     <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.14em] text-fg-muted">
                                                         {c.type}
                                                     </span>
+                                                    {c.link && (
+                                                        <TextLink href={c.link} external className="mt-2 text-xs text-brand">
+                                                            Verify certificate
+                                                        </TextLink>
+                                                    )}
                                                 </span>
                                             </div>
                                         </li>
                                     )
                                 })}
                             </ul>
+                        )}
+                        {item.kind === "certificate" && item.link && (
+                            <TextLink href={item.link} external className="mt-4 text-brand">
+                                Verify certificate
+                            </TextLink>
                         )}
                         {item.kind === "certificate" && item.image && (
                             <div className="relative mt-5 aspect-[16/10] max-w-lg overflow-hidden rounded-xl border border-border bg-background">

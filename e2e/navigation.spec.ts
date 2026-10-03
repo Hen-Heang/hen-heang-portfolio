@@ -30,8 +30,9 @@ test.describe("Site navigation", () => {
     }) => {
         await page.setViewportSize({ width: 390, height: 844 })
         await page.goto("/")
+        // The bottom tab bar's "More" button opens the full navigation menu.
         const trigger = page.getByRole("button", {
-            name: "Open navigation menu",
+            name: "Open more navigation",
         })
         await trigger.click()
         const drawer = page.getByRole("dialog")

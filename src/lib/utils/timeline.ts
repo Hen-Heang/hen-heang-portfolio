@@ -92,6 +92,7 @@ export function buildCareerTimeline(
                 org: achievement.issuer,
                 description: achievement.description ?? "",
                 image: achievement.image,
+                link: achievement.link,
                 kind: "certificate",
             })
             continue
@@ -112,7 +113,7 @@ export function buildCareerTimeline(
 
         best.credentials = [
             ...(best.credentials ?? []),
-            { title: achievement.title, type: achievement.type, image: achievement.image },
+            { title: achievement.title, type: achievement.type, image: achievement.image, link: achievement.link },
         ]
     }
 

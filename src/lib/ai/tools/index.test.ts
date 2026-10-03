@@ -39,7 +39,7 @@ describe("searchProjects tool", () => {
     it("finds every project that lists Spring Boot as a skill", async () => {
         const result = await run<{ projects: { slug: string }[] }>(portfolioTools.searchProjects, { query: "Spring Boot" })
         const slugs = result.projects.map((p) => p.slug)
-        expect(slugs).toEqual(expect.arrayContaining(["h-phsar", "authhub", "dev-lab"]))
+        expect(slugs).toEqual(expect.arrayContaining(["h-phsar", "authhub", "vstv-agent"]))
         expect(slugs).not.toContain("hengo")
     })
 

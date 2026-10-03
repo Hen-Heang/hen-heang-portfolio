@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <defs>
+    <linearGradient id="luyra-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#luyra-bg)"/>
+  <rect x="20" y="20" width="360" height="185" rx="14" fill="#111827" stroke="#334155"/>
+  <text x="42" y="57" fill="#f8fafc" font-family="system-ui" font-size="17" font-weight="700">Luyra</text>
+  <text x="42" y="78" fill="#94a3b8" font-family="system-ui" font-size="10">Personal finance workspace</text>
+  <rect x="42" y="101" width="148" height="68" rx="9" fill="#1e293b"/>
+  <text x="55" y="121" fill="#94a3b8" font-family="system-ui" font-size="9">This month</text>
+  <text x="55" y="145" fill="#f8fafc" font-family="system-ui" font-size="19" font-weight="700">₩2.48M</text>
+  <text x="55" y="160" fill="#34d399" font-family="system-ui" font-size="9">↓ 8.4% spending</text>
+  <rect x="207" y="101" width="151" height="68" rx="9" fill="#1e293b"/>
+  <text x="220" y="121" fill="#94a3b8" font-family="system-ui" font-size="9">Budget progress</text>
+  <rect x="220" y="135" width="122" height="8" rx="4" fill="#334155"/>
+  <rect x="220" y="135" width="79" height="8" rx="4" fill="#60a5fa"/>
+  <text x="220" y="160" fill="#bfdbfe" font-family="system-ui" font-size="9">65% planned</text>
+  <circle cx="342" cy="52" r="15" fill="#2563eb"/>
+  <path d="M335 52h14M342 45v14" stroke="#dbeafe" stroke-width="2" stroke-linecap="round"/>
+</svg>

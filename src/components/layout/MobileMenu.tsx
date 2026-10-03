@@ -13,6 +13,7 @@ interface MobileMenuProps {
     onOpenChange: (open: boolean) => void
     onOpenCommandMenu?: () => void
     triggerRef?: React.RefObject<HTMLButtonElement | null>
+    title?: string
 }
 
 /**
@@ -27,6 +28,7 @@ export function MobileMenu({
     onOpenChange,
     onOpenCommandMenu,
     triggerRef,
+    title = "Navigation",
 }: MobileMenuProps) {
     const pathname = usePathname()
 
@@ -50,7 +52,7 @@ export function MobileMenu({
                 >
                     <div className="flex items-center justify-between">
                         <DialogPrimitive.Title className="font-mono text-sm font-medium text-fg-muted">
-                            Navigation
+                            {title}
                         </DialogPrimitive.Title>
                         <DialogPrimitive.Close
                             aria-label="Close navigation menu"

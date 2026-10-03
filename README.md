@@ -31,14 +31,14 @@ Backend-focused portfolio for [Hen Heang](https://henheang.site), a Java and Spr
 
 - **H-Phsar:** Spring Boot and MyBatis B2B marketplace API with Spring Security, JWT, PostgreSQL, order workflows, and real-time notifications.
 - **AuthHub:** reusable Spring Security service with token revocation, MFA, RBAC, audit logging, Flyway, and PostgreSQL.
-- **Hengo:** Next.js 16 and React 19 application written in TypeScript. Supabase Auth and Postgres use Row Level Security; authenticated Next.js AI routes use the Vercel AI SDK and OpenAI for structured and streamed feedback.
-- **Money Flow:** Next.js finance PWA with Supabase RLS, scheduled jobs, AI-assisted insights, push notifications, and a Neon backup.
+- **Hengo:** focused Korean-learning platform for engineers and international professionals in Korea. Next.js 16 and React 19 use Supabase RLS, spaced repetition, AI voice coaching, and authenticated Vercel AI SDK/OpenAI routes.
+- **Luyra:** Next.js personal finance workspace with Supabase Auth, Neon Postgres, scheduled reviews, AI-assisted money coaching, and multi-channel notifications.
 
 ## Technology
 
 **Portfolio application:** Next.js 16 App Router, React 19, TypeScript, Tailwind CSS, Motion, Supabase, Vercel Analytics, and Vercel Speed Insights. The icon-only technology carousel uses Motion's `animate()` API for its accessible, pausable auto-scroll.
 
-**Professional focus:** Java, Spring Boot, Spring Security, MyBatis, PostgreSQL, Oracle, Redis, eGovFramework, REST APIs, testing, and Docker.
+**Professional focus:** Java, Spring Boot, Spring Security, MyBatis, PostgreSQL, Oracle, Redis, eGovFramework, REST APIs, testing, Docker, and verified DevOps fundamentals.
 
 ## Project structure
 

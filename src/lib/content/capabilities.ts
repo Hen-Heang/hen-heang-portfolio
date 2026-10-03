@@ -3,7 +3,7 @@
  * technologies the portfolio presents as primary skills.
  *
  * Why this is curated rather than derived from `portfolio_skills`:
- * the database stores 27 rows covering everything ever used (HTML, CSS,
+ * the database stores 28 rows covering everything ever used (HTML, CSS,
  * Bootstrap, IDEs, Postman, MySQL, Tailwind, React, …). That is a useful
  * record, but it is not what a recruiter should scan. This model is the
  * short, deliberate public list; the database rows stay untouched and remain
@@ -74,7 +74,7 @@ export const capabilityGroups: readonly CapabilityGroup[] = [
  * product integrations he has actually shipped.
  */
 export const aiStatement =
-    "Applied: AI-assisted development with Claude Code and Codex, plus product integrations using OpenAI and Gemini. Learning: Agent Harness design, MCP, guardrails, evaluations, and agent observability through structured practice."
+    "Applied: AI-assisted development with Claude Code and Codex, plus product integrations using OpenAI and Anthropic. Learning: Agent Harness design, MCP, guardrails, evaluations, and agent observability through structured practice."
 
 /**
  * Technologies that were previously shown as primary skills and now belong to
